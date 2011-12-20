@@ -15,4 +15,3 @@
   br = branch
   co = checkout
   di = diff
-  lg = log -p
