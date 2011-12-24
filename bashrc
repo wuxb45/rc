@@ -18,6 +18,7 @@ alias gr='grep -nr'
 alias df='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
+alias rsync4='rsync -avzc'
 
 # git alias
 #alias gb='git branch'
