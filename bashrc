@@ -7,7 +7,7 @@
 
 alias ls='ls --color=auto'
 
-alias ll='ls -alhF'
+alias ll='ls -alhF --time-style=long-iso'
 alias la='ls -A'
 alias l='ls -CF'
 alias tree='tree -C'
