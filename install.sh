@@ -10,5 +10,6 @@ done
 
 # special files
 # terminator
+echo "terminator-config -> ~/.config/terminator/config"
 mkdir -p ~/.config/terminator
 cp terminator-config ~/.config/terminator/config
