@@ -6,6 +6,7 @@
   group_tab = None
   move_tab_left = None
   go_right = <Alt>l
+  new_tab = <Alt>t
   group_all = None
   scaled_zoom = <Alt>m
   zoom_in = <Alt>equal
