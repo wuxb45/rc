@@ -26,6 +26,7 @@ set noerrorbells
 set novisualbell
 set magic
 set nolazyredraw
+set wildmenu
 
 "if MySys() == "windows"
   "set encoding=cp936
@@ -63,9 +64,18 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 filetype on
+
+" taglist
 nnoremap <silent> <F8> :TlistToggle<CR>
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Show_One_File=1
 let Tlist_WinWidth=35
-" set cscopequickfix=s-,c-,d-,i-,t-,e-
-" cscope -Rbq
+
+" minibuffer
+" use with taglist, set this
+let g:miniBufExplModSelTarget = 1
+" show minibuffer if has >=2 buffers.
+let g:miniBufExplorerMoreThanOne = 2
+
+autocmd BufRead,BufNew :call UMiniBufExplorer
+
