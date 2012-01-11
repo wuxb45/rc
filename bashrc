@@ -48,5 +48,5 @@ export HISTFILESIZE=2000
 export HISTIGNORE='&:bg:fg:ll:h'
 
 export EDITOR='vim'
-export LD_LIBRARY_PATH=/usr/local/lib
+export LD_LIBRARY_PATH=/opt/lib
 
