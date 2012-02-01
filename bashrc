@@ -18,10 +18,26 @@ alias gr='grep -nr'
 alias df='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
-alias rsync4='rsync -avzc'
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
+# haskell file server
+alias hfs.d='nohup hfs &>/dev/null &'
 
-PS1='\[\033[01;31m\u\]\[\033[01;36m@\]\[\033[01;35m\h\]\[\033[01;36m@\]\[\e[32;1m\t\]\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\$ '
+function ps1_file_hints ()
+{
+  i=1
+  for x in $*; do
+    if [ $i -ge 5 ]; then
+      echo -n "$x ... $(echo $* | wc -w) total"
+      return
+    else
+      echo -n "$x "
+    fi
+    i=$(($i+1))
+  done
+}
+
+#PS1='\[\033[01;31m\u\]\[\033[01;36m@\]\[\033[01;35m\h\]\[\033[01;36m@\]\[\e[32;1m\t\]\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\$ '
+PS1='\[\033[01;31m\u\]\[\033[01;36m@\]\[\033[01;35m\h\]\[\033[01;36m@\]\[\e[32;1m\t\]\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[00m\] ($(ps1_file_hints `ls`))\n\$ '
 
 CABALBIN=$HOME/.cabal/bin
 if [ -d "$CABALBIN" ]; then
