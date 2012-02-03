@@ -20,11 +20,18 @@ alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
 # haskell file server
-alias hfs.d='killall hfs; nohup hfs &>/dev/null &'
+alias hfsup='killall hfs; nohup hfs &>/dev/null &'
+
+# backup using rsync
+function rbackup ()
+{
+  local target="$HOME"/backup"$(pwd)"/
+  mkdir -p $target && rsync -av . $target
+}
 
 function ps1_file_hints ()
 {
-  i=1
+  local i=1
   for x in $*; do
     if [ $i -ge 5 ]; then
       echo -n "$x ... $(echo $* | wc -w) total"
