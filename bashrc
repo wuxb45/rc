@@ -20,7 +20,7 @@ alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
 # haskell file server
-alias hfs.d='nohup hfs &>/dev/null &'
+alias hfs.d='killall hfs; nohup hfs &>/dev/null &'
 
 function ps1_file_hints ()
 {
