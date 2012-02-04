@@ -57,10 +57,10 @@ if [ -d "$PROGRAMDIR" ]; then
     export "PATH=$PROGRAMDIR/$prog/bin:$PATH"
   done
 fi
-export HISTCONTROL=ignoredups:ignorespace
-export HISTSIZE=1000
-export HISTFILESIZE=2000
-export HISTIGNORE='&:bg:fg:ll:h'
+export HISTCONTROL=ignoreboth:erasedups
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+export HISTIGNORE='&'
 
 export EDITOR='vim'
 export LD_LIBRARY_PATH=/opt/lib
