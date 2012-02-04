@@ -29,6 +29,7 @@ function rbackup ()
   mkdir -p $target && rsync -av . $target
 }
 
+# show some files in current dir
 function ps1_file_hints ()
 {
   local i=1
