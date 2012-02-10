@@ -48,6 +48,7 @@ colorscheme zellner
 
 "for .gvimrc
 if has("gui_running")
+  set visualbell t_vb=
   set lines=40
   set columns=90
   highlight Normal guibg=#f0f8ff
