@@ -18,9 +18,31 @@ alias gr='grep -nr'
 alias df='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
+
+# update id3 for mp3 files
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
+
 # haskell file server
 alias hfsup='killall hfs; nohup hfs &>/dev/null &'
+
+# build ssh tunnel at background
+function sshtn ()
+{
+  # $# the counts
+  # $@/$* the args
+  if [ $# -lt 2 ];
+  then echo "usage: sshtn <user@host> <rport> [<lport>] "; return
+  fi
+  local hostname=$1
+  local rport=$2
+  local lport=$3
+  if [ $# -lt 3 ];
+  then
+    lport=$rport
+  fi
+  ssh -f -N -q -L "$lport":localhost:"$rport" "$hostname"
+}
+
 
 # backup using rsync
 function rbackup ()
