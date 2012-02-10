@@ -8,7 +8,7 @@ set softtabstop=2
 set backspace=2
 
 set expandtab
-set vb t_vb=
+set noeb vb t_vb=
 set fo-=r
 
 set nu

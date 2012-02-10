@@ -1,2 +1,1 @@
-set novb
-set noeb
+set vb t_vb=
