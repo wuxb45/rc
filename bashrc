@@ -1,10 +1,12 @@
 #
 # ~/.bashrc
 #
+# vim: fdm=marker
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# alias {{{
 alias vi='vim'
 alias ls='ls --color=auto'
 alias ll='ls -alhF --time-style=long-iso'
@@ -18,7 +20,13 @@ alias gr='grep -nr'
 alias df='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
+#     update id3 for mp3 files
+alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
+#     haskell file server
+alias hfsup='killall hfs; nohup hfs &>/dev/null &'
+# }}}
 
+# dict {{{
 # search dictionary and remember history
 function d ()
 {
@@ -28,14 +36,9 @@ function d ()
     dict "$1"
   fi
 }
+# }}}
 
-
-# update id3 for mp3 files
-alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
-
-# haskell file server
-alias hfsup='killall hfs; nohup hfs &>/dev/null &'
-
+# sshtn {{{
 # build ssh tunnel at background
 function sshtn ()
 {
@@ -53,33 +56,46 @@ function sshtn ()
   fi
   ssh -f -N -q -L "$lport":localhost:"$rport" "$hostname"
 }
+# }}}
 
-
+# rbackup {{{
 # backup using rsync
 function rbackup ()
 {
   local target="$HOME"/backup"$(pwd)"/
   mkdir -p $target && rsync -av . $target
 }
+# }}}
 
+# PS1 {{{
 # show some files in current dir
 function ps1_file_hints ()
 {
-  local i=1
-  for x in $*; do
-    if [ $i -ge 5 ]; then
-      echo -n "$x ... $(echo $* | wc -w) total"
+  local cap=$(($(tput cols) - 14))
+  local len='0'
+  for x in $(ls -F); do
+    local wc=$(echo $x | wc -m)
+    len=$(($len + $wc))
+    if [ $len -gt $cap ]; then
+      echo -n "... $(echo $(ls) | wc -w) total"
       return
     else
       echo -n "$x "
     fi
     i=$(($i+1))
   done
+  echo -n "... $(echo $(ls) | wc -w) total"
 }
 
-#PS1='\[\033[01;31m\u\]\[\033[01;36m@\]\[\033[01;35m\h\]\[\033[01;36m@\]\[\e[32;1m\t\]\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\$ '
-PS1='\[\033[01;31m\u\]\[\033[01;36m@\]\[\033[01;35m\h\]\[\033[01;36m@\]\[\e[32;1m\t\]\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[00m\] ($(ps1_file_hints `ls`))\n\$ '
+function ps1_pwd_info ()
+{
+  echo $(ls -dlhF --time-style=long-iso) | tr -s ' ' | cut -d' ' -f1,3,4,6,7
+}
 
+PS1='\[\033[01;31m\u\]\[\033[01;36m@\]\[\033[01;35m\h\]\[\033[01;36m@\]\[\e[32;1m\t\]\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[00m\] ($(ps1_pwd_info))\n($(ps1_file_hints))\n\$ '
+# }}}
+
+# $PATH {{{
 CABALBIN=$HOME/.cabal/bin
 if [ -d "$CABALBIN" ]; then
   export "PATH=$CABALBIN:$PATH"
@@ -91,13 +107,15 @@ if [ -d "$PROGRAMDIR" ]; then
     export "PATH=$PROGRAMDIR/$prog/bin:$PATH"
   done
 fi
+# }}}
+
+# misc {{{
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=10000
 export HISTFILESIZE=20000
 export HISTIGNORE='&'
-
 export EDITOR='vim'
 export LD_LIBRARY_PATH=/opt/lib
 
 shopt -s cdspell checkwinsize no_empty_cmd_completion
-
+# }}}
