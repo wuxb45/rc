@@ -19,6 +19,17 @@ alias df='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
 
+# search dictionary and remember history
+function d ()
+{
+  if [ $# -gt 0 ];
+  then
+    echo "$1" >> ~/.dict_history
+    dict "$1"
+  fi
+}
+
+
 # update id3 for mp3 files
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
 
