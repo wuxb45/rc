@@ -71,11 +71,11 @@ function rbackup ()
 # show some files in current dir
 function ps1_file_hints ()
 {
-  local cap=$(($(tput cols) - 14))
+  local cap=$(($(tput cols) - 15))
   local len='0'
   for x in $(ls -F); do
-    local wc=$(echo $x | wc -m)
-    len=$(($len + $wc))
+    local wc=${#x}
+    len=$(($len + $wc + 1))
     if [ $len -gt $cap ]; then
       echo -n "... $(echo $(ls) | wc -w) total"
       return
@@ -94,6 +94,14 @@ function ps1_pwd_info ()
 
 PS1='\[\033[01;31m\u\]\[\033[01;36m@\]\[\033[01;35m\h\]\[\033[01;36m@\]\[\e[32;1m\t\]\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[00m\] ($(ps1_pwd_info))\n($(ps1_file_hints))\n\$ '
 # }}}
+
+function vv ()
+{
+  if [ $# -lt 1 ]; then
+    return
+  fi
+  xdg-open "$1" &>/dev/null
+}
 
 # $PATH {{{
 CABALBIN=$HOME/.cabal/bin
