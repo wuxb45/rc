@@ -6,7 +6,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# alias {{{
+# simple alias {{{
 alias vi='vim'
 alias ls='ls --color=auto'
 alias ll='ls -alhF --time-style=long-iso'
@@ -20,10 +20,17 @@ alias gr='grep -nr'
 alias df='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
-#     update id3 for mp3 files
+# update id3 for mp3 files
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
-#     haskell file server
-alias hfsup='killall hfs; nohup hfs &>/dev/null &'
+# }}}
+
+# hfsup {{{
+# haskell file server
+function hfsup ()
+{
+  killall hfs &>/dev/null
+  nohup hfs &>/dev/null &
+}
 # }}}
 
 # dict {{{
@@ -67,7 +74,7 @@ function rbackup ()
 }
 # }}}
 
-# PS1 {{{
+# $PS1 {{{
 # show some files in current dir
 function ps1_file_hints ()
 {
@@ -95,6 +102,8 @@ function ps1_pwd_info ()
 PS1='\[\033[01;31m\u\]\[\033[01;36m@\]\[\033[01;35m\h\]\[\033[01;36m@\]\[\e[32;1m\t\]\[\033[01;00m\]:\[\033[01;34m\]\w\[\033[00m\] ($(ps1_pwd_info))\n($(ps1_file_hints))\n\$ '
 # }}}
 
+# vv {{{
+# open any file
 function vv ()
 {
   if [ $# -lt 1 ]; then
@@ -102,6 +111,7 @@ function vv ()
   fi
   xdg-open "$1" &>/dev/null
 }
+# }}}
 
 # $PATH {{{
 CABALBIN=$HOME/.cabal/bin
