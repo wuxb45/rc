@@ -1,6 +1,8 @@
+set nocompatible
+
 syntax on
 syntax enable
-set nocompatible
+filetype plugin indent on
 
 set tabstop=2
 set shiftwidth=2
@@ -19,7 +21,7 @@ set autochdir
 set autoread 
 
 set showcmd
-set sm
+set showmatch
 set tags=tags;
 
 set noerrorbells
@@ -27,6 +29,9 @@ set novisualbell
 set magic
 set nolazyredraw
 set wildmenu
+
+"set cursorline
+set scrolloff=3
 
 "if MySys() == "windows"
   "set encoding=cp936
@@ -48,6 +53,7 @@ colorscheme zellner
 
 "for .gvimrc
 if has("gui_running")
+  set guioptions-=T
   set lines=40
   set columns=90
   highlight Normal guibg=#f0f8ff
@@ -59,10 +65,12 @@ if has("gui_running")
   "endif
 endif
 
-set undodir=~/.vim/undodir
-set undofile
-set undolevels=1000
-set undoreload=10000
+if has('persistent_undo')
+  set undodir=~/.vim/undodir
+  set undofile
+  set undolevels=1000
+  set undoreload=10000
+endif
 filetype on
 
 " taglist
@@ -79,3 +87,6 @@ let g:miniBufExplorerMoreThanOne = 2
 
 autocmd BufRead,BufNew :call UMiniBufExplorer
 
+" Reference
+" https://github.com/spf13/spf13-vim
+" http://amix.dk/vim/vimrc.html
