@@ -2,7 +2,7 @@ set nocompatible
 
 syntax on
 syntax enable
-filetype plugin indent on
+"filetype plugin indent on
 
 set tabstop=2
 set shiftwidth=2
