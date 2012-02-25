@@ -66,6 +66,7 @@ if has("gui_running")
 endif
 
 if has('persistent_undo')
+  " mkdir -p ~/.vim/undodir
   set undodir=~/.vim/undodir
   set undofile
   set undolevels=1000
