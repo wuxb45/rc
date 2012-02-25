@@ -7,6 +7,7 @@
 [[ $- != *i* ]] && return
 
 # simple alias {{{
+alias cd..='cd ..'
 alias vi='vim'
 alias ls='ls --color=auto'
 alias ll='ls -alhF --time-style=long-iso'
