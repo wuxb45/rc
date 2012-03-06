@@ -23,7 +23,7 @@ alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
 # update id3 for mp3 files
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
-alias sshpr='ssh -C2qTnN -D 1984'
+alias sshpr='ssh -C2fqTnN -D 1984'
 # }}}
 
 # hfsup {{{
@@ -42,7 +42,7 @@ function d ()
   if [ $# -gt 0 ];
   then
     echo "$1" >> ~/.dict_history
-    dict "$1" | more
+    dict "$1" | less
   fi
 }
 # }}}
@@ -63,7 +63,7 @@ function sshtn ()
   then
     lport=$rport
   fi
-  ssh -f -N -q -L "$lport":localhost:"$rport" "$hostname"
+  ssh -fNq -L "$lport":localhost:"$rport" "$hostname"
 }
 # }}}
 
