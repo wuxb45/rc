@@ -116,15 +116,38 @@ function vv ()
 # }}}
 
 # $PATH {{{
-CABALBIN=$HOME/.cabal/bin
-if [ -d "$CABALBIN" ]; then
-  export "PATH=$CABALBIN:$PATH"
+
+# param: list-content, name-to-check
+# no match -> 0, match -> 1
+function blacklist-check ()
+{
+  local blacklist=$1
+  if [ -z "${blacklist}" ]; then
+    return 0
+  fi
+  for black in ${blacklist};
+  do
+    if [ ${black} == $2 ]; then
+      return 1
+    fi
+  done
+  return 0
+}
+
+CABALBIN=${HOME}/.cabal/bin
+if [ -d "${CABALBIN}" ]; then
+  export "PATH=${CABALBIN}:${PATH}"
 fi
 
-PROGRAMDIR=$HOME/program
-if [ -d "$PROGRAMDIR" ]; then
-  for prog in $(ls $PROGRAMDIR); do
-    export "PATH=$PROGRAMDIR/$prog/bin:$PATH"
+PROGRAMDIR=${HOME}/program
+blacklist=$(cat ${PROGRAMDIR}/blacklist)
+if [ -d "${PROGRAMDIR}" ]; then
+  for prog in $(ls ${PROGRAMDIR}); do
+    progdir=${PROGRAMDIR}/${prog}
+    blacklist-check ${blacklist} ${prog}
+    if [[ -d ${progdir} && $? -eq 0 ]]; then
+      export "PATH=${progdir}/bin:${PATH}"
+    fi
   done
 fi
 # }}}
