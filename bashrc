@@ -148,8 +148,8 @@ fi
 if [ -d "${PROGRAMDIR}" ]; then
   for prog in $(ls ${PROGRAMDIR}); do
     progdir=${PROGRAMDIR}/${prog}
-    blacklist-check ${blacklist} ${prog}
-    if [[ -d ${progdir} && $? -eq 0 ]]; then
+    blacklist-check "${blacklist}" "${prog}"
+    if [[ -d "${progdir}" && $? -eq 0 ]]; then
       export "PATH=${progdir}/bin:${PATH}"
     fi
   done
