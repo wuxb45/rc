@@ -140,7 +140,11 @@ if [ -d "${CABALBIN}" ]; then
 fi
 
 PROGRAMDIR=${HOME}/program
-blacklist=$(cat ${PROGRAMDIR}/blacklist)
+if [ -f "${PROGRAMDIR}/blacklist" ]; then
+  blacklist=$(cat ${PROGRAMDIR}/blacklist)
+else
+  blacklist=""
+fi
 if [ -d "${PROGRAMDIR}" ]; then
   for prog in $(ls ${PROGRAMDIR}); do
     progdir=${PROGRAMDIR}/${prog}
