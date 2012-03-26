@@ -26,6 +26,23 @@ alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {}
 alias sshpr='ssh -C2fqTnN -D 1984'
 # }}}
 
+# find in filename {{{
+function fd1 ()
+{
+  if [[ -n $1 ]]; then
+    find . -maxdepth 1 -iname "*${1}*"
+  fi
+}
+
+function fd ()
+{
+  if [[ -n $1 ]]; then
+    find . -iname "*${1}*"
+  fi
+}
+
+# }}}
+
 # hfsup {{{
 # haskell file server
 function hfsup ()
