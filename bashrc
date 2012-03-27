@@ -94,11 +94,12 @@ rbackup ()
 # }}}
 
 # $PS1 {{{
+mkdir -p "/tmp/ps1cache"
 # show some files in current dir
 ps1_file_hints ()
 {
-  local hintinfo="/tmp/${USER}.$$.ps1hint"
-  local hinttext="/tmp/${USER}.$$.ps1text"
+  local hintinfo="/tmp/ps1cache/${USER}.$$.ps1hint"
+  local hinttext="/tmp/ps1cache/${USER}.$$.ps1text"
   local last=""
   if [[ -f "${hintinfo}" ]]; then
     last=$(cat "${hintinfo}")
