@@ -27,14 +27,14 @@ alias sshpr='ssh -C2fqTnN -D 1984'
 # }}}
 
 # find in filename {{{
-function fd1 ()
+fd1 ()
 {
   if [[ -n $1 ]]; then
     find . -maxdepth 1 -iname "*${1}*"
   fi
 }
 
-function fd ()
+fd ()
 {
   if [[ -n $1 ]]; then
     find . -iname "*${1}*"
@@ -45,7 +45,7 @@ function fd ()
 
 # hfsup {{{
 # haskell file server
-function hfsup ()
+hfsup ()
 {
   killall hfs &>/dev/null
   nohup hfs &>/dev/null &
@@ -54,7 +54,7 @@ function hfsup ()
 
 # dict {{{
 # search dictionary and remember history
-function d ()
+d ()
 {
   if [ $# -gt 0 ];
   then
@@ -66,7 +66,7 @@ function d ()
 
 # sshtn {{{
 # build ssh tunnel at background
-function sshtn ()
+sshtn ()
 {
   # $# the counts
   # $@/$* the args
@@ -86,7 +86,7 @@ function sshtn ()
 
 # rbackup {{{
 # backup using rsync
-function rbackup ()
+rbackup ()
 {
   local target="$HOME"/backup"$(pwd)"/
   mkdir -p $target && rsync -av . $target
@@ -95,25 +95,39 @@ function rbackup ()
 
 # $PS1 {{{
 # show some files in current dir
-function ps1_file_hints ()
+ps1_file_hints ()
 {
+  local hintinfo="/tmp/${USER}.$$.ps1hint"
+  local hinttext="/tmp/${USER}.$$.ps1text"
+  local last=""
+  if [[ -f "${hintinfo}" ]]; then
+    last=$(cat "${hintinfo}")
+  fi
   local cap=$(($(tput cols) - 15))
+  local newhint="$(pwd):${cap}"
+
+  if [[ ${last} == ${newhint} ]]; then
+    cat "${hinttext}"
+    return
+  fi
+  echo -n "$newhint" > "${hintinfo}"
   local len='0'
+  local text=""
   for x in $(ls -F); do
-    local wc=${#x}
+    local wc=$(wc -L <<< "$x")
     len=$(($len + $wc + 1))
     if [ $len -gt $cap ]; then
-      echo -n "... $(echo $(ls) | wc -w) total"
-      return
+      break
     else
-      echo -n "$x "
+      text+="$x "
     fi
-    i=$(($i+1))
   done
-  echo -n "... $(echo $(ls) | wc -w) total"
+  text+="... $(echo $(ls) | wc -w) total"
+  echo -n "${text}" > "${hinttext}"
+  echo -n "${text}"
 }
 
-function ps1_pwd_info ()
+ps1_pwd_info ()
 {
   echo $(ls -dlhF --time-style=long-iso) | tr -s ' ' | cut -d' ' -f1,3,4,6,7
 }
@@ -123,7 +137,7 @@ PS1='\[\033[01;31m\u\]\[\033[01;36m@\]\[\033[01;35m\h\]\[\033[01;36m@\]\[\e[32;1
 
 # vv {{{
 # open any file
-function vv ()
+vv ()
 {
   if [ $# -lt 1 ]; then
     return
@@ -136,7 +150,7 @@ function vv ()
 
 # param: list-content, name-to-check
 # no match -> 0, match -> 1
-function blacklist-check ()
+blacklist-check ()
 {
   local blacklist=$1
   if [ -z "${blacklist}" ]; then
