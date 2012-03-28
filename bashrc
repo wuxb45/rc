@@ -93,6 +93,28 @@ rbackup ()
 }
 # }}}
 
+# convert to mp3 {{{
+# packages: flac for dec. flac, mac for dec. ape, lame for enc. mp3
+xmp3 ()
+{
+  local input=$1
+  local ext=${input##*.}
+  local lext=${ext,,*}
+  if [[ ! -f ${input} ]]; then
+    echo "** ${input}: file not exist"
+    return
+  fi
+  if [[ ${ext} == "ape" ]]; then
+    mac "${input}" - -d | lame -m j -q 2 -V 0 -s 44.1 --vbr-new - "${input%.*}.mp3"
+  elif [[ ${lext} == "flac" ]]; then
+    flac -c -d "${input}" | lame -m j -q 2 -V 0 -s 44.1 --vbr-new - "${input%.*}.mp3"
+  else
+    echo "**What is ${input} ?"
+  fi
+}
+
+# }}}
+
 # $PS1 {{{
 mkdir -p "/tmp/ps1cache"
 # show some files in current dir
