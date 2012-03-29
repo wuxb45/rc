@@ -95,6 +95,7 @@ rbackup ()
 
 # convert to mp3 {{{
 # packages: flac for dec. flac, mac for dec. ape, lame for enc. mp3
+# cd-tracker: cdparanoia -B
 xmp3 ()
 {
   local input=$1
@@ -108,6 +109,8 @@ xmp3 ()
     mac "${input}" - -d | lame -m j -q 2 -V 0 -s 44.1 --vbr-new - "${input%.*}.mp3"
   elif [[ ${lext} == "flac" ]]; then
     flac -c -d "${input}" | lame -m j -q 2 -V 0 -s 44.1 --vbr-new - "${input%.*}.mp3"
+  elif [[ ${lext} == "wav" ]]; then
+    lame -m j -q 2 -V 0 -s 44.1 -vbr-new "${input}" "${input%.*}.mp3"
   else
     echo "**What is ${input} ?"
   fi
