@@ -8,6 +8,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set backspace=2
+set colorcolumn=81
 
 set expandtab
 set noeb vb t_vb=
