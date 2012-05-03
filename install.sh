@@ -18,3 +18,8 @@ cp terminator-config ~/.config/terminator/config
 echo "reader_prefs -> ~/.adobe/Acrobat/9.0/Preferences/"
 mkdir -p ~/.adobe/Acrobat/9.0/Preferences
 cp reader_prefs ~/.adobe/Acrobat/9.0/Preferences/
+
+# Cabal
+echo "cabal-config -> ~/.cabal/config"
+mkdir -p ~/.cabal/
+cp cabal-config ~/.cabal/config
