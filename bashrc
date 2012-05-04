@@ -84,6 +84,26 @@ sshtn ()
 }
 # }}}
 
+# sshtn {{{
+# build ssh tunnel at background
+sshtnr ()
+{
+  # $# the counts
+  # $@/$* the args
+  if [ $# -lt 2 ];
+  then echo "usage: sshtnr <user@host> <rport> [<lport>] "; return
+  fi
+  local hostname=$1
+  local rport=$2
+  local lport=$3
+  if [ $# -lt 3 ];
+  then
+    lport=$rport
+  fi
+  ssh -fNq -R "$rport":localhost:"$lport" "$hostname"
+}
+# }}}
+
 # rbackup {{{
 # backup using rsync
 rbackup ()
