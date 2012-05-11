@@ -139,7 +139,7 @@ xmp3 ()
 # }}}
 
 # $PS1 {{{
-mkdir -p "/tmp/ps1cache"
+mkdir -m777 -p "/tmp/ps1cache"
 # show some files in current dir
 ps1_file_hints ()
 {
