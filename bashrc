@@ -150,7 +150,7 @@ ps1_file_hints ()
     last=$(cat "${hintinfo}")
   fi
   local cap=$(($(tput cols) - 15))
-  local newhint="$(pwd):${cap}"
+  local newhint="$(pwd):${cap}:$(date -Ins -r .)"
 
   if [[ ${last} == ${newhint} ]]; then
     cat "${hinttext}"
