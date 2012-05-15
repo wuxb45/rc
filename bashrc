@@ -159,7 +159,7 @@ ps1_file_hints ()
   echo -n "$newhint" > "${hintinfo}"
   local len='0'
   local text=""
-  for x in $(ls -F); do
+  for x in $(ls -UF | head -n 40); do
     local wc=$(wc -L <<< "$x")
     len=$(($len + $wc + 1))
     if [ $len -gt $cap ]; then
@@ -168,7 +168,7 @@ ps1_file_hints ()
       text+="$x "
     fi
   done
-  text+="... $(echo $(ls) | wc -w) total"
+  text+="... $(echo $(ls -U) | wc -w) total"
   echo -n "${text}" > "${hinttext}"
   echo -n "${text}"
 }
