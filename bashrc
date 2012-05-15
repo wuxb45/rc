@@ -244,4 +244,11 @@ export LD_LIBRARY_PATH=/opt/lib
 shopt -s cdspell checkwinsize no_empty_cmd_completion
 # }}}
 
+# dummy clean {{{
+dummyclean ()
+{
+  rm -f *.hi *.o *~
+}
+# }}}
+
 [[ -f ~/.bashrc.local ]] && . ~/.bashrc.local
