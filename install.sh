@@ -21,5 +21,15 @@ cp reader_prefs ~/.adobe/Acrobat/9.0/Preferences/
 
 # Cabal
 echo "cabal-config -> ~/.cabal/config"
-mkdir -p ~/.cabal/
+mkdir -p ~/.cabal
 cp cabal-config ~/.cabal/config
+
+# Yong input method
+echo "yong.ini -> ~/.yong/yong.ini"
+mkdir -p ~/.yong
+cp yong.ini ~/.yong/yong.ini
+
+# vim filetype.vim
+echo "filetype.vim -> ~/.vim/filetype.vim"
+mkdir -p ~/.vim
+cp filetype.vim ~/.vim/filetype.vim
