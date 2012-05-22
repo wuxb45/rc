@@ -8,7 +8,12 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set backspace=2
+
+colorscheme zellner
+hi ColorColumn ctermbg=LightGray guibg=LightGray
 set colorcolumn=81
+set cursorline
+set cursorcolumn
 
 set expandtab
 set noeb vb t_vb=
@@ -50,7 +55,6 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-colorscheme zellner
 
 "for .gvimrc
 if has("gui_running")
