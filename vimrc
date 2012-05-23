@@ -10,11 +10,12 @@ set softtabstop=2
 set backspace=2
 
 colorscheme zellner
-hi CursorLine cterm=NONE ctermbg=Gray guibg=Gray
 set cursorline
-hi CursorColumn cterm=NONE ctermbg=Gray guibg=Gray
+highlight CursorLine cterm=NONE ctermbg=Gray guibg=Gray
 set cursorcolumn
+highlight CursorColumn cterm=NONE ctermbg=Gray guibg=Gray
 set colorcolumn=81
+highlight ColorColumn cterm=NONE ctermbg=Gray guibg=Gray
 
 set expandtab
 set noeb vb t_vb=
