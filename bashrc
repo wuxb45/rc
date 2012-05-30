@@ -56,22 +56,24 @@ hfsup ()
 # search dictionary and remember history
 d ()
 {
-  if [ $# -gt 0 ];
-  then
+  if [ $# -gt 0 ]; then
     echo "$1" >> ~/.dict_history
     dict "$1" | less
+  else
+    echo "dict: feed me a word?"
   fi
 }
 # }}}
 
-# sshtn {{{
+# sshtn/sshtnr {{{
 # build ssh tunnel at background
 sshtn ()
 {
   # $# the counts
   # $@/$* the args
-  if [ $# -lt 2 ];
-  then echo "usage: sshtn <user@host> <rport> [<lport>] "; return
+  if [ $# -lt 2 ]; then
+    echo "usage: sshtn <user@host> <rport> [<lport>] "
+    return
   fi
   local hostname=$1
   local rport=$2
@@ -82,16 +84,14 @@ sshtn ()
   fi
   ssh -fNq -L "$lport":localhost:"$rport" "$hostname"
 }
-# }}}
 
-# sshtn {{{
-# build ssh tunnel at background
 sshtnr ()
 {
   # $# the counts
   # $@/$* the args
-  if [ $# -lt 2 ];
-  then echo "usage: sshtnr <user@host> <rport> [<lport>] "; return
+  if [ $# -lt 2 ]; then
+    echo "usage: sshtnr <user@host> <rport> [<lport>] "
+    return
   fi
   local hostname=$1
   local rport=$2
@@ -110,6 +110,30 @@ rbackup ()
 {
   local target="$HOME"/backup"$(pwd)"/
   mkdir -p $target && rsync -av . $target
+}
+# }}}
+
+# rpush/rpull {{{
+rpush ()
+{
+  if [[ $# -lt 2 ]]; then
+    echo "usage: rpush <dir-name> <target-host>"
+    return
+  fi
+  local fullpath=$(readlink -f "$1")
+  local remote=$2
+  rsync -avz "${fullpath}/" "${remote}:${fullpath}"
+}
+
+rpull ()
+{
+  if [[ $# -lt 2 ]]; then
+    echo "usage: rpush <dir-name> <target-host>"
+    return
+  fi
+  local fullpath=readlink -f "$1"
+  local remote=$2
+  rsync -avz "${remote}:${fullpath}/" "${fullpath}"
 }
 # }}}
 
