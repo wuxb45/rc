@@ -113,28 +113,24 @@ rbackup ()
 }
 # }}}
 
-# rpush/rpull {{{
+# rpush {{{
 rpush ()
 {
   if [[ $# -lt 2 ]]; then
-    echo "usage: rpush <dir-name> <target-host>"
+    echo "usage: rpush <dir-or-file> <target-host>"
     return
   fi
   local fullpath=$(readlink -f "$1")
   local remote=$2
-  rsync -avz "${fullpath}/" "${remote}:${fullpath}"
+  if [[ -d ${fullpath} ]]; then
+    ssh ${remote} "mkdir -p ${fullpath}"
+    rsync -av "${fullpath}/" "${remote}:${fullpath}"
+  else
+    ssh ${remote} "mkdir -p ${fullpath%/*}"
+    rsync -v "${fullpath}" "${remote}:${fullpath}"
+  fi
 }
 
-rpull ()
-{
-  if [[ $# -lt 2 ]]; then
-    echo "usage: rpush <dir-name> <target-host>"
-    return
-  fi
-  local fullpath=readlink -f "$1"
-  local remote=$2
-  rsync -avz "${remote}:${fullpath}/" "${fullpath}"
-}
 # }}}
 
 # convert to mp3 {{{
