@@ -3,7 +3,6 @@ bash_profile
 gitconfig
 hgrc
 htoprc
-screenrc
 toprc
 vimrc
 gvimrc
