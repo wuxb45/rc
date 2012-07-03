@@ -35,5 +35,5 @@ put yong.ini ~/.yong/yong.ini
 
 # vim filetype.vim
 echo "filetype.vim -> ~/.vim/filetype.vim"
-mkdir -p ~/.vim
+mkdir -p ~/.vim/undodir
 put filetype.vim ~/.vim/filetype.vim

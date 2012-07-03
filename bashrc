@@ -21,6 +21,7 @@ alias gr='grep -nr'
 alias df='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
+alias free='free -h'
 # update id3 for mp3 files
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
 alias sshpr='ssh -C2fqTnN -D 1984'
