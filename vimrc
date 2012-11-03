@@ -10,12 +10,12 @@ set softtabstop=2
 set backspace=2
 
 colorscheme zellner
-set cursorline
-highlight CursorLine cterm=NONE ctermbg=Gray guibg=Gray
-set cursorcolumn
-highlight CursorColumn cterm=NONE ctermbg=Gray guibg=Gray
-set colorcolumn=81
-highlight ColorColumn cterm=NONE ctermbg=Gray guibg=Gray
+"set cursorline
+"highlight CursorLine cterm=NONE ctermbg=Gray guibg=Gray
+"set cursorcolumn
+"highlight CursorColumn cterm=NONE ctermbg=Gray guibg=Gray
+"set colorcolumn=81
+"highlight ColorColumn cterm=NONE ctermbg=Gray guibg=Gray
 
 set expandtab
 set noeb vb t_vb=
@@ -98,3 +98,13 @@ autocmd BufRead,BufNew :call UMiniBufExplorer
 " Reference
 " https://github.com/spf13/spf13-vim
 " http://amix.dk/vim/vimrc.html
+
+" Set the following lines in your ~/.vimrc or the systemwide /etc/vimrc:
+" filetype plugin indent on
+" set grepprg=grep\ -nH\ $*
+" let g:tex_flavor = "latex"
+" 
+" Also, this installs to /usr/share/vim/vimfiles, which may not be in
+" your runtime path (RTP). Be sure to add it too, e.g:
+" set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+
