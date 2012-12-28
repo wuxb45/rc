@@ -33,7 +33,13 @@ echo "yong.ini -> ~/.yong/yong.ini"
 mkdir -p ~/.yong
 put yong.ini ~/.yong/yong.ini
 
-# vim filetype.vim
-echo "filetype.vim -> ~/.vim/filetype.vim"
+# vim
 mkdir -p ~/.vim/undodir
-put filetype.vim ~/.vim/filetype.vim
+mkdir -p ~/.vim/ftdetect
+put vim/ftdetect/hsc.vim ~/.vim/ftdetect/hsc.vim
+put vim/ftdetect/scala.vim ~/.vim/ftdetect/scala.vim
+mkdir -p ~/.vim/syntax
+put vim/syntax/scala.vim ~/.vim/syntax/scala.vim
+mkdir -p ~/.vim/indent
+put vim/indent/scala.vim ~/.vim/indent/scala.vim
+
