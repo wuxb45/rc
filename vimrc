@@ -93,6 +93,39 @@ let g:miniBufExplModSelTarget = 1
 " show minibuffer if has >=2 buffers.
 let g:miniBufExplorerMoreThanOne = 2
 
+" cscope
+if has("cscope")
+  " set csprg=/usr/local/bin/cscope
+  set csto=1
+  set cst
+  set nocsverb
+  " add any database in current directory
+  if filereadable("cscope.out")
+      cs add cscope.out
+  " else add database pointed to by environment
+  elseif $CSCOPE_DB != ""
+      cs add $CSCOPE_DB
+  endif
+  set csverb
+endif
+
+" find C symbol.
+" nmap <C-->s :cs find s <C-R>=expand("<cword>")<CR><CR>
+" find global definition.
+" nmap <C-->g :cs find g <C-R>=expand("<cword>")<CR><CR>
+" find functions calling this function.
+" nmap <C-->c :cs find c <C-R>=expand("<cword>")<CR><CR>
+" find this text string.
+" nmap <C-->t :cs find t <C-R>=expand("<cword>")<CR><CR>
+" find this egrep pattern.
+" nmap <C-->e :cs find e <C-R>=expand("<cword>")<CR><CR>
+" find this file.
+" nmap <C-->f :cs find f <C-R>=expand("<cword>")<CR><CR>
+" find files #including this file.
+" nmap <C-->i :cs find i <C-R>=expand("<cword>")<CR><CR>
+" find functions called by this function.
+" nmap <C-->d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
 autocmd BufRead,BufNew :call UMiniBufExplorer
 
 " Reference
