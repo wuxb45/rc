@@ -143,5 +143,5 @@ autocmd BufRead,BufNew :call UMiniBufExplorer
 " your runtime path (RTP). Be sure to add it too, e.g:
 " set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 
-" spell check
-set spell spelllang=en_us
+" spell check, use it manually.
+" set spell spelllang=en_us
