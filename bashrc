@@ -44,6 +44,20 @@ fd ()
 
 # }}}
 
+# grep text in pdfs {{{
+pdfgrep()
+{
+  pattern=$1
+  pdfs=$(find . -iname "*.pdf")
+  for pdf in ${pdfs}; do
+    lines=$(pdftotext ${pdf} - | grep -nE ${pattern} - )
+    if [[ -n $lines ]]; then
+      echo ${pdf} ${lines}
+    fi
+  done
+}
+# }}}
+
 # hfsup {{{
 # haskell file server
 hfsup ()
