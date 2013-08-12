@@ -1,1 +1,1 @@
--linux -i2 -nut
+-linux -i2 -nut -psl
