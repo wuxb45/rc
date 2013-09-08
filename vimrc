@@ -9,7 +9,11 @@ set shiftwidth=2
 set softtabstop=2
 set backspace=2
 
-colorscheme zellner
+if has("gui_running")
+  colorscheme delek
+else
+  colorscheme zellner
+endif
 "set cursorline
 "highlight CursorLine cterm=NONE ctermbg=Gray guibg=Gray
 "set cursorcolumn
