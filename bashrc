@@ -45,16 +45,14 @@ fd ()
 
 # }}}
 
-# grep text in pdfs {{{
+# pdfgrep: find pdfs and grep text {{{
 pdfgrep()
 {
-  pattern=$1
-  pdfs=$(find . -iname "*.pdf")
-  for pdf in ${pdfs}; do
-    lines=$(pdftotext ${pdf} - | grep -nE "${pattern}" - )
-    if [[ -n $lines ]]; then
-      echo ${pdf} ${lines}
-    fi
+  pat="$1"
+  IFS=$'\n'
+  for pdf in $(find . -iname '*.pdf'); do
+    echo -ne "--> \033[K${pdf}\r"
+    pdftotext "${pdf}" - 2>/dev/null | grep -nEH --color=auto --label="${pdf}" "${pat}" -
   done
 }
 # }}}
