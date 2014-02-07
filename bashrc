@@ -47,6 +47,14 @@ fd ()
 
 # }}}
 
+# manpages to pdf {{{
+man2pdf()
+{
+  # man2pdf 2 open
+  man -t ${1} ${2} | ps2pdf - > ${1}${2}.pdf
+}
+# }}}
+
 # pdfgrep: find pdfs and grep text {{{
 pdfgrep()
 {
