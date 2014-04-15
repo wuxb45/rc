@@ -26,7 +26,8 @@ alias free='free -h'
 # update id3 for mp3 files
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
 alias sshpr='ssh -C2fqTnN -D 1984'
-alias vcheck='valgrind --leak-check=yes '
+alias vcheck='valgrind --leak-check=full '
+alias vvcheck='valgrind --leak-check=full --show-leak-kinds=all '
 alias timestamp='date +%Y-%m-%d-%H-%M-%S-%N'
 # }}}
 
