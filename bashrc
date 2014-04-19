@@ -236,7 +236,7 @@ ps1_pwd_info ()
   echo $(ls -dlhF --time-style=long-iso) | tr -s ' ' | cut -d' ' -f1,3,4,6,7
 }
 
-PS1='$(tput bold)$(tput smul)$(tput setb 0)$(tput setf 2)\u$(tput setf 7)@$(tput setf 5)\h$(tput setf 7)@$(tput setf 6)\t$(tput setf 7):$(tput setf 3)\w$(tput sgr0) $(tput setb 7)($(ps1_pwd_info))\n($(ps1_file_hints))\n\$$(tput sgr0) '
+PS1='$(tput bold)$(tput smul)$(tput setb 0)$(tput setf 2)\u$(tput setf 7)@$(tput setf 5)\h$(tput setf 7)@$(tput setf 6)\t$(tput setf 7):$(tput setf 3)\w$(tput sgr0) $(tput setb 7)($(ps1_pwd_info))\n($(ps1_file_hints))$(tput sgr0)\n\$ '
 # }}}
 
 # vv {{{
