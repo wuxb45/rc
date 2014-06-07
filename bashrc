@@ -56,6 +56,13 @@ man2pdf()
 }
 # }}}
 
+# markdown to html (lynx) {{{
+readmd()
+{
+  markdown ${1} | lynx -stdin
+}
+# }}}
+
 # pdfgrep: find pdfs and grep text {{{
 pdfgrep()
 {
