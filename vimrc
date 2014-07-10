@@ -1,4 +1,5 @@
 set nocompatible
+"set spell
 
 syntax on
 syntax enable
