@@ -88,7 +88,7 @@ pdfsplit()
   #     $3 is the input file
   #     output file will be named "inputfile_pXX-pYY.pdf"
   gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=${1} -dLastPage=${2} \
-     -sOutputFile=${3%.pdf}_p${1}-p${2}.pdf ${3}
+     -sOutputFile="${3%.pdf}_p${1}-p${2}.pdf" "${3}"
 }
 # }}}
 
