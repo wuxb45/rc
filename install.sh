@@ -2,7 +2,8 @@
 put ()
 {
   echo "${1} -> ${2}"
-  rsync -u $1 $2
+  colordiff "${1}" "${2}"
+  rsync -u "${1}" "${2}"
 }
 
 # normal .xx files
