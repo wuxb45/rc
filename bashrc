@@ -12,6 +12,7 @@ alias vi='vim'
 alias ls='ls --color=auto'
 alias ll='ls -alhF --time-style=long-iso'
 alias la='ls -A'
+alias lt='ls -ltrhF --time-style=long-iso'
 alias l='ls -CF'
 alias tree='tree -C'
 alias grep='grep --color=auto'
@@ -29,6 +30,7 @@ alias sshpr='ssh -C2fqTnN -D 1984'
 alias vcheck='valgrind --leak-check=full '
 alias vvcheck='valgrind --leak-check=full --show-leak-kinds=all '
 alias timestamp='date +%Y-%m-%d-%H-%M-%S-%N'
+alias lsb='lsblk -o KNAME,FSTYPE,MOUNTPOINT,MODEL,SIZE,MIN-IO,PHY-SEC,LOG-SEC,ROTA,SCHED,DISC-ZERO'
 # }}}
 
 # find in filename {{{
