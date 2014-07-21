@@ -2,7 +2,9 @@
 put ()
 {
   echo "${1} -> ${2}"
-  colordiff "${1}" "${2}"
+  if [ -x colordiff ]; then
+    colordiff "${1}" "${2}"
+  fi
   rsync -u "${1}" "${2}"
 }
 
