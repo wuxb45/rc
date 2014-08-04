@@ -14,7 +14,7 @@
   switch_to_tab_7 = <Alt>7
   paste = None
   move_tab_right = None
-  prev_tab = None
+  prev_tab = <Alt>p
   switch_to_tab_6 = <Alt>6
   group_tab = None
   switch_to_tab_4 = <Alt>4
@@ -35,7 +35,7 @@
   reset = None
   search = <Alt>f
   go_up = <Alt>k
-  next_tab = None
+  next_tab = <Alt>n
   split_horiz = <Alt>o
   zoom_normal = <Alt>backslash
   go_down = <Alt>j
@@ -53,7 +53,7 @@
     use_system_font = False
     cursor_color = "#0603f6"
     foreground_color = "#000000"
-    font = DejaVu Sans Mono 10
+    font = DejaVu Sans Mono 9
     background_color = "#dbf2d3"
 [layouts]
   [[default]]
