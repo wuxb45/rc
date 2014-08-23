@@ -94,6 +94,13 @@ pdfsplit()
 }
 # }}}
 
+# px: ps without noises {{{
+px()
+{
+  ps -ef --forest | grep '^.*[^]]$'
+}
+# }}}
+
 # hfsup {{{
 # haskell file server
 hfsup ()
