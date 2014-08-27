@@ -97,7 +97,7 @@ pdfsplit()
 # px: ps without noises {{{
 px()
 {
-  ps -ef --forest | grep '^.*[^]]$'
+  ps -eo euser,pid,ppid,tname,c,rss,start,etime,cmd --forest | grep '^.*[^]]$'
 }
 # }}}
 
