@@ -30,8 +30,12 @@ mkdir -p ~/.cabal
 put cabal-config ~/.cabal/config
 
 # Yong input method
-mkdir -p ~/.yong
-put yong.ini ~/.yong/yong.ini
+#mkdir -p ~/.yong
+#put yong.ini ~/.yong/yong.ini
+
+# matplotlib set default backend to svg
+mkdir -p ~/.config/matplotlib
+put matplotlibrc ~/.config/matplotlib/matplotlibrc
 
 # vim
 mkdir -p ~/.vim/undodir
