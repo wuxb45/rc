@@ -304,7 +304,7 @@ if [ -d "${PROGRAMDIR}" ]; then
   for prog in $(ls ${PROGRAMDIR}); do
     progdir=${PROGRAMDIR}/${prog}
     blacklist-check "${blacklist}" "${prog}"
-    if [[ -d "${progdir}" && $? -eq 0 ]]; then
+    if [[ -d "${progdir}" && $? -eq 0 && -d "${progdir}/bin" ]]; then
       export "PATH=${progdir}/bin:${PATH}"
     fi
   done
