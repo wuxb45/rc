@@ -2,8 +2,10 @@
 put ()
 {
   echo "${1} -> ${2}"
-  if [ -x colordiff ]; then
+  if [ -x $(which colordiff) ]; then
     colordiff "${1}" "${2}"
+  elif [ -x $(which diff) ]; then
+    diff "${1}" "${2}"
   fi
   rsync -u "${1}" "${2}"
 }
@@ -22,12 +24,12 @@ mkdir -p ~/.config/terminator
 put terminator-config ~/.config/terminator/config
 
 # Adobe Reader 9.0
-mkdir -p ~/.adobe/Acrobat/9.0/Preferences
-put reader_prefs ~/.adobe/Acrobat/9.0/Preferences/
+#mkdir -p ~/.adobe/Acrobat/9.0/Preferences
+#put reader_prefs ~/.adobe/Acrobat/9.0/Preferences/
 
 # Cabal
-mkdir -p ~/.cabal
-put cabal-config ~/.cabal/config
+#mkdir -p ~/.cabal
+#put cabal-config ~/.cabal/config
 
 # Yong input method
 #mkdir -p ~/.yong
