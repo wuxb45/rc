@@ -216,6 +216,26 @@ xmp3 ()
 
 # }}}
 
+# {{{ pacsrc
+pacsrc()
+{
+  local name=$1
+  local AR=${HOME}/src/abs
+  [[ ! -e ${AR} ]] && mkdir -p ${AR}
+  if [[ ! -d ${AR} ]]; then
+    echo ${AR} is not a directory
+    return 1
+  fi
+  local repo=$(pacman -Si ${name} | grep '^Repository' | awk '{ print $3 }')
+  if [[ -z ${repo} ]]; then
+    return 1
+  fi
+  local fullname="${repo}/${name}"
+  echo found ${fullname}
+  ABSROOT=${AR} abs ${fullname}
+}
+# }}}
+
 # $PS1 {{{
 mkdir -m777 -p "/tmp/ps1cache"
 # show some files in current dir
