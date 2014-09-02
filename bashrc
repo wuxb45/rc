@@ -33,7 +33,7 @@ alias timestamp='date +%Y-%m-%d-%H-%M-%S-%N'
 alias lsb='lsblk -o KNAME,FSTYPE,MOUNTPOINT,MODEL,SIZE,MIN-IO,PHY-SEC,LOG-SEC,ROTA,SCHED,DISC-ZERO'
 # }}}
 
-# find in filename {{{
+# fd/fd1: find in filename {{{
 fd1 ()
 {
   if [[ -n $1 ]]; then
@@ -50,7 +50,7 @@ fd ()
 
 # }}}
 
-# manpages to pdf {{{
+# map2pdf: manpages to pdf {{{
 man2pdf()
 {
   # man2pdf 2 open
@@ -58,7 +58,7 @@ man2pdf()
 }
 # }}}
 
-# markdown to html (lynx) {{{
+# readmd: read markdown in lynx (by converting to on-the-fly html) {{{
 readmd()
 {
   markdown ${1} | lynx -stdin
@@ -68,11 +68,14 @@ readmd()
 # pdfgrep: find pdfs and grep text {{{
 pdfgrep()
 {
-  pat="$1"
-  IFS=$'\n'
+  if [[ -z ${1} ]]; then
+    echo "usage : $0 <keyword>"
+    return
+  fi
+  local pat="$1"
   for pdf in $(find . -iname '*.pdf'); do
     echo -ne "--> \033[K${pdf}\r"
-    pdftotext "${pdf}" - 2>/dev/null | grep -nEH --color=auto --label="${pdf}" "${pat}" -
+    IFS=$'\n' pdftotext "${pdf}" - 2>/dev/null | grep -nEH --color=auto --label="${pdf}" "${pat}" -
   done
 }
 # }}}
@@ -84,9 +87,9 @@ pdfsplit()
     echo "usage: pdfsplit <first page> <last page> <file name>"
     return
   fi
-  # this function uses 3 arguments:
-  #     $1 is the first page of the range to extract
-  #     $2 is the last page of the range to extract
+  # this function takes 3 arguments:
+  #     $1 is the first page to extract
+  #     $2 is the last page to extract
   #     $3 is the input file
   #     output file will be named "inputfile_pXX-pYY.pdf"
   gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=${1} -dLastPage=${2} \
@@ -101,30 +104,20 @@ px()
 }
 # }}}
 
-# hfsup {{{
-# haskell file server
-hfsup ()
-{
-  killall hfs &>/dev/null
-  nohup hfs &>/dev/null &
-}
-# }}}
-
-# dict {{{
+# d: dict {{{
 # search dictionary and remember history
 d ()
 {
-  if [ $# -gt 0 ]; then
+  if [[ -n $1 ]]; then
     echo "$1" >> ~/.dict_history
     dict "$1" | less
   else
-    echo "dict: feed me a word?"
+    echo "usage : $0 <word>"
   fi
 }
 # }}}
 
-# sshtn/sshtnr {{{
-# build ssh tunnel at background
+# sshtn/sshtnr: building ssh tunnel at background {{{
 sshtn ()
 {
   # $# the counts
@@ -162,8 +155,7 @@ sshtnr ()
 }
 # }}}
 
-# rbackup {{{
-# backup using rsync
+# rbackup: backup using rsync {{{
 rbackup ()
 {
   local target="$HOME"/backup"$(pwd)"/
@@ -171,7 +163,7 @@ rbackup ()
 }
 # }}}
 
-# rpush {{{
+# rpush: push file/dir to the same location in remote machine {{{
 rpush ()
 {
   if [[ $# -lt 2 ]]; then
@@ -191,7 +183,7 @@ rpush ()
 
 # }}}
 
-# convert to mp3 {{{
+# xmp3: convert audio files to mp3 {{{
 # packages: flac for dec. flac, mac for dec. ape, lame for enc. mp3
 # cd-tracker: cdparanoia -B
 xmp3 ()
@@ -216,7 +208,7 @@ xmp3 ()
 
 # }}}
 
-# {{{ pacsrc
+# pacsrc: retrieving package from abs with the help from pacman {{{
 pacsrc()
 {
   local name=$1
@@ -234,6 +226,28 @@ pacsrc()
   echo found ${fullname}
   ABSROOT=${AR} abs ${fullname}
 }
+# }}}
+
+# vv: open file with xdg-open {{{
+# open any file
+vv ()
+{
+  if [ $# -lt 1 ]; then
+    return
+  fi
+  xdg-open "$1" &>/dev/null
+}
+# }}}
+
+# bash env misc {{{
+export HISTCONTROL=ignoreboth:erasedups
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+export HISTIGNORE='&'
+export EDITOR='vim'
+export LD_LIBRARY_PATH=/opt/lib
+
+shopt -s cdspell checkwinsize no_empty_cmd_completion
 # }}}
 
 # $PS1 {{{
@@ -279,17 +293,6 @@ ps1_pwd_info ()
 PS1='$(tput bold)$(tput smul)$(tput setb 0)$(tput setf 2)\u$(tput setf 7)@$(tput setf 5)\h$(tput setf 7)@$(tput setf 6)\t$(tput setf 7):$(tput setf 3)\w$(tput sgr0) $(tput setb 7)($(ps1_pwd_info))\n($(ps1_file_hints))$(tput sgr0)\n\$ '
 # }}}
 
-# vv {{{
-# open any file
-vv ()
-{
-  if [ $# -lt 1 ]; then
-    return
-  fi
-  xdg-open "$1" &>/dev/null
-}
-# }}}
-
 # $PATH {{{
 
 # param: list-content, name-to-check
@@ -329,24 +332,6 @@ if [ -d "${PROGRAMDIR}" ]; then
     fi
   done
 fi
-# }}}
-
-# misc {{{
-export HISTCONTROL=ignoreboth:erasedups
-export HISTSIZE=10000
-export HISTFILESIZE=20000
-export HISTIGNORE='&'
-export EDITOR='vim'
-export LD_LIBRARY_PATH=/opt/lib
-
-shopt -s cdspell checkwinsize no_empty_cmd_completion
-# }}}
-
-# dummy clean {{{
-dummyclean ()
-{
-  rm -f *.hi *.o *~
-}
 # }}}
 
 [[ -f ~/.bashrc.local ]] && . ~/.bashrc.local
