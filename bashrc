@@ -239,6 +239,27 @@ vv ()
 }
 # }}}
 
+# convchs/convcht: convert to utf-8 encoding {{{
+convchs()
+{
+  local tf=$(mktemp)
+  for f in "$@"; do
+    iconv -f GB18030 -t UTF-8 "$f" -o ${tf}
+    mv "${f}" "${f}.orig"
+    mv ${tf} "${f}"
+  done
+}
+convcht()
+{
+  local tf=$(mktemp)
+  for f in "$@"; do
+    iconv -f BIG-5 -t UTF-8 "$f" -o ${tf}
+    mv "${f}" "${f}.orig"
+    mv ${tf} "${f}"
+  done
+}
+# }}}
+
 # bash env misc {{{
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=10000
