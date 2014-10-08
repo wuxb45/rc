@@ -260,19 +260,7 @@ convcht()
 }
 # }}}
 
-# bash env misc {{{
-export HISTCONTROL=ignoreboth:erasedups
-export HISTSIZE=10000
-export HISTFILESIZE=20000
-export HISTIGNORE='&'
-export EDITOR='vim'
-export LD_LIBRARY_PATH=/opt/lib
-
-shopt -s cdspell checkwinsize no_empty_cmd_completion
-# }}}
-
-# $PS1 {{{
-mkdir -m777 -p "/tmp/ps1cache"
+# PS1 helpers {{{
 # show some files in current dir
 ps1_file_hints ()
 {
@@ -310,8 +298,27 @@ ps1_pwd_info ()
 {
   echo $(ls -dlhF --time-style=long-iso) | tr -s ' ' | cut -d' ' -f1,3,4,6,7
 }
+# }}}
 
+# $PS1 {{{
+[[ -d "/tmp/ps1cache" ]] || mkdir -m777 -p "/tmp/ps1cache"
 PS1='$(tput bold)$(tput smul)$(tput setb 0)$(tput setf 2)\u$(tput setf 7)@$(tput setf 5)\h$(tput setf 7)@$(tput setf 6)\t$(tput setf 7):$(tput setf 3)\w$(tput sgr0) $(tput setb 7)($(ps1_pwd_info))\n($(ps1_file_hints))$(tput sgr0)\n\$ '
+# }}}
+
+shopt -s cdspell checkwinsize no_empty_cmd_completion cmdhist dirspell
+
+if [[ -z $BASHRC_LOADED ]]; then
+
+[[ -f ~/.bashrc.local1 ]] && . ~/.bashrc.local1
+
+# bash env misc {{{
+export HISTCONTROL=ignoreboth:erasedups
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+export HISTIGNORE='&'
+export EDITOR='vim'
+#LD_LIBRARY_PATH=/opt/lib
+
 # }}}
 
 # $PATH {{{
@@ -335,7 +342,7 @@ blacklist-check ()
 
 CABALBIN=${HOME}/.cabal/bin
 if [ -d "${CABALBIN}" ]; then
-  export "PATH=${CABALBIN}:${PATH}"
+  PATH=${CABALBIN}:${PATH}
 fi
 
 PROGRAMDIR=${HOME}/program
@@ -349,10 +356,14 @@ if [ -d "${PROGRAMDIR}" ]; then
     progdir=${PROGRAMDIR}/${prog}
     blacklist-check "${blacklist}" "${prog}"
     if [[ -d "${progdir}" && $? -eq 0 && -d "${progdir}/bin" ]]; then
-      export "PATH=${progdir}/bin:${PATH}"
+      PATH=${progdir}/bin:${PATH}
     fi
   done
 fi
+export PATH
 # }}}
 
-[[ -f ~/.bashrc.local ]] && . ~/.bashrc.local
+export BASHRC_LOADED=y
+fi
+
+[[ -f ~/.bashrc.localn ]] && . ~/.bashrc.localn
