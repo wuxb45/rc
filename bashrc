@@ -260,7 +260,7 @@ convcht()
 }
 # }}}
 
-# forall {{{
+# forall/forpar {{{
 forall()
 {
   if [[ $# -lt 2 ]]; then
@@ -277,6 +277,23 @@ forall()
   for h in $hosts; do
     echo "== $h =="
     ssh "$h" "${@:2}"
+  done
+}
+forpar()
+{
+  if [[ $# -lt 2 ]]; then
+    echo "Usage: $0 <cfg-name> <cmd> ..."
+    return 1
+  fi
+  local hosts=
+  if [[ -r "${HOME}/.forall/${1}" ]]; then
+    hosts=$(cat "${HOME}/.forall/${1}")
+  elif [[ -r "/etc/forall/${1}" ]]; then
+    hosts=$(cat "/etc/forall/${1}")
+  fi
+  [[ -z $hosts ]] && return 1
+  for h in $hosts; do
+    (ssh "$h" "${@:2}") &>/tmp/forpar.$h.log &
   done
 }
 # }}}
