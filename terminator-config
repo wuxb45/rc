@@ -12,9 +12,13 @@
   switch_to_tab_8 = <Alt>8
   switch_to_tab_9 = <Alt>9
   switch_to_tab_10 = None
-  zoom_in = <Alt>period
-  zoom_out = <Alt>comma
-  zoom_normal = <Alt>backslash
+  broadcast_all = F2
+  broadcast_group = F3
+  broadcast_off = F4
+  reset_clear = F5
+  zoom_out = F6
+  zoom_normal = F7
+  zoom_in = F8
   go_left = <Alt>h
   go_down = <Alt>j
   go_up = <Alt>k
@@ -22,14 +26,13 @@
   prev_tab = <Alt>p
   next_tab = <Alt>n
   new_tab = <Alt>t
-  scaled_zoom = <Alt>m
+  scaled_zoom = None
   split_vert = <Alt>i
   split_horiz = <Alt>o
   search = <Alt>f
   close_window = None
   resize_left = None
   rotate_ccw = None
-  reset_clear = None
   resize_right = None
   resize_down = None
   toggle_zoom = None
@@ -74,4 +77,5 @@
     [[[window0]]]
       type = Window
       parent = ""
+      size = 1024, 512
 [plugins]

@@ -7,7 +7,7 @@ put ()
   elif [[ -x $(which diff 2>/dev/null) ]]; then
     diff "${1}" "${2}"
   fi
-  rsync -u "${1}" "${2}"
+  rsync -c "${1}" "${2}"
 }
 
 # normal .xx files
