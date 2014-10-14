@@ -54,6 +54,7 @@ set scrolloff=3
   set encoding=utf-8
 "endif
 
+set fileformat=unix
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set fileencoding=utf-8
 
@@ -76,7 +77,7 @@ if has("gui_running")
   "if MySys() == "windows"
   "  set guifont=Consolas:h15
   "elseif MySys() == "linux"
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+    set guifont=DejaVu\ Sans\ Mono\ 10
     "set guifont=VL\ gothic\ 11
   "endif
 endif
@@ -91,7 +92,7 @@ endif
 filetype on
 
 " taglist
-nnoremap <silent> <F8> :TlistToggle<CR>
+nnoremap <silent> <F9> :TlistToggle<CR>
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Show_One_File=1
 let Tlist_WinWidth=35
