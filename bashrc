@@ -117,41 +117,30 @@ d ()
 }
 # }}}
 
-# sshtn/sshtnr: building ssh tunnel at background {{{
-sshtn ()
+# sshtnl/sshtnr: building ssh tunnel at background {{{
+sshtnl ()
 {
-  # $# the counts
-  # $@/$* the args
-  if [ $# -lt 2 ]; then
-    echo "usage: sshtn <user@host> <rport> [<lport>] "
-    return
+  if [[ $# -ne 3 ]]; then
+    echo "  Access to <local-port> will be forwarded to <target-host>:<target-port> int the remote network of <remote-host>"
+    echo "  Usage: $0 <[username@]remote-host> <target-host>:<target-port> <local-port>"
+    return 0
   fi
-  local hostname=$1
-  local rport=$2
-  local lport=$3
-  if [ $# -lt 3 ];
-  then
-    lport=$rport
-  fi
-  ssh -fNq -L "$lport":localhost:"$rport" "$hostname"
+  local rhost="$1"
+  local thost="$2"
+  local lport="$3"
+  ssh -fNq -L "${lport}":"${thost}" "${rhost}"
 }
-
 sshtnr ()
 {
-  # $# the counts
-  # $@/$* the args
-  if [ $# -lt 2 ]; then
-    echo "usage: sshtnr <user@host> <rport> [<lport>] "
+  if [ $# -ne 3 ]; then
+    echo "  Access to <remote-host>:<remote-port> will be forwarded to <target-host>:<target-port> in local network"
+    echo "  Usage: $0 <[username@]remote-host> <target-host>:<target-port> <remote-port>"
     return
   fi
-  local hostname=$1
-  local rport=$2
-  local lport=$3
-  if [ $# -lt 3 ];
-  then
-    lport=$rport
-  fi
-  ssh -fNq -R "$rport":localhost:"$lport" "$hostname"
+  local rhost="$1"
+  local thost="$2"
+  local rport="$3"
+  ssh -fNq -R "${rport}":"${thost}" "${rhost}"
 }
 # }}}
 
