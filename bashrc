@@ -69,7 +69,7 @@ readmd()
 pdfgrep()
 {
   if [[ -z ${1} ]]; then
-    echo "usage : $0 <keyword>"
+    echo "usage : pdfgrep <keyword>"
     return
   fi
   local pat="$1"
@@ -112,7 +112,7 @@ d ()
     echo "$1" >> ~/.dict_history
     dict "$1" | less
   else
-    echo "usage : $0 <word>"
+    echo "usage : d <word>"
   fi
 }
 # }}}
@@ -122,7 +122,7 @@ sshtnl ()
 {
   if [[ $# -ne 3 ]]; then
     echo "  Access to <local-port> will be forwarded to <target-host>:<target-port> int the remote network of <remote-host>"
-    echo "  Usage: $0 <[username@]remote-host> <target-host>:<target-port> <local-port>"
+    echo "  Usage: sshtnl <[username@]remote-host> <target-host>:<target-port> <local-port>"
     return 0
   fi
   local rhost="$1"
@@ -134,7 +134,7 @@ sshtnr ()
 {
   if [ $# -ne 3 ]; then
     echo "  Access to <remote-host>:<remote-port> will be forwarded to <target-host>:<target-port> in local network"
-    echo "  Usage: $0 <[username@]remote-host> <target-host>:<target-port> <remote-port>"
+    echo "  Usage: sshtnr <[username@]remote-host> <target-host>:<target-port> <remote-port>"
     return
   fi
   local rhost="$1"
@@ -253,7 +253,7 @@ convcht()
 forall()
 {
   if [[ $# -lt 2 ]]; then
-    echo "Usage: $0 <cfg-name> <cmd> ..."
+    echo "Usage: forall <cfg-name> <cmd> ..."
     return 1
   fi
   local hosts=
@@ -271,7 +271,7 @@ forall()
 forpar()
 {
   if [[ $# -lt 2 ]]; then
-    echo "Usage: $0 <cfg-name> <cmd> ..."
+    echo "Usage: forpar <cfg-name> <cmd> ..."
     return 1
   fi
   local hosts=
