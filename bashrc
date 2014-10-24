@@ -285,6 +285,30 @@ forpar()
     (ssh "$h" "${@:2}") &>/tmp/forpar.$h.log &
   done
 }
+fordif()
+{
+  if [[ $# -lt 2 ]]; then
+    echo "Usage: fordif <cfg-name> <cmd> ..."
+    return 1
+  fi
+  local hosts=
+  if [[ -r "${HOME}/.forall/${1}" ]]; then
+    hosts=$(cat "${HOME}/.forall/${1}")
+  elif [[ -r "/etc/forall/${1}" ]]; then
+    hosts=$(cat "/etc/forall/${1}")
+  fi
+  [[ -z $hosts ]] && return 1
+  for h in $hosts; do
+    (ssh "$h" "${@:2}") &>"/tmp/forpar.$h.log" &
+  done
+  wait
+  rm "/tmp/fordif.${1}.all"
+  for h in $hosts; do
+    cat "/tmp/forpar.$h.log" >>"/tmp/fordif.${1}.all"
+  done
+  sort /tmp/fordif.${1}.all | uniq -c | sort >"/tmp/fordif.${1}.dif"
+  echo "/tmp/fordif.${1}.dif"
+}
 # }}}
 
 # PS1 helpers {{{
