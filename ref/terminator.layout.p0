@@ -1,0 +1,132 @@
+  [[p0]]
+    [[[child0]]]
+      position = 0:27
+      type = Window
+      order = 0
+      parent = ""
+      size = 1920, 1014
+    [[[child1]]]
+      position = 960
+      type = HPaned
+      order = 0
+      parent = child0
+    [[[child2]]]
+      position = 396
+      type = VPaned
+      order = 0
+      parent = child1
+    [[[child3]]]
+      position = 196
+      type = VPaned
+      order = 0
+      parent = child2
+    [[[child17]]]
+      position = 198
+      type = VPaned
+      order = 1
+      parent = child15
+    [[[child6]]]
+      position = 200
+      type = VPaned
+      order = 1
+      parent = child2
+    [[[child15]]]
+      position = 200
+      type = VPaned
+      order = 1
+      parent = child11
+    [[[child8]]]
+      position = 198
+      type = VPaned
+      order = 1
+      parent = child6
+    [[[child12]]]
+      position = 196
+      type = VPaned
+      order = 0
+      parent = child11
+    [[[terminal10]]]
+      profile = default
+      group = Tab 0
+      parent = child8
+      title = p14
+      command = ssh p14
+      type = Terminal
+      order = 1
+    [[[terminal13]]]
+      profile = default
+      group = Tab 0
+      parent = child12
+      title = p15
+      command = ssh p15
+      type = Terminal
+      order = 0
+    [[[child11]]]
+      position = 396
+      type = VPaned
+      order = 1
+      parent = child1
+    [[[terminal5]]]
+      profile = default
+      group = Tab 0
+      parent = child3
+      title = p11
+      command = ssh p11
+      type = Terminal
+      order = 1
+    [[[terminal4]]]
+      profile = default
+      group = Tab 0
+      parent = child3
+      title = p10
+      command = ssh p10
+      type = Terminal
+      order = 0
+    [[[terminal7]]]
+      profile = default
+      group = Tab 0
+      parent = child6
+      title = p12
+      command = ssh p12
+      type = Terminal
+      order = 0
+    [[[terminal16]]]
+      profile = default
+      group = Tab 0
+      parent = child15
+      title = p17
+      command = ssh p17
+      type = Terminal
+      order = 0
+    [[[terminal9]]]
+      profile = default
+      group = Tab 0
+      parent = child8
+      title = p13
+      command = ssh p13
+      type = Terminal
+      order = 0
+    [[[terminal18]]]
+      profile = default
+      group = Tab 0
+      parent = child17
+      title = p18
+      command = ssh p18
+      type = Terminal
+      order = 0
+    [[[terminal19]]]
+      profile = default
+      group = Tab 0
+      parent = child17
+      title = p19
+      command = ssh p19
+      type = Terminal
+      order = 1
+    [[[terminal14]]]
+      profile = default
+      group = Tab 0
+      parent = child12
+      title = p16
+      command = ssh p16
+      type = Terminal
+      order = 1
