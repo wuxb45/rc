@@ -42,6 +42,7 @@ set novisualbell
 set magic
 set nolazyredraw
 set wildmenu
+set fdm=marker
 
 "set cursorline
 set scrolloff=3

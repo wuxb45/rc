@@ -249,7 +249,7 @@ convcht()
 }
 # }}}
 
-# forall/forpar {{{
+# forall/forpar/fordif {{{
 forall()
 {
   if [[ $# -lt 2 ]]; then
@@ -302,7 +302,7 @@ fordif()
     (ssh "$h" "${@:2}") &>"/tmp/forpar.$h.log" &
   done
   wait
-  rm -f "/tmp/fordif.${1}.all"
+  [[ -e "/tmp/fordif.${1}.all" ]] && rm -f "/tmp/fordif.${1}.all"
   for h in $hosts; do
     cat "/tmp/forpar.$h.log" >>"/tmp/fordif.${1}.all"
   done
