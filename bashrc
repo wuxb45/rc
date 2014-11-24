@@ -121,26 +121,26 @@ d ()
 sshtnl ()
 {
   if [[ $# -ne 3 ]]; then
-    echo "  Access to <local-port> will be forwarded to <target-host>:<target-port> int the remote network of <remote-host>"
-    echo "  Usage: sshtnl <[username@]remote-host> <target-host>:<target-port> <local-port>"
+    echo "  Access to <[p-host:]p-port> on local machine will be forwarded to <t-host>:<t-port> in the remote network of <remote-host>"
+    echo "  Usage: sshtnl <[username@]remote-host> <[p-host:]p-port> <t-host:t-port>"
     return 0
   fi
-  local rhost="$1"
-  local thost="$2"
-  local lport="$3"
-  ssh -fNq -L "${lport}":"${thost}" "${rhost}"
+  local shost="$1"
+  local phost="$2"
+  local thost="$3"
+  ssh -fN -L "${phost}":"${thost}" "${shost}"
 }
 sshtnr ()
 {
   if [ $# -ne 3 ]; then
-    echo "  Access to <remote-host>:<remote-port> will be forwarded to <target-host>:<target-port> in local network"
-    echo "  Usage: sshtnr <[username@]remote-host> <target-host>:<target-port> <remote-port>"
+    echo "  Access to <[r-host:]r-port> on remote machine will be forwarded to <t-host:t-port> in local network"
+    echo "  Usage: sshtnr <[username@]remote-host> <[rhost:]r-port> <t-host:t-port>"
     return
   fi
-  local rhost="$1"
-  local thost="$2"
-  local rport="$3"
-  ssh -fNq -R "${rport}":"${thost}" "${rhost}"
+  local shost="$1"
+  local rhost="$2"
+  local thost="$3"
+  ssh -fN -R "${rhost}":"${thost}" "${shost}"
 }
 # }}}
 
