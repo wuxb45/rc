@@ -94,6 +94,7 @@ filetype on
 
 " taglist
 nnoremap <silent> <F9> :TlistToggle<CR>
+nnoremap <silent> <F10> :set nu!<CR>
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Show_One_File=1
 let Tlist_WinWidth=35
