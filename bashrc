@@ -353,7 +353,12 @@ ps1_pwd_info ()
 
 # $PS1 {{{
 [[ -d "/tmp/ps1cache" ]] || mkdir -m777 -p "/tmp/ps1cache"
-PS1='$(tput bold)$(tput smul)$(tput setb 0)$(tput setf 2)\u$(tput setf 7)@$(tput setf 5)\h$(tput setf 7)@$(tput setf 6)\t$(tput setf 7):$(tput setf 3)\w$(tput sgr0) $(tput setb 7)($(ps1_pwd_info))\n($(ps1_file_hints))$(tput sgr0)\n\$ '
+command -v tput &>/dev/null
+if [[ 0 -eq $? ]]; then
+  PS1='$(tput bold)$(tput smul)$(tput setb 0)$(tput setf 2)\u$(tput setf 7)@$(tput setf 5)\h$(tput setf 7)@$(tput setf 6)\t$(tput setf 7):$(tput setf 3)\w$(tput sgr0) $(tput setb 7)($(ps1_pwd_info))\n($(ps1_file_hints))$(tput sgr0)\n\$ '
+else
+  PS1='\u@\h@\t:\w\n\$ '
+fi
 # }}}
 
 shopt -q -s cdspell checkwinsize no_empty_cmd_completion cmdhist dirspell

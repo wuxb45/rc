@@ -2,12 +2,18 @@
 put ()
 {
   echo "${1} -> ${2}"
+
   if [[ -x $(which colordiff 2>/dev/null) ]]; then
     colordiff "${1}" "${2}"
   elif [[ -x $(which diff 2>/dev/null) ]]; then
     diff "${1}" "${2}"
   fi
-  rsync -c "${1}" "${2}"
+
+  if [[ -x $(which rsync 2>/dev/null) ]]; then
+    rsync -c "${1}" "${2}"
+  else
+    cp "${1}" "${2}"
+  fi
 }
 
 # normal .xx files
