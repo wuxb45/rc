@@ -311,6 +311,34 @@ fordif()
 }
 # }}}
 
+# flamegraph + perf {{{
+fperf ()
+{
+  if [[ -z "$@" ]]; then
+    echo "Usage: fperf <commands> ..."
+    return
+  fi
+  local rid=$(timestamp)
+  local ghroot="https://raw.githubusercontent.com/brendangregg/FlameGraph/master"
+  local bindir="${HOME}/program/usr/bin"
+  local st1="${bindir}/stackcollapse-perf.pl"
+  local st2="${bindir}/flamegraph.pl"
+  if [[ ! -f "${bindir}/stackcollapse-perf.pl" ]]; then
+    mkdir -p ~/program/usr/bin
+    wget "${ghroot}/stackcollapse-perf.pl" -O "${st1}"
+  fi
+  if [[ ! -f "${bindir}/flamegraph.pl" ]]; then
+    mkdir -p ~/program/usr/bin
+    wget "${ghroot}/flamegraph.pl" -O "${st2}"
+  fi
+  perf record -g -- "$@"
+  perf script > /tmp/fperf-${rid}.perf
+  perl -w "${st1}" /tmp/fperf-${rid}.perf > /tmp/fperf-${rid}.folded
+  perl -w "${st2}" /tmp/fperf-${rid}.folded > fperf-${rid}.svg
+}
+
+# }}}
+
 # PS1 helpers {{{
 # show some files in current dir
 ps1_file_hints ()
