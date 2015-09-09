@@ -26,7 +26,6 @@ alias du1='du -h --max-depth=1'
 alias free='free -h'
 # update id3 for mp3 files
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
-alias sshpr='ssh -C2fqTnN -D 1984'
 alias vcheck='valgrind --leak-check=full '
 alias vvcheck='valgrind --leak-check=full --show-leak-kinds=all '
 alias timestamp='date +%Y-%m-%d-%H-%M-%S-%N'
@@ -117,7 +116,7 @@ d ()
 }
 # }}}
 
-# sshtnl/sshtnr: building ssh tunnel at background {{{
+# sshtnl/sshtnr/sshpr: building ssh tunnel at background {{{
 sshtnl ()
 {
   if [[ $# -ne 3 ]]; then
@@ -128,19 +127,30 @@ sshtnl ()
   local shost="$1"
   local phost="$2"
   local thost="$3"
-  ssh -fN -L "${phost}":"${thost}" "${shost}"
+  ssh -2fqnNT -L "${phost}":"${thost}" "${shost}"
 }
 sshtnr ()
 {
   if [ $# -ne 3 ]; then
     echo "  Access to <[r-host:]r-port> on remote machine will be forwarded to <t-host:t-port> in local network"
-    echo "  Usage: sshtnr <[username@]remote-host> <[rhost:]r-port> <t-host:t-port>"
+    echo "  Usage: sshtnr <[username@]remote-host> <[r-host:]r-port> <t-host:t-port>"
     return
   fi
   local shost="$1"
   local rhost="$2"
   local thost="$3"
-  ssh -fN -R "${rhost}":"${thost}" "${shost}"
+  ssh -2fqnNT -R "${rhost}":"${thost}" "${shost}"
+}
+sshpr ()
+{
+  if [ $# -ne 2 ]; then
+    echo "Building SOCKS Proxy on <l-host:l-port> through <[username@]remote-host>"
+    echo "  Usage: sshpr <[username@]remote-host> <[l-host:]l-port>"
+    return
+  fi
+  local rhost="$1"
+  local lhost="$2"
+  ssh -2fqnNT -D "${lhost}" "${rhost}"
 }
 # }}}
 
