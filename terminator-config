@@ -26,10 +26,13 @@
   prev_tab = <Alt>p
   next_tab = <Alt>n
   new_tab = <Alt>t
-  scaled_zoom = None
   split_vert = <Alt>i
   split_horiz = <Alt>o
   search = <Alt>f
+  scaled_zoom = None
+  edit_window_title = None
+  insert_number = None
+  insert_padded = None
   close_window = None
   resize_left = None
   rotate_ccw = None
