@@ -18,7 +18,7 @@ put ()
 
 # normal .xx files
 #echo "install all config files into your HOME."
-DEST=${DEST:-${HOME}}
+DEST=${1:-${HOME}}
 echo "[DEST=${DEST}]"
 
 for cf in $(cat config.list);
@@ -50,14 +50,14 @@ put matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 # vim
 mkdir -p ${DEST}/.vim/undodir
 mkdir -p ${DEST}/.vim/ftdetect
-put vim/ftdetect/hsc.vim   ${DEST}/.vim/ftdetect/hsc.vim
-put vim/ftdetect/scala.vim ${DEST}/.vim/ftdetect/scala.vim
-put vim/ftdetect/stap.vim  ${DEST}/.vim/ftdetect/stap.vim
+#put vim/ftdetect/hsc.vim   ${DEST}/.vim/ftdetect/hsc.vim
+#put vim/ftdetect/scala.vim ${DEST}/.vim/ftdetect/scala.vim
+#put vim/ftdetect/stap.vim  ${DEST}/.vim/ftdetect/stap.vim
 mkdir -p ${DEST}/.vim/syntax
-put vim/syntax/scala.vim   ${DEST}/.vim/syntax/scala.vim
-put vim/syntax/stap.vim    ${DEST}/.vim/syntax/stap.vim
+#put vim/syntax/scala.vim   ${DEST}/.vim/syntax/scala.vim
+#put vim/syntax/stap.vim    ${DEST}/.vim/syntax/stap.vim
 mkdir -p ${DEST}/.vim/indent
-put vim/indent/scala.vim   ${DEST}/.vim/indent/scala.vim
-put vim/indent/stap.vim    ${DEST}/.vim/indent/stap.vim
+#put vim/indent/scala.vim   ${DEST}/.vim/indent/scala.vim
+#put vim/indent/stap.vim    ${DEST}/.vim/indent/stap.vim
 mkdir -p ${DEST}/.vim/ftplugin
-put vim/ftplugin/stap.vim  ${DEST}/.vim/ftplugin/stap.vim
+#put vim/ftplugin/stap.vim  ${DEST}/.vim/ftplugin/stap.vim
