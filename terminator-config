@@ -33,6 +33,7 @@
   edit_window_title = None
   insert_number = None
   insert_padded = None
+  layout_launcher = None
   close_window = None
   resize_left = None
   rotate_ccw = None
