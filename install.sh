@@ -3,10 +3,12 @@ put ()
 {
   echo "${1} -> ${2}"
 
-  if [[ -x $(which colordiff 2>/dev/null) ]]; then
-    colordiff "${1}" "${2}"
-  elif [[ -x $(which diff 2>/dev/null) ]]; then
-    diff "${1}" "${2}"
+  if [[ -f "${2}" ]]; then
+    if [[ -x $(which colordiff 2>/dev/null) ]]; then
+      colordiff "${1}" "${2}"
+    elif [[ -x $(which diff 2>/dev/null) ]]; then
+      diff "${1}" "${2}"
+    fi
   fi
 
   if [[ -x $(which rsync 2>/dev/null) ]]; then
