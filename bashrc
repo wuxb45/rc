@@ -345,6 +345,7 @@ fperf ()
   perf script > /tmp/fperf-${rid}.perf
   perl -w "${st1}" /tmp/fperf-${rid}.perf > /tmp/fperf-${rid}.folded
   perl -w "${st2}" /tmp/fperf-${rid}.folded > fperf-${rid}.svg
+  rm -f /tmp/fperf-${rid}.perf /tmp/fperf-${rid}.folded
 }
 
 # }}}
