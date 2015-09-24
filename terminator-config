@@ -71,7 +71,7 @@
     cursor_color = "#0603f6"
     foreground_color = "#000000"
     font = DejaVu Sans Mono 9
-    background_color = "#dbf2d3"
+    background_color = "#f0f0f0"
 [layouts]
   [[default]]
     [[[child1]]]

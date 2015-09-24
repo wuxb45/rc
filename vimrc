@@ -15,8 +15,8 @@ if has("gui_running")
 else
   colorscheme zellner
 endif
-"set cursorline
-"highlight CursorLine cterm=NONE ctermbg=Gray guibg=Gray
+set cursorline
+highlight CursorLine cterm=NONE ctermbg=Yellow guibg=Yellow
 "set cursorcolumn
 "highlight CursorColumn cterm=NONE ctermbg=Gray guibg=Gray
 "set colorcolumn=81
