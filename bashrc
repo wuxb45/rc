@@ -26,8 +26,7 @@ alias du1='du -h --max-depth=1'
 alias free='free -h'
 # update id3 for mp3 files
 alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
-alias vcheck='valgrind --leak-check=full '
-alias vvcheck='valgrind --leak-check=full --show-leak-kinds=all '
+alias vcheck='valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes'
 alias timestamp='date +%Y-%m-%d-%H-%M-%S-%N'
 alias lsb='lsblk -o KNAME,FSTYPE,MOUNTPOINT,MODEL,SIZE,MIN-IO,PHY-SEC,LOG-SEC,ROTA,SCHED,DISC-ZERO'
 # }}}
