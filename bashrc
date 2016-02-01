@@ -95,6 +95,21 @@ pdfsplit()
 }
 # }}}
 
+# svg2pdf: convert svg to pdf and crop it {{{
+svg2pdf()
+{
+  for svg in "$@"; do
+    echo ${svg}
+    local fn=${svg%.svg}
+    inkscape -f ${svg} -A /tmp/${fn}.pdf
+    pdfcrop /tmp/${fn}.pdf
+    rm /tmp/${fn}.pdf
+    mv /tmp/${fn}-crop.pdf ${fn}.pdf
+  done
+}
+
+# }}}
+
 # px: ps without noises {{{
 px()
 {
