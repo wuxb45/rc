@@ -46,6 +46,13 @@ fd ()
   fi
 }
 
+fdh ()
+{
+  if [[ -n $1 ]]; then
+    local gccprefix="/usr/lib/gcc/$(gcc -dumpmachine)/$(gcc -dumpversion)"
+    find /usr/include /usr/local/include ${gccprefix}/include ${gccprefix}/include-fixed -iname "*${1}*"
+  fi
+}
 # }}}
 
 # map2pdf: manpages to pdf {{{
