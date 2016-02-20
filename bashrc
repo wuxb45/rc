@@ -89,16 +89,16 @@ pdfgrep()
 pdfsplit()
 {
   if [ $# -lt 3 ]; then
-    echo "usage: pdfsplit <first page> <last page> <file name>"
+    echo "usage: pdfsplit <file name> <first page> <last page>"
     return
   fi
   # this function takes 3 arguments:
-  #     $1 is the first page to extract
-  #     $2 is the last page to extract
-  #     $3 is the input file
+  #     $1 is the input file
+  #     $2 is the first page to extract
+  #     $3 is the last page to extract
   #     output file will be named "inputfile_pXX-pYY.pdf"
-  gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=${1} -dLastPage=${2} \
-     -sOutputFile="${3%.pdf}_p${1}-p${2}.pdf" "${3}"
+  gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=${2} -dLastPage=${3} \
+     -sOutputFile="${1%.pdf}_p${2}-p${3}.pdf" "${1}"
 }
 # }}}
 
