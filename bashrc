@@ -80,7 +80,7 @@ pdfgrep()
   local pat="$1"
   for pdf in $(find . -iname '*.pdf'); do
     echo -ne "\033[K=> ${pdf}\r"
-    IFS=$'\n' pdftotext "${pdf}" - 2>/dev/null | grep -nEH --color=auto --label="${pdf}" "${pat}" -
+    IFS=$'\n' pdftotext "${pdf}" - 2>/dev/null | grep -nEHi --color=auto --label="${pdf}" "${pat}" -
   done
 }
 
@@ -93,7 +93,7 @@ pdfgrep1()
   local pat="$1"
   for pdf in $(find . -iname '*.pdf'); do
     echo -ne "\033[K=> ${pdf}\r"
-    nr=$(IFS=$'\n' pdftotext "${pdf}" - 2>/dev/null | grep -E "${pat}" - | wc -l)
+    nr=$(IFS=$'\n' pdftotext "${pdf}" - 2>/dev/null | grep -Ei "${pat}" - | wc -l)
     if [ ${nr} -gt 0 ]; then
       echo -e "\033[K\033[0;34m${pdf}\0033[0m     ${nr}"
     fi
