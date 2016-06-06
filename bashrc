@@ -487,9 +487,11 @@ if [ -d "${PROGRAMDIR}" ]; then
   for prog in $(ls ${PROGRAMDIR}); do
     progdir=${PROGRAMDIR}/${prog}
     blacklist-check "${blacklist}" "${prog}"
-    if [[ -d "${progdir}" && $? -eq 0 && -d "${progdir}/bin" ]]; then
-      PATH=${progdir}/bin:${PATH}
-    fi
+    for bindir in bin sbin; do
+      if [[ -d "${progdir}" && $? -eq 0 && -d "${progdir}/${bindir}" ]]; then
+        PATH=${progdir}/${bindir}:${PATH}
+      fi
+    done
   done
 fi
 export PATH
