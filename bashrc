@@ -315,6 +315,7 @@ forall()
     ssh "$h" "${@:2}"
   done
 }
+
 forpar()
 {
   if [[ $# -lt 2 ]]; then
@@ -332,6 +333,7 @@ forpar()
     (ssh "$h" "${@:2}") &>/tmp/forpar.$h.log &
   done
 }
+
 fordif()
 {
   if [[ $# -lt 2 ]]; then
@@ -355,6 +357,7 @@ fordif()
   done
   sort /tmp/fordif.${1}.all | uniq -c | sort >"/tmp/fordif.${1}.dif"
   echo "/tmp/fordif.${1}.dif"
+  vim "/tmp/fordif.${1}.dif"
 }
 # }}}
 
