@@ -70,7 +70,7 @@
     use_system_font = False
     cursor_color = "#0603f6"
     foreground_color = "#000000"
-    font = DejaVu Sans Mono 8
+    font = DejaVu Sans Mono 10
     background_color = "#DDF4D4"
 [layouts]
   [[default]]
