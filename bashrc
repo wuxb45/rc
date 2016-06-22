@@ -390,6 +390,17 @@ fperf ()
 
 # }}}
 
+# {{{ cppcheck
+
+ccheck()
+{
+  local GCCINSTALL="/usr/lib/gcc/$(gcc -dumpmachine)/$(gcc -dumpversion)"
+  cppcheck -I/usr/local/include -I/usr/include -I ${GCCINSTALL}/include -I ${GCCINSTALL}/include-fixed \
+    -v -DDUMMY --std=c11 --language=c --enable=all "$@"
+}
+
+# }}}
+
 # PS1 helpers {{{
 # show some files in current dir
 ps1_file_hints ()
