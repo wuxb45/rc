@@ -391,14 +391,24 @@ fperf ()
 # }}}
 
 # {{{ cppcheck
-
 ccheck()
 {
   local GCCINSTALL="/usr/lib/gcc/$(gcc -dumpmachine)/$(gcc -dumpversion)"
   cppcheck -I/usr/local/include -I/usr/include -I ${GCCINSTALL}/include -I ${GCCINSTALL}/include-fixed \
     -v -DDUMMY --std=c11 --language=c --enable=all "$@"
 }
+# }}}
 
+# {{{ ireboot
+ireboot()
+{
+  if [[ ${USER} -ne "root" ]]; then
+    echo "Only root has permission to ireboot"
+  else
+    echo 1 > /proc/sys/kernel/sysrq
+    echo b > /proc/sysrq-trigger
+  fi
+}
 # }}}
 
 # PS1 helpers {{{

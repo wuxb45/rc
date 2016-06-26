@@ -8,7 +8,6 @@
   interactive = auto
   ui = auto
   pager = true
-
 [alias]
   st = status
   ci = commit
@@ -17,3 +16,5 @@
   di = diff
 [push]
   default = simple
+[core]
+  pager = less -x1,3
