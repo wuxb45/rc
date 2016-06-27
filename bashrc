@@ -264,6 +264,59 @@ pacsrc()
 }
 # }}}
 
+# {{{ pactree
+__pacgrep()
+{
+  local key=${1}
+  local pkg=${2}
+  [[ $# -lt 2 || ${pkg} == 'None' ]] && return
+  for val in $(pacman -Qi ${pkg} 2>/dev/null | grep "${key}" | sed -e 's/^.*: \(.*\)$/\1/'); do
+    pkg1=$(echo "${val}" | sed -e 's/^\([-a-zA-Z0-9_]*\).*$/\1/')
+    [[ ${pkg1} != "None" ]] && echo "${pkg1}"
+  done
+}
+__pacdep()
+{
+  [[ $# -lt 2 || ${1} == 'None' ]] && return
+  local pkg=${1}
+  local pre=${2}
+  for dep in $(__pacgrep 'Depends On' ${pkg}); do
+    echo "-${pre}>${dep}"
+    __pacdep ${dep} "${pre}-"
+  done
+  for opt in $(__pacgrep 'Optional Deps' ${pkg}); do
+    echo "-${pre}*${opt}"
+    __pacdep ${dep} "${pre}-"
+  done
+}
+__pacreq()
+{
+  [[ $# -lt 2 || ${1} == 'None' ]] && return
+  local pkg=${1}
+  local pre=${2}
+  for dep in $(__pacgrep 'Required By' ${pkg}); do
+    echo "-${pre}>${dep}"
+    __pacreq ${dep} "${pre}--"
+  done
+  for opt in $(__pacgrep 'Optional For' ${pkg}); do
+    echo "-${pre}*${opt}"
+    __pacreq ${dep} "${pre}--"
+  done
+}
+pactree()
+{
+  local pkg=${1}
+  if [[ -z ${pkg} ]]; then
+    echo "Usage $0 <package>"
+    return
+  fi
+  echo "## Dep tree:"
+  __pacdep ${pkg} ''
+  echo "## Req tree:"
+  __pacreq ${pkg} ''
+}
+# }}}
+
 # vv: open file with xdg-open {{{
 # open any file
 vv ()
