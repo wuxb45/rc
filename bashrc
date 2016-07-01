@@ -29,6 +29,7 @@ alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {}
 alias vcheck='valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes'
 alias timestamp='date +%Y-%m-%d-%H-%M-%S-%N'
 alias lsb='lsblk -o KNAME,FSTYPE,MOUNTPOINT,MODEL,SIZE,MIN-IO,PHY-SEC,LOG-SEC,ROTA,SCHED,DISC-ZERO'
+alias ktags="ctags -I @${HOME}/.ktags_ignore_id --exclude=@${HOME}/.ktags_ignore_path -R ."
 # }}}
 
 # fd/fd1: find in filename {{{
