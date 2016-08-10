@@ -266,6 +266,7 @@ pacsrc()
   local fullname="${repo}/${name}"
   echo found ${fullname}
   ABSROOT=${AR} abs ${fullname}
+  echo "pacsrc: package file ready at ${AR}/${fullname}"
 }
 # }}}
 
