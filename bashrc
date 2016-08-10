@@ -248,6 +248,10 @@ xmp3 ()
 # pacsrc: retrieving package from abs with the help from pacman {{{
 pacsrc()
 {
+  if [[ $# -lt 1 ]]; then
+    echo "Usage: pacsrc <package>"
+    return
+  fi
   local name=$1
   local AR=${HOME}/src/abs
   [[ ! -e ${AR} ]] && mkdir -p ${AR}
