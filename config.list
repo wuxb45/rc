@@ -9,3 +9,4 @@ indent.pro
 tigrc
 ktags_ignore_id
 ktags_ignore_path
+gdbinit

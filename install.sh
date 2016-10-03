@@ -5,9 +5,9 @@ put ()
 
   if [[ -f "${2}" ]]; then
     if [[ -x $(which colordiff 2>/dev/null) ]]; then
-      colordiff "${1}" "${2}"
+      colordiff "${2}" "${1}"
     elif [[ -x $(which diff 2>/dev/null) ]]; then
-      diff "${1}" "${2}"
+      diff "${2}" "${1}"
     fi
   fi
 
