@@ -56,6 +56,8 @@ put ${MCDIR}/terminator-config ${DEST}/.config/terminator/config
 mkdir -p ${DEST}/.config/matplotlib
 put ${MCDIR}/matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 
+wget -nv -O ${DEST}/.gdb-dashboard "https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
+
 # vim
 mkdir -p ${DEST}/.vim/undodir
 mkdir -p ${DEST}/.vim/ftdetect
