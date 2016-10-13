@@ -25,3 +25,12 @@ dashboard source -style context 9
 
 dashboard stack -style locals True
 dashboard stack -style limit 5
+
+alias -a db ex = dashboard expressions
+alias -a db mem = dashboard memory
+alias -a db as = dashboard assembly
+alias -a db hi = dashboard history
+alias -a db reg = dashboard registers
+alias -a db st = dashboard stack
+alias -a db th = dashboard threads
+alias -a db so = dashboard source
