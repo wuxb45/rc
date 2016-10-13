@@ -1,8 +1,2 @@
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-#ibus-daemon -x -d
-#export LANG=zh_CN.UTF-8
-#export LC_ALL="zh_CN.UTF-8"
-export CLUTTER_PAINT=disable-clipped-redraws:disable-culling
+#export CLUTTER_PAINT=disable-clipped-redraws:disable-culling
 [[ -f ~/.xprofile.local ]] && . ~/.xprofile.local
