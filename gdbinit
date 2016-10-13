@@ -15,7 +15,7 @@ source ~/.gdb-dashboard
 # Light Purple     \e[1;35m
 # Yellow           \e[1;33m
 # White            \e[1;37m
-dashboard -layout !expressions !memory threads stack source !assembly !history !registers
+dashboard -layout !expressions !memory !assembly !history !registers !stack !threads source
 
 dashboard -style syntax_highlighting 'trac'
 dashboard -style style_selected_1 '1;31' # Light Red
