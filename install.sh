@@ -40,18 +40,6 @@ done
 mkdir -p ${DEST}/.config/terminator
 put ${MCDIR}/terminator-config ${DEST}/.config/terminator/config
 
-# Adobe Reader 9.0
-#mkdir -p ${DEST}/.adobe/Acrobat/9.0/Preferences
-#put ${MCDIR}/reader_prefs ${DEST}/.adobe/Acrobat/9.0/Preferences/
-
-# Cabal
-#mkdir -p ${DEST}/.cabal
-#put ${MCDIR}/cabal-config ${DEST}/.cabal/config
-
-# Yong input method
-#mkdir -p ${DEST}/.yong
-#put ${MCDIR}/yong.ini ${DEST}/.yong/yong.ini
-
 # matplotlib set default backend to svg
 mkdir -p ${DEST}/.config/matplotlib
 put ${MCDIR}/matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
@@ -61,14 +49,6 @@ wget -nv -O ${DEST}/.gdb-dashboard "https://raw.githubusercontent.com/cyrus-and/
 # vim
 mkdir -p ${DEST}/.vim/undodir
 mkdir -p ${DEST}/.vim/ftdetect
-#put vim/ftdetect/hsc.vim   ${DEST}/.vim/ftdetect/hsc.vim
-#put vim/ftdetect/scala.vim ${DEST}/.vim/ftdetect/scala.vim
-#put vim/ftdetect/stap.vim  ${DEST}/.vim/ftdetect/stap.vim
 mkdir -p ${DEST}/.vim/syntax
-#put vim/syntax/scala.vim   ${DEST}/.vim/syntax/scala.vim
-#put vim/syntax/stap.vim    ${DEST}/.vim/syntax/stap.vim
 mkdir -p ${DEST}/.vim/indent
-#put vim/indent/scala.vim   ${DEST}/.vim/indent/scala.vim
-#put vim/indent/stap.vim    ${DEST}/.vim/indent/stap.vim
 mkdir -p ${DEST}/.vim/ftplugin
-#put vim/ftplugin/stap.vim  ${DEST}/.vim/ftplugin/stap.vim
