@@ -19,48 +19,67 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias gr='grep -nr'
-alias grc='grep -nr --include=*.{cc,hh,c,h,cpp,cxx,C,py,hs,java,sh,pl,tex}'
+alias grc='grep -nr --include=*.{c,cc,cpp,cxx,C,h,hh,hpp,py,hs,java,sh,pl,tex}'
 alias dfh='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
 alias freeh='free -h'
 # update id3 for mp3 files
-alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
+#alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
 alias vcheck='valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes'
 alias timestamp='date +%Y-%m-%d-%H-%M-%S-%N'
 alias lsb='lsblk -o KNAME,FSTYPE,MOUNTPOINT,MODEL,SIZE,MIN-IO,PHY-SEC,LOG-SEC,ROTA,SCHED,DISC-ZERO'
 alias ktags="ctags -I @${HOME}/.ktags_ignore_id --exclude=@${HOME}/.ktags_ignore_path -R ."
 # }}}
 
-# fd/fd1: find in filename {{{
+# fd/fd1/fdh: find in filename {{{
 fd1 ()
 {
-  if [[ -n $1 ]]; then
+  if [[ -z ${1} ]]; then
+    echo "  Usage: $FUNCNAME <keyword>"
+  else
     find . -maxdepth 1 -iname "*${1}*"
   fi
 }
 
 fd ()
 {
-  if [[ -n $1 ]]; then
+  if [[ -z ${1} ]]; then
+    echo "Find files whose name contains <keyword>"
+    echo "  Usage: $FUNCNAME <keyword>"
+  else
     find . -iname "*${1}*"
   fi
 }
 
 fdh ()
 {
-  if [[ -n $1 ]]; then
+  if [[ -z ${1} ]]; then
+    echo "Find header files by <keyword>"
+    echo "  Usage: $FUNCNAME <keyword>"
+  else
     local gccprefix="/usr/lib/gcc/$(gcc -dumpmachine)/$(gcc -dumpversion)"
     find /usr/include /usr/local/include ${gccprefix}/include ${gccprefix}/include-fixed -iname "*${1}*"
   fi
 }
 # }}}
 
-# map2pdf: manpages to pdf {{{
+# map2pdf: convert manpages to pdf {{{
 man2pdf()
 {
-  # man2pdf 2 open
-  man -t ${1} ${2} | ps2pdf - > ${1}${2}.pdf
+  if [[ $# -lt 1 ]]; then
+    echo "  Usage : $FUNCNAME [<section>] <name>"
+    return 0
+  fi
+
+  local psfile=/tmp/map2pdf_tmp.ps
+  local pdffile="${1}${2}.pdf"
+  man -t ${1} ${2} > ${psfile}
+  if [[ 0 -eq $? ]]; then
+    ps2pdf ${psfile} ${pdffile}
+    echo "-> ${pdffile}"
+  fi
+  rm -f ${psfile}
 }
 # }}}
 
@@ -71,12 +90,13 @@ readmd()
 }
 # }}}
 
-# pdfgrep: find pdfs and grep text {{{
+# pdfgrep/pdfgrep1: grep pdf text {{{
 pdfgrep()
 {
-  if [[ -z ${1} ]]; then
-    echo "usage : pdfgrep <keyword>"
-    return
+  if [[ $# -ne 1 ]]; then
+    echo "Grep all occurances of <keyword> in pdf files"
+    echo "  Usage : $FUNCNAME <keyword>"
+    return 0
   fi
   local pat="$1"
   for pdf in $(find . -iname '*.pdf'); do
@@ -87,9 +107,10 @@ pdfgrep()
 
 pdfgrep1()
 {
-  if [[ -z ${1} ]]; then
-    echo "usage : pdfgrep1 <keyword>"
-    return
+  if [[ $# -ne 1 ]]; then
+    echo "Find pdf files that contain <keyword>"
+    echo "  Usage : $FUNCNAME <keyword>"
+    return 0
   fi
   local pat="$1"
   for pdf in $(find . -iname '*.pdf'); do
@@ -105,9 +126,9 @@ pdfgrep1()
 # pdfsplit: split pages from pdf {{{
 pdfsplit()
 {
-  if [ $# -lt 3 ]; then
-    echo "usage: pdfsplit <file name> <first page> <last page>"
-    return
+  if [[ $# -ne 3 ]]; then
+    echo "  Usage: $FUNCNAME <file name> <first page> <last page>"
+    return 0
   fi
   # this function takes 3 arguments:
   #     $1 is the input file
@@ -122,13 +143,15 @@ pdfsplit()
 # svg2pdf: convert svg to pdf and crop it {{{
 svg2pdf()
 {
+  if [[ $# -eq 0 ]]; then
+    echo "  Usage: $FUNCNAME <svg-file> ..."
+  fi
   for svg in "$@"; do
     echo ${svg}
     local fn=${svg%.svg}
     inkscape -f ${svg} -A /tmp/${fn}.pdf
-    pdfcrop /tmp/${fn}.pdf
+    pdfcrop /tmp/${fn}.pdf ${fn}.pdf
     rm /tmp/${fn}.pdf
-    mv /tmp/${fn}-crop.pdf ${fn}.pdf
   done
 }
 
@@ -141,25 +164,12 @@ px()
 }
 # }}}
 
-# d: dict {{{
-# search dictionary and remember history
-d ()
-{
-  if [[ -n $1 ]]; then
-    echo "$1" >> ~/.dict_history
-    dict "$1" | less
-  else
-    echo "usage : d <word>"
-  fi
-}
-# }}}
-
 # sshtnl/sshtnr/sshpr: building ssh tunnel at background {{{
 sshtnl ()
 {
   if [[ $# -ne 3 ]]; then
-    echo "  Access to <[p-host:]p-port> on local machine will be forwarded to <t-host>:<t-port> in the remote network of <remote-host>"
-    echo "  Usage: sshtnl <[username@]remote-host> <[p-host:]p-port> <t-host:t-port>"
+    echo "Access to <[p-host:]p-port> on local machine will be forwarded to <t-host>:<t-port> in the remote network of <remote-host>"
+    echo "  Usage: $FUNCNAME <[username@]remote-host> <[p-host:]p-port> <t-host:t-port>"
     return 0
   fi
   local shost="$1"
@@ -170,8 +180,8 @@ sshtnl ()
 sshtnr ()
 {
   if [ $# -ne 3 ]; then
-    echo "  Access to <[r-host:]r-port> on remote machine will be forwarded to <t-host:t-port> in local network"
-    echo "  Usage: sshtnr <[username@]remote-host> <[r-host:]r-port> <t-host:t-port>"
+    echo "Access to <[r-host:]r-port> on remote machine will be forwarded to <t-host:t-port> in local network"
+    echo "  Usage: $FUNCNAME <[username@]remote-host> <[r-host:]r-port> <t-host:t-port>"
     return
   fi
   local shost="$1"
@@ -183,7 +193,7 @@ sshpr ()
 {
   if [ $# -ne 2 ]; then
     echo "Building SOCKS Proxy on <l-host:l-port> through <[username@]remote-host>"
-    echo "  Usage: sshpr <[username@]remote-host> <[l-host:]l-port>"
+    echo "  Usage: $FUNCNAME <[username@]remote-host> <[l-host:]l-port>"
     return
   fi
   local rhost="$1"
@@ -203,8 +213,9 @@ rbackup ()
 # rpush: push file/dir to the same location in remote machine {{{
 rpush ()
 {
-  if [[ $# -lt 2 ]]; then
-    echo "usage: rpush <dir-or-file> <target-host>"
+  if [[ $# -ne 2 ]]; then
+    echo "Push file/dir to the same location in a remote machine."
+    echo "  Usage: $FUNCNAME <dir-or-file> <target-host>"
     return
   fi
   local fullpath=$(readlink -f "$1")
@@ -249,7 +260,7 @@ xmp3 ()
 pacsrc()
 {
   if [[ $# -lt 1 ]]; then
-    echo "Usage: pacsrc <package>"
+    echo "  Usage: $FUNCNAME <package>"
     return
   fi
   local name=$1
@@ -270,7 +281,7 @@ pacsrc()
 }
 # }}}
 
-# {{{ pactree
+# {{{ pactree: pacman package dependences
 __pacgrep()
 {
   local key=${1}
@@ -281,6 +292,7 @@ __pacgrep()
     [[ ${pkg1} != "None" ]] && echo "${pkg1}"
   done
 }
+
 __pacdep()
 {
   [[ $# -lt 2 || ${1} == 'None' ]] && return
@@ -295,6 +307,7 @@ __pacdep()
     __pacdep ${dep} "${pre}-"
   done
 }
+
 __pacreq()
 {
   [[ $# -lt 2 || ${1} == 'None' ]] && return
@@ -309,11 +322,13 @@ __pacreq()
     __pacreq ${dep} "${pre}--"
   done
 }
+
 pactree()
 {
   local pkg=${1}
-  if [[ -z ${pkg} ]]; then
-    echo "Usage $0 <package>"
+  if [[ $# -ne 1 ]]; then
+    echo "Print dependence trees of <package>"
+    echo "  Usage $FUNCNAME <package>"
     return
   fi
   echo "## Dep tree:"
@@ -327,10 +342,9 @@ pactree()
 # open any file
 vv ()
 {
-  if [ $# -lt 1 ]; then
-    return
+  if [[ $# -eq 1 ]]; then
+    xdg-open "$1" &>/dev/null
   fi
-  xdg-open "$1" &>/dev/null
 }
 # }}}
 
@@ -355,11 +369,11 @@ convcht()
 }
 # }}}
 
-# forall/forpar/fordif {{{
+# {{{ forall/forpar/fordif: parallel remote execution
 forall()
 {
   if [[ $# -lt 2 ]]; then
-    echo "Usage: forall <cfg-name> <cmd> ..."
+    echo "  Usage: $FUNCNAME <cfg-name> <cmd> ..."
     return 1
   fi
   local hosts=
@@ -378,7 +392,7 @@ forall()
 forpar()
 {
   if [[ $# -lt 2 ]]; then
-    echo "Usage: forpar <cfg-name> <cmd> ..."
+    echo "  Usage: $FUNCNAME <cfg-name> <cmd> ..."
     return 1
   fi
   local hosts=
@@ -396,7 +410,7 @@ forpar()
 fordif()
 {
   if [[ $# -lt 2 ]]; then
-    echo "Usage: fordif <cfg-name> <cmd> ..."
+    echo "  Usage: $FUNCNAME <cfg-name> <cmd> ..."
     return 1
   fi
   local hosts=
@@ -420,11 +434,11 @@ fordif()
 }
 # }}}
 
-# flamegraph + perf {{{
+# {{{ fperf: perf + flamegraph
 fperf ()
 {
-  if [[ -z "$@" ]]; then
-    echo "Usage: fperf <commands> ..."
+  if [[ $# -ne 1 ]]; then
+    echo "  Usage: $FUNCNAME <commands> ..."
     return
   fi
   local rid=$(timestamp)
@@ -449,7 +463,7 @@ fperf ()
 
 # }}}
 
-# {{{ cppcheck
+# {{{ ccheck: cppcheck works
 ccheck()
 {
   local GCCINSTALL="/usr/lib/gcc/$(gcc -dumpmachine)/$(gcc -dumpversion)"
@@ -458,7 +472,7 @@ ccheck()
 }
 # }}}
 
-# {{{ ireboot
+# {{{ ireboot: force immediate reboot (root)
 ireboot()
 {
   if [[ ${USER} -ne "root" ]]; then
@@ -470,7 +484,7 @@ ireboot()
 }
 # }}}
 
-# PS1 helpers {{{
+# {{{ PS1 helpers
 # show some files in current dir
 ps1_file_hints ()
 {
@@ -510,7 +524,7 @@ ps1_pwd_info ()
 }
 # }}}
 
-# $PS1 {{{
+# {{{ $PS1
 [[ -d "/tmp/ps1cache" ]] || mkdir -m777 -p "/tmp/ps1cache"
 command -v tput &>/dev/null
 if [[ 0 -eq $? ]]; then
@@ -533,7 +547,6 @@ export HISTFILESIZE=20000
 export HISTIGNORE='&'
 export EDITOR='vim'
 #LD_LIBRARY_PATH=/opt/lib
-
 # }}}
 
 # $PATH {{{
@@ -581,6 +594,6 @@ export PATH
 # }}}
 
 export BASHRC_LOADED=y
-fi
+fi # BASHRC_LOADED
 
 [[ -f ~/.bashrc.localn ]] && . ~/.bashrc.localn
