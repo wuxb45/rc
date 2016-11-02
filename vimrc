@@ -1,26 +1,20 @@
 set nocompatible
 "set spell
 
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+
 syntax on
 syntax enable
-"filetype plugin indent on
 
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set backspace=2
 
-if has("gui_running")
-  colorscheme delek
-else
-  colorscheme zellner
-endif
 set cursorline
-highlight CursorLine cterm=NONE ctermbg=Yellow guibg=Yellow
-"set cursorcolumn
-"highlight CursorColumn cterm=NONE ctermbg=Gray guibg=Gray
-"set colorcolumn=81
-"highlight ColorColumn cterm=NONE ctermbg=Gray guibg=Gray
+highlight CursorLine cterm=NONE ctermbg=255 guibg=Yellow
 
 set expandtab
 set noeb vb t_vb=
@@ -75,12 +69,7 @@ if has("gui_running")
   set lines=40
   set columns=90
   highlight Normal guibg=#f0f8ff
-  "if MySys() == "windows"
-  "  set guifont=Consolas:h15
-  "elseif MySys() == "linux"
-    set guifont=DejaVu\ Sans\ Mono\ 10
-    "set guifont=VL\ gothic\ 11
-  "endif
+  set guifont=DejaVu\ Sans\ Mono\ 10
 endif
 
 if has('persistent_undo')
