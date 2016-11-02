@@ -5,49 +5,36 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-syntax on
 syntax enable
 
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set backspace=2
-
 set cursorline
-highlight CursorLine cterm=NONE ctermbg=255 guibg=Yellow
-
 set expandtab
 set noeb vb t_vb=
 set fo-=r
-
 set nu
 set hlsearch
 set incsearch
 set ruler
 set autochdir 
 set autoread 
-
 set showcmd
 set showmatch
 set tags=tags;
-
 set noerrorbells
 set novisualbell
 set magic
 set nolazyredraw
 set wildmenu
 set fdm=marker
-
-"set cursorline
 set scrolloff=3
 
-"if MySys() == "windows"
-  "set encoding=cp936
-  "set nobackup
-  "set nowritebackup
-"elseif MySys() == "linux"
-  set encoding=utf-8
-"endif
+colorscheme my256
+
+set encoding=utf-8
 
 set fileformat=unix
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
