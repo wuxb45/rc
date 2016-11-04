@@ -437,7 +437,7 @@ fordif()
 # {{{ fperf: perf + flamegraph
 fperf ()
 {
-  if [[ $# -ne 1 ]]; then
+  if [[ $# -eq 0 ]]; then
     echo "  Usage: $FUNCNAME <commands> ..."
     return
   fi
@@ -454,7 +454,7 @@ fperf ()
     mkdir -p ~/program/usr/bin
     wget "${ghroot}/flamegraph.pl" -O "${st2}"
   fi
-  perf record -g -- "$@"
+  perf record --call-graph lbr -- "$@"
   perf script > /tmp/fperf-${rid}.perf
   perl -w "${st1}" /tmp/fperf-${rid}.perf > /tmp/fperf-${rid}.folded
   perl -w "${st2}" /tmp/fperf-${rid}.folded > fperf-${rid}.svg
