@@ -21,7 +21,7 @@ dashboard -style syntax_highlighting 'trac'
 dashboard -style style_selected_1 '1;31' # Light Red
 dashboard -style style_selected_2 '33'   # Brown
 
-dashboard source -style context 9
+dashboard source -style context 15
 
 dashboard stack -style locals True
 dashboard stack -style limit 5
