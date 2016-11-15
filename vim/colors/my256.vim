@@ -144,7 +144,7 @@ if has("gui_running") || &t_Co == 256
   call <SID>X("IncSearch", "708090", "f0e68c", "")
   call <SID>X("Pmenu", "ffffff", "cb2f27", "")
   call <SID>X("SignColumn", "", "", "")
-  call <SID>X("CursorLine", "", "eeeeee", "None")
+  call <SID>X("CursorLine", "", "ffff99", "None")
   call <SID>X("LineNr", "eeeeee", "438ec3", "bold")
   call <SID>X("MatchParen", "", "", "")
 
