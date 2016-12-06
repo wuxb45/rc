@@ -1,10 +1,6 @@
 set nocompatible
-"set spell
-
 set t_Co=256
-
 syntax enable
-
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -29,13 +25,14 @@ set nolazyredraw
 set wildmenu
 set fdm=marker
 set scrolloff=3
+set laststatus=2
+"set spell
 
 colorscheme my256
 
 set encoding=utf-8
-
 set fileformat=unix
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set fileencodings=ucs-bom,utf-8,latin1
 set fileencoding=utf-8
 
 " map keys for moving cursor between windows
@@ -44,18 +41,8 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
-
 " switch to next window in normal mode
 nmap <Space> <C-w>w
-
-"for .gvimrc
-if has("gui_running")
-  set guioptions-=T
-  set lines=40
-  set columns=90
-  highlight Normal guibg=#f0f8ff
-  set guifont=DejaVu\ Sans\ Mono\ 10
-endif
 
 if has('persistent_undo')
   " mkdir -p ~/.vim/undodir
@@ -66,22 +53,20 @@ if has('persistent_undo')
 endif
 filetype on
 
-" taglist
-nnoremap <silent> <F9> :TlistToggle<CR>
+" Tagbar
+set statusline=%t[%{&fenc},%{&ff}]%m%r%y\ %{tagbar#currenttag('%s','','')}%=%c,%l/%L\ %P
+let g:tagbar_sort = 0
+let g:tagbar_left = 1
+let g:tagbar_indent = 0
+nnoremap <silent> <F9> :TagbarToggle<CR>
 nnoremap <silent> <F10> :set nu!<CR>
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Show_One_File=1
-let Tlist_WinWidth=35
 
-" minibuffer
-" use with taglist, set this
-let g:miniBufExplModSelTarget = 1
-" show minibuffer if has >=2 buffers.
-let g:miniBufExplorerMoreThanOne = 2
+" MBE
+let g:miniBufExplBuffersNeeded = 1
+let g:miniBufExplCycleArround = 1
 
 " cscope
 if has("cscope")
-  " set csprg=/usr/local/bin/cscope
   set csto=1
   set cst
   set nocsverb
@@ -93,7 +78,6 @@ if has("cscope")
       cs add $CSCOPE_DB
   endif
   set csverb
-endif
 
 " find C symbol.
 " nmap <C-->s :cs find s <C-R>=expand("<cword>")<CR><CR>
@@ -111,21 +95,5 @@ endif
 " nmap <C-->i :cs find i <C-R>=expand("<cword>")<CR><CR>
 " find functions called by this function.
 " nmap <C-->d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
-autocmd BufRead,BufNew :call UMiniBufExplorer
-
-" Reference
-" https://github.com/spf13/spf13-vim
-" http://amix.dk/vim/vimrc.html
-
-" Set the following lines in your ~/.vimrc or the systemwide /etc/vimrc:
-" filetype plugin indent on
-" set grepprg=grep\ -nH\ $*
-" let g:tex_flavor = "latex"
-" 
-" Also, this installs to /usr/share/vim/vimfiles, which may not be in
-" your runtime path (RTP). Be sure to add it too, e.g:
-" set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
-
-" spell check, use it manually.
 " set spell spelllang=en_us
+endif
