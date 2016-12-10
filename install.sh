@@ -47,10 +47,7 @@ put ${MCDIR}/matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 wget -nv -O ${DEST}/.gdb-dashboard "https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
 
 # vim
-mkdir -p ${DEST}/.vim/colors
-mkdir -p ${DEST}/.vim/undodir
-mkdir -p ${DEST}/.vim/ftdetect
-mkdir -p ${DEST}/.vim/syntax
-mkdir -p ${DEST}/.vim/indent
-mkdir -p ${DEST}/.vim/ftplugin
+for subdir in plugin colors undodir ftdetect syntax indent ftplugin; do
+  mkdir -p ${DEST}/.vim/${subdir}
+done
 rsync -av vim/ ${DEST}/.vim

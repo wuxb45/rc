@@ -37,10 +37,10 @@ set fileencoding=utf-8
 
 " map keys for moving cursor between windows
 let g:BASH_Ctrl_j = 'off'
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-H> <C-W>h
+nnoremap <C-L> <C-W>l
 " switch to next window in normal mode
 nmap <Space> <C-w>w
 
@@ -53,48 +53,29 @@ if has('persistent_undo')
 endif
 filetype on
 
-" Tagbar
-set statusline=%t[%{&fenc},%{&ff}]%m%r%y\ %{tagbar#currenttag('%s','','')}%=%c,%l/%L\ %P
-let g:tagbar_sort = 0
-let g:tagbar_left = 1
-let g:tagbar_indent = 0
-autocmd FileType tagbar setlocal nocursorline nocursorcolumn
-nnoremap <silent> <F9> :TagbarToggle<CR>
-nnoremap <silent> <F10> :set nu!<CR>
-
-" MBE
-let g:miniBufExplBuffersNeeded = 1
-let g:miniBufExplCycleArround = 1
-
-" cscope
-if has("cscope")
-  set csto=1
-  set cst
-  set nocsverb
-  " add any database in current directory
-  if filereadable("cscope.out")
-      cs add cscope.out
-  " else add database pointed to by environment
-  elseif $CSCOPE_DB != ""
-      cs add $CSCOPE_DB
+function! MyPluginOptions()
+  " Tagbar
+  if exists(":TagbarToggle")
+    set statusline=%t[%{&fenc},%{&ff}]%m%r%y\ %{tagbar#currenttag('%s','','')}%=%c,%l/%L\ %P
+    let g:tagbar_sort = 0
+    let g:tagbar_left = 1
+    let g:tagbar_indent = 0
+    autocmd FileType tagbar setlocal nocursorline nocursorcolumn
+    nnoremap <silent> <F9> :TagbarToggle<CR>
+  elseif exists(":TlistToggle")
+    nnoremap <silent> <F9> :TlistToggle<CR>
   endif
-  set csverb
+  nnoremap <silent> <F10> :set nu!<CR>
 
-" find C symbol.
-" nmap <C-->s :cs find s <C-R>=expand("<cword>")<CR><CR>
-" find global definition.
-" nmap <C-->g :cs find g <C-R>=expand("<cword>")<CR><CR>
-" find functions calling this function.
-" nmap <C-->c :cs find c <C-R>=expand("<cword>")<CR><CR>
-" find this text string.
-" nmap <C-->t :cs find t <C-R>=expand("<cword>")<CR><CR>
-" find this egrep pattern.
-" nmap <C-->e :cs find e <C-R>=expand("<cword>")<CR><CR>
-" find this file.
-" nmap <C-->f :cs find f <C-R>=expand("<cword>")<CR><CR>
-" find files #including this file.
-" nmap <C-->i :cs find i <C-R>=expand("<cword>")<CR><CR>
-" find functions called by this function.
-" nmap <C-->d :cs find d <C-R>=expand("<cword>")<CR><CR>
-" set spell spelllang=en_us
-endif
+  " MBE
+  let g:miniBufExplBuffersNeeded = 1
+  let g:miniBufExplCycleArround = 1
+
+  " advanced cscope
+  if has('cscope')
+    nnoremap <C-F> :call cscope#findInteractive(expand('<cword>'))<CR>
+    nnoremap <C-[> :call ToggleLocationList()<CR>
+  endif
+endfunction
+
+autocmd VimEnter * call MyPluginOptions()
