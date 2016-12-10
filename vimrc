@@ -70,12 +70,6 @@ function! MyPluginOptions()
   " MBE
   let g:miniBufExplBuffersNeeded = 1
   let g:miniBufExplCycleArround = 1
-
-  " advanced cscope
-  if has('cscope')
-    nnoremap <C-F> :call cscope#findInteractive(expand('<cword>'))<CR>
-    nnoremap <C-[> :call ToggleLocationList()<CR>
-  endif
 endfunction
 
 autocmd VimEnter * call MyPluginOptions()
