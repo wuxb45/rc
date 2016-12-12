@@ -1,57 +1,25 @@
 set nocompatible
-set t_Co=256
+filetype on
 syntax enable
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set backspace=2
-set cursorline
-set expandtab
-set noeb vb t_vb=
-set fo-=r
-set nu
-set hlsearch
-set incsearch
-set ruler
-set autochdir 
-set autoread 
-set showcmd
-set showmatch
-set tags=tags;
-set noerrorbells
-set novisualbell
-set magic
-set nolazyredraw
-set wildmenu
-set fdm=marker
-set scrolloff=3
-set laststatus=2
-"set spell
-
+set t_Co=256 tabstop=2 shiftwidth=2 softtabstop=2 backspace=2
+set autochdir autoread cursorline expandtab hlsearch incsearch
+set magic number showcmd showmatch wildmenu
+set tags=tags; fdm=marker scrolloff=3 laststatus=2
+set encoding=utf-8 fileformat=unix
+set fileencodings=ucs-bom,utf-8,latin1 fileencoding=utf-8
 colorscheme my256
-
-set encoding=utf-8
-set fileformat=unix
-set fileencodings=ucs-bom,utf-8,latin1
-set fileencoding=utf-8
-
-" map keys for moving cursor between windows
+match ErrorMsg '\s\+$'
+" moving cursor over windows
 let g:BASH_Ctrl_j = 'off'
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-H> <C-W>h
 nnoremap <C-L> <C-W>l
-" switch to next window in normal mode
 nmap <Space> <C-w>w
 
 if has('persistent_undo')
-  " mkdir -p ~/.vim/undodir
-  set undodir=~/.vim/undodir
-  set undofile
-  set undolevels=1000
-  set undoreload=10000
+  set undodir=~/.vim/undodir undofile undolevels=1000 undoreload=10000
 endif
-filetype on
 
 function! MyPluginOptions()
   " Tagbar
@@ -66,10 +34,8 @@ function! MyPluginOptions()
     nnoremap <silent> <F9> :TlistToggle<CR>
   endif
   nnoremap <silent> <F10> :set nu!<CR>
-
   " MBE
   let g:miniBufExplBuffersNeeded = 1
   let g:miniBufExplCycleArround = 1
 endfunction
-
 autocmd VimEnter * call MyPluginOptions()
