@@ -154,16 +154,17 @@ if has("gui_running") || &t_Co == 256
   call <SID>X("Special", "fd8900", "", "")
 
   " Syntax Elements
-  call <SID>X("String", "0086d2", "", "")
-  call <SID>X("Constant", "0022d2", "", "")
+  call <SID>X("String", "5d6d7e", "", "")
+  call <SID>X("Constant", "148f77", "", "")
   call <SID>X("Number", "ff1493", "", "")
   call <SID>X("Statement", "dc143c", "", "")
-  call <SID>X("Function", "ff0086", "", "")
+  call <SID>X("Conditional", "dc143c", "", "")
+  call <SID>X("Function", "1200d2", "", "")
   call <SID>X("PreProc", "ff0007", "", "")
   call <SID>X("Comment", "22a21f", "", "bold")
-  call <SID>X("Type", "0000d8", "", "")
+  call <SID>X("Type", "8B5A2B", "", "")
   call <SID>X("Error", "ff0000", "101010", "bold")
-  call <SID>X("Identifier", "ff0086", "", "")
+  call <SID>X("Identifier", "f39c12", "", "")
   call <SID>X("Label", "ff0086", "", "")
 
   " Python Highlighting
