@@ -153,7 +153,7 @@ svg2pdf()
 # px: ps without noises {{{
 px()
 {
-  ps -eo euser,pid,ppid,tname,c,rss,start,etime,cmd --forest | grep -v ']$'
+  ps -eo 'euser:6,pid,ppid,tty:6,rss,start,time,cmd' --forest | grep -v ']$'
 }
 # }}}
 
