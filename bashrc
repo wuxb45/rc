@@ -24,13 +24,13 @@ alias dfh='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
 alias freeh='free -h'
-# update id3 for mp3 files
-#alias mp3chinese='find . -iname "*.mp3" -execdir mid3iconv -e gbk --remove-v1 {} \;'
 alias vcheck='valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes'
 alias gcheck='LD_PRELOAD=/usr/lib/libtcmalloc.so HEAPCHECK=normal'
 alias timestamp='date +%Y-%m-%d-%H-%M-%S-%N'
 alias lsb='lsblk -o KNAME,FSTYPE,MOUNTPOINT,MODEL,SIZE,MIN-IO,PHY-SEC,LOG-SEC,ROTA,SCHED,DISC-ZERO'
 alias ktags="ctags -I @${HOME}/.ktags_ignore_id --exclude=@${HOME}/.ktags_ignore_path -R ."
+alias pgdb='sudo -Hi gdb -p'
+alias ptop='perf top -p'
 # }}}
 
 # fd/fd1/fdh: find in filename {{{
@@ -81,13 +81,6 @@ man2pdf()
     echo "-> ${pdffile}"
   fi
   rm -f ${psfile}
-}
-# }}}
-
-# readmd: read markdown in lynx (by converting to on-the-fly html) {{{
-readmd()
-{
-  markdown ${1} | lynx -stdin
 }
 # }}}
 
@@ -155,13 +148,12 @@ svg2pdf()
     rm /tmp/${fn}.pdf
   done
 }
-
 # }}}
 
 # px: ps without noises {{{
 px()
 {
-  ps -eo euser,pid,ppid,tname,c,rss,start,etime,cmd --forest | grep '^.*[^]]$'
+  ps -eo euser,pid,ppid,tname,c,rss,start,etime,cmd --forest | grep -v ']$'
 }
 # }}}
 
