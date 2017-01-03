@@ -446,7 +446,7 @@ ps1_file_hints ()
   echo -n "$newhint" > "${hintinfo}"
   local len='0'
   local text=""
-  for x in $(ls -UF | head -n 40); do
+  for x in $(ls -tF | head -n 40); do
     local wc=$(wc -L <<< "$x")
     len=$(($len + $wc + 1))
     if [ $len -gt $cap ]; then
