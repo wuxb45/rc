@@ -33,6 +33,12 @@ alias pgdb='sudo -Hi gdb -p'
 alias ptop='perf top -p'
 # }}}
 
+# term color {{{
+alias tfg='tput setaf'
+alias tbg='tput setab'
+alias txx='tput sgr0'
+# }}} term color
+
 # fd/fd1/fdh: find in filename {{{
 fd1 ()
 {
@@ -464,7 +470,11 @@ ps1_pwd_info ()
 [[ -d "/tmp/ps1cache" ]] || mkdir -m777 -p "/tmp/ps1cache"
 command -v tput &>/dev/null
 if [[ 0 -eq $? ]]; then
-  PS1='$(tput bold)$(tput smul)$(tput setb 0)$(tput setf 2)\u$(tput setf 7)@$(tput setf 5)\h$(tput setf 7)@$(tput setf 6)\t$(tput setf 7):$(tput setf 3)\w$(tput sgr0) $(tput setb 7)($(ps1_pwd_info))\n($(ps1_file_hints))$(tput sgr0)\n\$ '
+  PS_1='$(tput bold)$(tput smul)$(tbg 0)$(tfg 2)\u$(tfg 7)@$(tfg 5)\h'
+  PS_2='$(tfg 7)@$(tfg 6)\t$(tfg 7):$(tfg 3)\w$(txx)'
+  PS_3='$(tput bold)$(tbg 19)$(tfg 84)'
+  PS_4='($(ps1_pwd_info) #$(tfg 9)$(ls -U | wc -w)$(tfg 84))$(txx)\n\$ '
+  PS1="$PS_1$PS_2 $PS_3$PS_4"
 else
   PS1='\u@\h@\t:\w\n\$ '
 fi
