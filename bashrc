@@ -472,9 +472,8 @@ command -v tput &>/dev/null
 if [[ 0 -eq $? ]]; then
   PS_1='$(tput bold)$(tput smul)$(tbg 0)$(tfg 2)\u$(tfg 7)@$(tfg 5)\h'
   PS_2='$(tfg 7)@$(tfg 6)\t$(tfg 7):$(tfg 3)\w$(txx)'
-  PS_3='$(tput bold)$(tbg 19)$(tfg 84)'
-  PS_4='($(ps1_pwd_info) #$(tfg 9)$(ls -U | wc -w)$(tfg 84))$(txx)\n\$ '
-  PS1="$PS_1$PS_2 $PS_3$PS_4"
+  PS_3='$(tbg 7)($(ps1_pwd_info) #$(tfg 9)$(ls -U | wc -w)$(tfg 0))\n$(ps1_file_hints)$(txx)\n\$ '
+  PS1="$PS_1$PS_2 $PS_3"
 else
   PS1='\u@\h@\t:\w\n\$ '
 fi
