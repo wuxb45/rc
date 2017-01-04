@@ -71,7 +71,7 @@ fdh ()
 }
 # }}}
 
-# map2pdf: convert manpages to pdf {{{
+# pdf tools {{{
 man2pdf()
 {
   if [[ $# -lt 1 ]]; then
@@ -88,9 +88,7 @@ man2pdf()
   fi
   rm -f ${psfile}
 }
-# }}}
 
-# pdfgrep/pdfgrep1: grep pdf text {{{
 pdfgrep()
 {
   if [[ $# -ne 1 ]]; then
@@ -121,9 +119,7 @@ pdfgrep1()
     fi
   done
 }
-# }}}
 
-# pdfsplit: split pages from pdf {{{
 pdfsplit()
 {
   if [[ $# -ne 3 ]]; then
@@ -138,9 +134,7 @@ pdfsplit()
   gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=${2} -dLastPage=${3} \
      -sOutputFile="${1%.pdf}_p${2}-p${3}.pdf" "${1}"
 }
-# }}}
 
-# svg2pdf: convert svg to pdf and crop it {{{
 svg2pdf()
 {
   if [[ $# -eq 0 ]]; then
@@ -159,7 +153,21 @@ svg2pdf()
 # px: ps without noises {{{
 px()
 {
-  ps -eo 'euser:6,pid,ppid,tty:6,rss,start,time,cmd' --forest | grep -v ']$'
+  ps -eo 'euser:6,pid,ppid,tty:6,rss,start,time,cmd' --forest | grep -v ']$' | \
+  (
+    local leftsize=0;
+    while read -r line; do
+      if [[ $leftsize -eq 0 ]]; then
+        leftsize=$(( ${#line} - 4))
+        echo "${line}"
+      else
+        echo -n "${line:0:$leftsize}"
+        tfg 18
+        echo "${line:$leftsize}"
+        txx
+      fi
+    done
+  )
 }
 # }}}
 
@@ -201,60 +209,6 @@ sshpr ()
 }
 # }}}
 
-# rbackup: backup using rsync {{{
-rbackup ()
-{
-  local target="$HOME"/backup"$(pwd)"/
-  mkdir -p $target && rsync -av . $target
-}
-# }}}
-
-# rpush: push file/dir to the same location in remote machine {{{
-rpush ()
-{
-  if [[ $# -ne 2 ]]; then
-    echo "Push file/dir to the same location in a remote machine."
-    echo "  Usage: $FUNCNAME <dir-or-file> <target-host>"
-    return
-  fi
-  local fullpath=$(readlink -f "$1")
-  local remote=$2
-  if [[ -d ${fullpath} ]]; then
-    ssh ${remote} "mkdir -p ${fullpath}"
-    rsync -av "${fullpath}/" "${remote}:${fullpath}"
-  else
-    ssh ${remote} "mkdir -p ${fullpath%/*}"
-    rsync -v "${fullpath}" "${remote}:${fullpath}"
-  fi
-}
-
-# }}}
-
-# xmp3: convert audio files to mp3 {{{
-# packages: flac for dec. flac, mac for dec. ape, lame for enc. mp3
-# cd-tracker: cdparanoia -B
-xmp3 ()
-{
-  local input=$1
-  local ext=${input##*.}
-  local lext=${ext,,*}
-  if [[ ! -f ${input} ]]; then
-    echo "** ${input}: file not exist"
-    return
-  fi
-  if [[ ${ext} == "ape" ]]; then
-    mac "${input}" - -d | lame -m j -q 2 -V 0 -s 44.1 --vbr-new - "${input%.*}.mp3"
-  elif [[ ${lext} == "flac" ]]; then
-    flac -c -d "${input}" | lame -m j -q 2 -V 0 -s 44.1 --vbr-new - "${input%.*}.mp3"
-  elif [[ ${lext} == "wav" ]]; then
-    lame -m j -q 2 -V 0 -s 44.1 -vbr-new "${input}" "${input%.*}.mp3"
-  else
-    echo "**What is ${input} ?"
-  fi
-}
-
-# }}}
-
 # pacsrc: retrieving package from abs with the help from pacman {{{
 pacsrc()
 {
@@ -277,37 +231,6 @@ pacsrc()
   echo found ${fullname}
   ABSROOT=${AR} abs ${fullname}
   echo "pacsrc: package file ready at ${AR}/${fullname}"
-}
-# }}}
-
-# vv: open file with xdg-open {{{
-# open any file
-vv ()
-{
-  if [[ $# -eq 1 ]]; then
-    xdg-open "$1" &>/dev/null
-  fi
-}
-# }}}
-
-# convchs/convcht: convert to utf-8 encoding {{{
-convchs()
-{
-  local tf=$(mktemp)
-  for f in "$@"; do
-    iconv -f GB18030 -t UTF-8 "$f" -o ${tf}
-    mv "${f}" "${f}.orig"
-    mv ${tf} "${f}"
-  done
-}
-convcht()
-{
-  local tf=$(mktemp)
-  for f in "$@"; do
-    iconv -f BIG-5 -t UTF-8 "$f" -o ${tf}
-    mv "${f}" "${f}.orig"
-    mv ${tf} "${f}"
-  done
 }
 # }}}
 
@@ -414,7 +337,7 @@ ccheck()
 }
 # }}}
 
-# {{{ ireboot: force immediate reboot (root)
+# ireboot: force immediate reboot (root) {{{
 ireboot()
 {
   if [[ ${USER} -ne "root" ]]; then
@@ -426,7 +349,7 @@ ireboot()
 }
 # }}}
 
-# {{{ PS1 helpers
+# PS1 {{{
 # show some files in current dir
 ps1_file_hints ()
 {
@@ -464,9 +387,7 @@ ps1_pwd_info ()
 {
   echo $(ls -dlhF --time-style=long-iso) | tr -s ' ' | cut -d' ' -f1,3,4,6,7
 }
-# }}}
 
-# {{{ $PS1
 [[ -d "/tmp/ps1cache" ]] || mkdir -m777 -p "/tmp/ps1cache"
 command -v tput &>/dev/null
 if [[ 0 -eq $? ]]; then
@@ -477,22 +398,20 @@ if [[ 0 -eq $? ]]; then
 else
   PS1='\u@\h@\t:\w\n\$ '
 fi
-# }}}
+# }}} PS1
 
+# bash env misc {{{
 shopt -q -s cdspell checkwinsize no_empty_cmd_completion cmdhist dirspell
 
 if [[ -z $BASHRC_LOADED ]]; then
 
 [[ -f ~/.bashrc.local1 ]] && . ~/.bashrc.local1
 
-# bash env misc {{{
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=10000
 export HISTFILESIZE=20000
 export HISTIGNORE='&'
 export EDITOR='vim'
-#LD_LIBRARY_PATH=/opt/lib
-# }}}
 
 # $PATH {{{
 
@@ -542,3 +461,5 @@ export BASHRC_LOADED=y
 fi # BASHRC_LOADED
 
 [[ -f ~/.bashrc.localn ]] && . ~/.bashrc.localn
+
+# }}}
