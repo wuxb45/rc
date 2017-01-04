@@ -153,12 +153,12 @@ svg2pdf()
 # px: ps without noises {{{
 px()
 {
-  ps -eo 'euser:6,pid,ppid,tty:6,rss,start,time,cmd' --forest | grep -v ']$' | \
+  ps -eo 'start,time,tty:5,rss,euser:6,pid:6,ppid:6,cmd' --forest | grep -v ']$' | \
   (
     local leftsize=0;
     while read -r line; do
       if [[ $leftsize -eq 0 ]]; then
-        leftsize=$(( ${#line} - 4))
+        leftsize=$(( ${#line} - 2))
         echo "${line}"
       else
         echo -n "${line:0:$leftsize}"
