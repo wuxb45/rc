@@ -83,5 +83,5 @@
     scroll_on_output = True
     scrollback_lines = 2000
     scrollbar_position = hidden
-    show_titlebar = False
+    show_titlebar = True
     use_system_font = False
