@@ -1,7 +1,7 @@
 [global_config]
   enabled_plugins = CustomCommandsMenu, ActivityWatch, TerminalShot
 [keybindings]
-  broadcast_all = F2
+  broadcast_all = None
   broadcast_group = F3
   broadcast_off = F4
   close_term = None
