@@ -27,3 +27,4 @@ dashboard stack -style locals True
 dashboard stack -style limit 5
 
 add-auto-load-safe-path ./
+set max-value-size unlimited
