@@ -38,4 +38,5 @@ function! MyPluginOptions()
   let g:miniBufExplBuffersNeeded = 1
   let g:miniBufExplCycleArround = 1
 endfunction
-autocmd VimEnter * call MyPluginOptions()
+au VimEnter * call MyPluginOptions()
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
