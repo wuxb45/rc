@@ -1,5 +1,6 @@
 [global_config]
   enabled_plugins = CustomCommandsMenu, ActivityWatch, TerminalShot
+  smart_copy = False
 [keybindings]
   broadcast_all = None
   broadcast_group = F3
@@ -83,5 +84,4 @@
     scroll_on_output = True
     scrollback_lines = 2000
     scrollbar_position = hidden
-    show_titlebar = True
     use_system_font = False
