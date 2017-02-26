@@ -123,7 +123,7 @@ pdfgrep1()
 pdfsplit()
 {
   if [[ $# -ne 3 ]]; then
-    echo "  Usage: $FUNCNAME <file name> <first page> <last page>"
+    echo "  Usage: $FUNCNAME <file-name> <first-page> <last-page>"
     return 0
   fi
   # this function takes 3 arguments:
@@ -133,6 +133,17 @@ pdfsplit()
   #     output file will be named "inputfile_pXX-pYY.pdf"
   gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=${2} -dLastPage=${3} \
      -sOutputFile="${1%.pdf}_p${2}-p${3}.pdf" "${1}"
+}
+
+pdfbreak()
+{
+  if [[ $# -ne 2 ]]; then
+    echo "  Usage: $FUNCNAME <file-name> <nr-pages>"
+    return 0
+  fi
+  for pp in $(seq 1 ${2}); do
+    pdfsplit "${1}" "${pp}" "${pp}"
+  done
 }
 
 svg2pdf()

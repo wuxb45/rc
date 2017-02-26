@@ -1,6 +1,9 @@
 " my types
-syn keyword cType i8 u8 i16 u16 i32 u32 i64 u64
-syn keyword cType ai8 au8 ai16 au16 ai32 au32 ai64 au64
+syn keyword cType u8 u16 u32 u64
+syn keyword cType s8 s16 s32 s64
+
+syn keyword cType au8 au16 au32 au64
+syn keyword cType as8 as16 as32 as64
 syn keyword cType abool aflag
 
 " function
