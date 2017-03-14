@@ -10,6 +10,8 @@
   copy = None
   cycle_next = None
   cycle_prev = None
+  edit_tab_title = None
+  edit_terminal_title = None
   edit_window_title = None
   go_down = <Alt>j
   go_left = <Alt>h

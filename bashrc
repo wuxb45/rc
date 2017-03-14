@@ -364,8 +364,8 @@ ireboot()
 # show some files in current dir
 ps1_file_hints ()
 {
-  local hintinfo="/tmp/.PS1.cache/${USER}.$$.ps1hint"
-  local hinttext="/tmp/.PS1.cache/${USER}.$$.ps1text"
+  local hintinfo="/tmp/.PS1.${USER}.$$.ps1hint"
+  local hinttext="/tmp/.PS1.${USER}.$$.ps1text"
   local last=""
   if [[ -f "${hintinfo}" ]]; then
     last=$(cat "${hintinfo}")
@@ -399,7 +399,6 @@ ps1_pwd_info ()
   echo $(ls -dlhF --time-style=long-iso) | tr -s ' ' | cut -d' ' -f1,3,4,6,7
 }
 
-[[ -d "/tmp/.PS1.cache" ]] || mkdir -m777 -p "/tmp/.PS1.cache"
 command -v tput &>/dev/null
 if [[ 0 -eq $? ]]; then
   PS_1='$(tput bold)$(tput smul)$(tbg 0)$(tfg 2)\u$(tfg 7)@$(tfg 5)\h'
