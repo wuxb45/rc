@@ -44,7 +44,7 @@ put ${MCDIR}/terminator-config ${DEST}/.config/terminator/config
 mkdir -p ${DEST}/.config/matplotlib
 put ${MCDIR}/matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 
-wget --no-check-certificate -nv -O ${DEST}/.gdb-dashboard "https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
+wget -nv -T 2 -O ${DEST}/.gdb-dashboard "https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
 
 # vim
 for subdir in plugin colors undodir ftdetect syntax indent ftplugin; do
