@@ -9,13 +9,21 @@ set encoding=utf-8 fileformat=unix
 set fileencodings=ucs-bom,utf-8,latin1 fileencoding=utf-8
 colorscheme my256
 match ErrorMsg '\s\+$'
-" moving cursor over windows
+
+" disable default C-j mapping
 let g:BASH_Ctrl_j = 'off'
+" normal mode map
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-H> <C-W>h
 nnoremap <C-L> <C-W>l
-nmap <Space> <C-w>w
+nnoremap <Space> <C-w>w
+nnoremap <silent> <F10> :set nu!<CR>
+nnoremap \ :GtagsCursor<CR>
+
+" disable netrw
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
 
 if has('persistent_undo')
   set undodir=~/.vim/undodir undofile undolevels=1000 undoreload=10000
@@ -33,10 +41,11 @@ function! MyPluginOptions()
   elseif exists(":TlistToggle")
     nnoremap <silent> <F9> :TlistToggle<CR>
   endif
-  nnoremap <silent> <F10> :set nu!<CR>
   " MBE
   let g:miniBufExplBuffersNeeded = 1
   let g:miniBufExplCycleArround = 1
 endfunction
 au VimEnter * call MyPluginOptions()
+
+" remember last position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
