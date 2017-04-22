@@ -120,19 +120,28 @@ pdfgrep1()
   done
 }
 
-pdfsplit()
+pdfcut()
 {
-  if [[ $# -ne 3 ]]; then
-    echo "  Usage: $FUNCNAME <file-name> <first-page> <last-page>"
+  if [[ $# -lt 3 ]]; then
+    echo "  Usage: $FUNCNAME <pdf-in> <pdf-out> <first-page> [<last-page>]"
     return 0
   fi
-  # this function takes 3 arguments:
-  #     $1 is the input file
-  #     $2 is the first page to extract
-  #     $3 is the last page to extract
-  #     output file will be named "inputfile_pXX-pYY.pdf"
-  gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER -dFirstPage=${2} -dLastPage=${3} \
-     -sOutputFile="${1%.pdf}_p${2}-p${3}.pdf" "${1}"
+  local head="gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER"
+  local p0="-dFirstPage=${3}"
+  local pn=
+  if [[ -n ${4} ]]; then
+    pn="-dLastPage=${4}"
+  fi
+  $head $p0 $pn -sOutputFile="${2}" "${1}"
+}
+
+pdfcut1()
+{
+  if [[ $# -lt 2 ]]; then
+    echo "  Usage: $FUNCNAME <pdf-in> <first-page> [<last-page>]"
+    return 0
+  fi
+  pdfcut "${1}" "${1%.pdf}_p${2}-p${3}.pdf" ${2} ${3}
 }
 
 pdfbreak()
