@@ -14,6 +14,7 @@
   br = branch
   co = checkout
   di = diff
+  wd = diff --color-words
 [push]
   default = simple
 [core]

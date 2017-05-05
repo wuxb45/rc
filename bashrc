@@ -151,7 +151,7 @@ pdfbreak()
     return 0
   fi
   for pp in $(seq 1 ${2}); do
-    pdfsplit "${1}" "${pp}" "${pp}"
+    pdfcut "${1}" "${1%.pdf}_${pp}.pdf" "${pp}" "${pp}"
   done
 }
 
