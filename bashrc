@@ -30,7 +30,7 @@ alias timestamp='date +%Y-%m-%d-%H-%M-%S-%N'
 alias lsb='lsblk -o KNAME,FSTYPE,MOUNTPOINT,MODEL,SIZE,MIN-IO,PHY-SEC,LOG-SEC,ROTA,SCHED,DISC-ZERO -x KNAME'
 alias ktags="ctags -I @${HOME}/.ktags_ignore_id --exclude=@${HOME}/.ktags_ignore_path -R ."
 # gtags then htags
-alias htags='htags -agInosT --show-position'
+alias htags='htags -agInosT --show-position --fixed-guide'
 alias pgdb='sudo -Hi gdb -p'
 alias ptop='perf top -p'
 # }}}
