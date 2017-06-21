@@ -7,6 +7,6 @@ gvimrc
 xprofile
 indent.pro
 tigrc
-ktags_ignore_id
-ktags_ignore_path
+ki_ids
+ki_path
 gdbinit

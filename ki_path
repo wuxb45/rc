@@ -1,0 +1,8 @@
+Documentation
+scripts
+firmware
+sound
+tools
+.gitignore
+.git
+Makefile
