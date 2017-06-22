@@ -34,6 +34,26 @@ alias pgdb='sudo -Hi gdb -p'
 alias ptop='perf top -p'
 # }}}
 
+# cgshell {{{
+# todo add more limits
+cgshell ()
+{
+  hash cgm &>/dev/null
+  if [[ $? -ne 0 ]]; then
+    echo "cgm (cgmanager) not available"
+    return 1
+  fi
+  if [[ $# -lt 1 ]]; then
+    echo "Usage: $FUNCNAME <size-in-MB>"
+    return 1
+  fi
+  sudo cgm create memory small
+  sudo cgm chown memory small ${USER} ${USER}
+  sudo cgm setvalue memory small memory.limit_in_bytes $((${1} * 1024 * 1024))
+  sudo cgm movepid memory small $$
+}
+# }}} cgshell
+
 # ktags {{{
 # .ki_path .ki_ids .ki_wl_{arch,drivers}
 ktags ()
