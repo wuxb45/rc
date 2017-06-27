@@ -470,15 +470,17 @@ ps1_pwd_info ()
 
 command -v tput &>/dev/null
 if [[ 0 -eq $? ]]; then
-  # first line
+  # user host
   PS_1='$(tput bold)$(tput smul)$(tbg 0)$(tfg 2)\u$(tfg 7)@$(tfg 5)\h'
+  # time pwd
   PS_2='$(tfg 7)@$(tfg 6)\t$(tfg 7):$(tfg 3)\w$(txx) '
-  PS_3='$(tbg 7)($(ps1_pwd_info) #$(tfg 9)$(ls -U | wc -w)$(tfg 0))'
-  # hints
+  # working dir info
+  PS_w='$(tbg 7)($(ps1_pwd_info) #$(tfg 9)$(ls -U | wc -w)$(tfg 0))'
+  # hints at new line
   PS_h='\n($(ps1_file_hints))'
-  # prompt
+  # the prompt $
   PS_p='$(txx)\n\$ '
-  PS1="${PS_1}${PS_2}${PS_3}${PS_h}${PS_p}"
+  PS1="${PS_1}${PS_2}${PS_w}${PS_h}${PS_p}"
 else
   PS1='\u@\h@\t:\w\n\$ '
 fi
