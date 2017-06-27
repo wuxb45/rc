@@ -228,7 +228,11 @@ svg2pdf()
 # px: ps without noises {{{
 px()
 {
-  ps -eo 'tty:5,start:8,time:8,rss:8,euser:6,pid:6,ppid:6,cmd' --forest | grep -v ']$' | \
+  OPT='-e'
+  if [[ -n ${1} ]]; then
+    OPT="-u ${1}"
+  fi
+  ps ${OPT} -o 'tty:5,start:8,time:8,rss:8,euser:6,pid:6,ppid:6,cmd' --forest | grep -v ']$' | \
   (
     local leftsize=0;
     while read -r line; do
