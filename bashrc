@@ -39,8 +39,8 @@ alias ptop='perf top -p'
 cgshell ()
 {
   hash cgm &>/dev/null
-  if [[ $? -ne 0 ]]; then
-    echo "cgm (cgmanager) not available"
+  if [[ 0 -ne $? ]]; then
+    echo "cgm not available"
     return 1
   fi
   if [[ $# -lt 1 ]]; then
@@ -422,8 +422,7 @@ ireboot()
   if [[ ${USER} -ne "root" ]]; then
     echo "Only root has permission to ireboot"
   else
-    echo 1 > /proc/sys/kernel/sysrq
-    echo b > /proc/sysrq-trigger
+    sudo bash -c 'echo 1 > /proc/sys/kernel/sysrq; echo b > /proc/sysrq-trigger'
   fi
 }
 # }}}
@@ -468,7 +467,7 @@ ps1_pwd_info ()
   echo $(ls -dlhF --time-style=long-iso) | tr -s ' ' | cut -d' ' -f1,3,4,6,7
 }
 
-command -v tput &>/dev/null
+hash tput &>/dev/null
 if [[ 0 -eq $? ]]; then
   # user host
   PS_1='$(tput bold)$(tput smul)$(tbg 0)$(tfg 2)\u$(tfg 7)@$(tfg 5)\h'
