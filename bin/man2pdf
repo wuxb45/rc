@@ -1,0 +1,14 @@
+#!/bin/bash
+if [[ $# -lt 1 ]]; then
+  echo "  Usage : man2pdf [<section>] <name>"
+  return 0
+fi
+
+local psfile=/tmp/map2pdf_tmp.ps
+local pdffile="${1}${2}.pdf"
+man -t ${1} ${2} > ${psfile}
+if [[ 0 -eq $? ]]; then
+  ps2pdf ${psfile} ${pdffile}
+  echo "-> ${pdffile}"
+fi
+rm -f ${psfile}

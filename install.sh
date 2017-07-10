@@ -30,9 +30,13 @@ if [[ ! -f ${MCDIR}/install.sh ]]; then
   exit 0
 fi
 
-for cf in $(cat ${MCDIR}/config.list);
-do
+for cf in $(cat ${MCDIR}/config.list); do
   put "${MCDIR}/$cf" "${DEST}/.$cf"
+done
+
+mkdir -p "${DEST}/program/usr/bin"
+for bin in $(cat ${MCDIR}/program.list); do
+  put "${MCDIR}/bin/$bin" "${DEST}/program/usr/bin/$bin"
 done
 
 ### special files

@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ $# -lt 2 ]]; then
+  echo "  Usage: pdfcut1 <pdf-in> <first-page> [<last-page>]"
+  return 0
+fi
+pdfcut "${1}" "${1%.pdf}_p${2}-p${3}.pdf" ${2} ${3}

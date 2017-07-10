@@ -1,0 +1,10 @@
+#!/bin/bash
+if [ $# -ne 3 ]; then
+  echo "Access to <[r-host:]r-port> on remote machine will be forwarded to <t-host:t-port> in local network"
+  echo "  Usage: sshtnr <[username@]remote-host> <[r-host:]r-port> <t-host:t-port>"
+  return
+fi
+local shost="$1"
+local rhost="$2"
+local thost="$3"
+ssh -2fqnNT -R "${rhost}":"${thost}" "${shost}"

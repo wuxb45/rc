@@ -1,0 +1,11 @@
+#!/bin/bash
+if [[ $# -eq 0 ]]; then
+  echo "  Usage: svg2pdf <svg-file> ..."
+fi
+for svg in "$@"; do
+  echo ${svg}
+  local fn=${svg%.svg}
+  inkscape -f ${svg} -A /tmp/${fn}.pdf
+  pdfcrop /tmp/${fn}.pdf ${fn}.pdf
+  rm /tmp/${fn}.pdf
+done

@@ -1,0 +1,29 @@
+#!/bin/bash
+# .ki_path .ki_ids .ki_wl_{arch,drivers}
+local tignore="/tmp/.${USER}.kip"
+cp ${HOME}/.ki_path ${tignore}
+for sub in arch drivers; do
+  local wf="${HOME}/.ki_wl_${sub}"
+  local whites=
+  if [[ -f ${wf} ]]; then
+    whites=$(cat ${wf})
+  fi
+  local all=$(ls -d ${sub}/*/)
+  local found=
+  for a in ${all[@]}; do
+    d=${a%/}
+    found=
+    for w in ${whites[@]}; do
+      if [[ ${d} == ${w} ]]; then
+        found="found"
+        echo "white-listing ${d}"
+        break
+      fi
+    done
+    if [[ -z ${found} ]]; then
+      echo ${d} >> ${tignore}
+    fi
+  done
+done
+ctags -I "@${HOME}/.ki_ids" --exclude="@${tignore}" -R .
+rm -f ${tignore}

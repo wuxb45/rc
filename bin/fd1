@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ -z ${1} ]]; then
+  echo "  Usage: fd1 <keyword>"
+else
+  find . -maxdepth 1 -iname "*${1}*"
+fi

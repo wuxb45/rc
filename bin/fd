@@ -1,0 +1,7 @@
+#!/bin/bash
+if [[ -z ${1} ]]; then
+  echo "Find files whose name contains <keyword>"
+  echo "  Usage: fd <keyword>"
+else
+  find . -iname "*${1}*"
+fi

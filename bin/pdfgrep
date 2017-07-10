@@ -1,0 +1,11 @@
+#!/bin/bash
+if [[ $# -ne 1 ]]; then
+  echo "Grep all occurances of <keyword> in pdf files"
+  echo "  Usage : pdfgrep <keyword>"
+  return 0
+fi
+local pat="$1"
+for pdf in $(find . -iname '*.pdf'); do
+  echo -ne "\033[K=> ${pdf}\r"
+  IFS=$'\n' pdftotext "${pdf}" - 2>/dev/null | grep -nEHi --color=auto --label="${pdf}" "${pat}" -
+done

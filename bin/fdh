@@ -1,0 +1,8 @@
+#!/bin/bash
+if [[ -z ${1} ]]; then
+  echo "Find header files by <keyword>"
+  echo "  Usage: fdh <keyword>"
+else
+  local gccprefix="/usr/lib/gcc/$(gcc -dumpmachine)/$(gcc -dumpversion)"
+  find /usr/include /usr/local/include ${gccprefix}/include ${gccprefix}/include-fixed -iname "*${1}*"
+fi
