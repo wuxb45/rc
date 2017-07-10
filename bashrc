@@ -3,6 +3,48 @@
 #
 # vim: fdm=marker
 
+# $PATH {{{
+if [[ -z ${PATH_LOADED} ]]; then
+# param: list-content, name-to-check
+# no match -> 0, match -> 1
+blacklist-check ()
+{
+  local blacklist=$1
+  if [ -z "${blacklist}" ]; then
+    return 0
+  fi
+  for black in ${blacklist};
+  do
+    if [ ${black} == $2 ]; then
+      return 1
+    fi
+  done
+  return 0
+}
+
+PROGRAMDIR=${HOME}/program
+if [ -f "${PROGRAMDIR}/blacklist" ]; then
+  blacklist=$(cat ${PROGRAMDIR}/blacklist)
+else
+  blacklist=""
+fi # blacklist
+
+if [ -d "${PROGRAMDIR}" ]; then
+  for prog in $(ls ${PROGRAMDIR}); do
+    progdir=${PROGRAMDIR}/${prog}
+    blacklist-check "${blacklist}" "${prog}"
+    for bindir in bin sbin; do
+      if [[ -d "${progdir}" && $? -eq 0 && -d "${progdir}/${bindir}" ]]; then
+        PATH=${progdir}/${bindir}:${PATH}
+      fi
+    done
+  done
+fi # program
+export PATH
+export PATH_LOADED=y
+fi # PATH_LOADED
+# }}}
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -484,8 +526,9 @@ else
 fi
 # }}} PS1
 
-# bash env misc {{{
 shopt -q -s cdspell checkwinsize no_empty_cmd_completion cmdhist dirspell
+
+# exports {{{
 
 if [[ -z $BASHRC_LOADED ]]; then
 
@@ -496,50 +539,6 @@ export HISTSIZE=10000
 export HISTFILESIZE=20000
 export HISTIGNORE='&'
 export EDITOR='vim'
-
-# $PATH {{{
-
-# param: list-content, name-to-check
-# no match -> 0, match -> 1
-blacklist-check ()
-{
-  local blacklist=$1
-  if [ -z "${blacklist}" ]; then
-    return 0
-  fi
-  for black in ${blacklist};
-  do
-    if [ ${black} == $2 ]; then
-      return 1
-    fi
-  done
-  return 0
-}
-
-CABALBIN=${HOME}/.cabal/bin
-if [ -d "${CABALBIN}" ]; then
-  PATH=${CABALBIN}:${PATH}
-fi
-
-PROGRAMDIR=${HOME}/program
-if [ -f "${PROGRAMDIR}/blacklist" ]; then
-  blacklist=$(cat ${PROGRAMDIR}/blacklist)
-else
-  blacklist=""
-fi
-if [ -d "${PROGRAMDIR}" ]; then
-  for prog in $(ls ${PROGRAMDIR}); do
-    progdir=${PROGRAMDIR}/${prog}
-    blacklist-check "${blacklist}" "${prog}"
-    for bindir in bin sbin; do
-      if [[ -d "${progdir}" && $? -eq 0 && -d "${progdir}/${bindir}" ]]; then
-        PATH=${progdir}/${bindir}:${PATH}
-      fi
-    done
-  done
-fi
-export PATH
-# }}}
 
 export BASHRC_LOADED=y
 fi # BASHRC_LOADED
