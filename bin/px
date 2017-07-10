@@ -17,3 +17,5 @@ while read -r line; do
     tput sgr0
   fi
 done
+
+rm /tmp/.px.$$
