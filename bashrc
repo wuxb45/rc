@@ -32,6 +32,11 @@ alias lsb='lsblk -o KNAME,FSTYPE,MOUNTPOINT,MODEL,SIZE,MIN-IO,PHY-SEC,LOG-SEC,RO
 alias htags='htags -agInosT --show-position --fixed-guide'
 alias pgdb='sudo -Hi gdb -p'
 alias ptop='perf top -p'
+# term color
+alias tfg='tput setaf'
+alias tbg='tput setab'
+# clear
+alias txx='tput sgr0'
 # }}}
 
 # cgshell {{{
@@ -87,12 +92,6 @@ ktags ()
   rm -f ${tignore}
 }
 # }}} ktags
-
-# term color {{{
-alias tfg='tput setaf'
-alias tbg='tput setab'
-alias txx='tput sgr0'
-# }}} term color
 
 # fd/fd1/fdh: find in filename {{{
 fd1 ()
