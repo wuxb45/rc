@@ -12,7 +12,7 @@ put ()
   fi
 
   if [[ -x $(which rsync 2>/dev/null) ]]; then
-    rsync -c "${1}" "${2}"
+    rsync -p -c "${1}" "${2}"
   else
     cp "${1}" "${2}"
   fi
