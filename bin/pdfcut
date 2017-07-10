@@ -3,9 +3,9 @@ if [[ $# -lt 3 ]]; then
   echo "  Usage: pdfcut <pdf-in> <pdf-out> <first-page> [<last-page>]"
   exit 0
 fi
-local head="gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER"
-local p0="-dFirstPage=${3}"
-local pn=
+head="gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER"
+p0="-dFirstPage=${3}"
+pn=
 if [[ -n ${4} ]]; then
   pn="-dLastPage=${4}"
 fi

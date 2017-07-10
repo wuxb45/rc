@@ -4,7 +4,7 @@ if [ $# -ne 3 ]; then
   echo "  Usage: sshtnr <[username@]remote-host> <[r-host:]r-port> <t-host:t-port>"
   exit 0
 fi
-local shost="$1"
-local rhost="$2"
-local thost="$3"
+shost="$1"
+rhost="$2"
+thost="$3"
 ssh -2fqnNT -R "${rhost}":"${thost}" "${shost}"

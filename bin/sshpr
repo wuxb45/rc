@@ -4,6 +4,6 @@ if [ $# -ne 2 ]; then
   echo "  Usage: sshpr <[username@]remote-host> <[l-host:]l-port>"
   exit 0
 fi
-local rhost="$1"
-local lhost="$2"
+rhost="$1"
+lhost="$2"
 ssh -2fqnNT -D "${lhost}" "${rhost}"

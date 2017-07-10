@@ -4,8 +4,8 @@ if [[ $# -lt 1 ]]; then
   exit 0
 fi
 
-local psfile=/tmp/map2pdf_tmp.ps
-local pdffile="${1}${2}.pdf"
+psfile=/tmp/map2pdf_tmp.ps
+pdffile="${1}${2}.pdf"
 man -t ${1} ${2} > ${psfile}
 if [[ 0 -eq $? ]]; then
   ps2pdf ${psfile} ${pdffile}

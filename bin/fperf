@@ -3,11 +3,11 @@ if [[ $# -eq 0 ]]; then
   echo "  Usage: fperf <commands> ..."
   exit 0
 fi
-local rid=$(timestamp)
-local ghroot="https://raw.githubusercontent.com/brendangregg/FlameGraph/master"
-local bindir="${HOME}/program/usr/bin"
-local st1="${bindir}/stackcollapse-perf.pl"
-local st2="${bindir}/flamegraph.pl"
+rid=$(timestamp)
+ghroot="https://raw.githubusercontent.com/brendangregg/FlameGraph/master"
+bindir="${HOME}/program/usr/bin"
+st1="${bindir}/stackcollapse-perf.pl"
+st2="${bindir}/flamegraph.pl"
 if [[ ! -f "${bindir}/stackcollapse-perf.pl" ]]; then
   mkdir -p ~/program/usr/bin
   wget "${ghroot}/stackcollapse-perf.pl" -O "${st1}"

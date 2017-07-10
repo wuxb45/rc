@@ -3,7 +3,7 @@ if [[ $# -lt 2 ]]; then
   echo "  Usage: fordif <cfg-name> <cmd> ..."
   exit 0
 fi
-local hosts=
+hosts=
 if [[ -r "${HOME}/.forall/${1}" ]]; then
   hosts=$(cat "${HOME}/.forall/${1}")
 elif [[ -r "/etc/forall/${1}" ]]; then
