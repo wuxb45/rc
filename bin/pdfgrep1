@@ -2,7 +2,7 @@
 if [[ $# -ne 1 ]]; then
   echo "Find pdf files that contain <keyword>"
   echo "  Usage : pdfgrep1 <keyword>"
-  return 0
+  exit 0
 fi
 local pat="$1"
 for pdf in $(find . -iname '*.pdf'); do

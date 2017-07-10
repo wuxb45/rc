@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ $# -eq 0 ]]; then
   echo "  Usage: fperf <commands> ..."
-  return
+  exit 0
 fi
 local rid=$(timestamp)
 local ghroot="https://raw.githubusercontent.com/brendangregg/FlameGraph/master"

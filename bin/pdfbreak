@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ $# -ne 2 ]]; then
   echo "  Usage: pdfbreak <file-name> <nr-pages>"
-  return 0
+  exit 0
 fi
 for pp in $(seq 1 ${2}); do
   pdfcut "${1}" "${1%.pdf}_${pp}.pdf" "${pp}" "${pp}"

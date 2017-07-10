@@ -2,7 +2,7 @@
 if [ $# -ne 2 ]; then
   echo "Building SOCKS Proxy on <l-host:l-port> through <[username@]remote-host>"
   echo "  Usage: sshpr <[username@]remote-host> <[l-host:]l-port>"
-  return
+  exit 0
 fi
 local rhost="$1"
 local lhost="$2"

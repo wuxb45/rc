@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ $# -lt 1 ]]; then
   echo "  Usage : man2pdf [<section>] <name>"
-  return 0
+  exit 0
 fi
 
 local psfile=/tmp/map2pdf_tmp.ps
