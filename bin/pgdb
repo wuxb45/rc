@@ -1,0 +1,16 @@
+#!/bin/bash
+hash sudo &>/dev/null
+if [[ 0 -ne $? ]] then
+  echo "sudo not found"
+  exit 0
+fi
+hash gdb &>/dev/null
+if [[ 0 -ne $? ]] then
+  echo "gdb not found"
+  exit 0
+fi
+if [[ $# -lt 1 ]]; then
+  echo "Usage $0 <pid>"
+  exit 0
+fi
+sudo -Hi gdb -p "${@}"

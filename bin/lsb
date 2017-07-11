@@ -1,0 +1,7 @@
+#!/bin/bash
+hash lsblk &>/dev/null
+if [[ 0 -ne $? ]] then
+  echo "lsblk not found"
+  exit 0
+fi
+lsblk -o "KNAME,FSTYPE,MOUNTPOINT,MODEL,SIZE,MIN-IO,PHY-SEC,LOG-SEC,ROTA,SCHED,DISC-ZERO" -x KNAME "${@}"

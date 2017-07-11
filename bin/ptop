@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ $# -lt 1 ]]; then
+  echo "Usage $0 <pid>"
+  exit 0
+fi
+perf top -p "${@}"

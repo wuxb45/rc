@@ -1,0 +1,11 @@
+#!/bin/bash
+hash valgrind &>/dev/null
+if [[ 0 -ne $? ]]; then
+  echo "valgrind not found"
+  exit 0
+fi
+if [[ $# -lt 1 ]]; then
+  echo "Usage $0 <pid>"
+  exit 0
+fi
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes "${@}"
