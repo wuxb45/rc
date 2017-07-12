@@ -1,0 +1,5 @@
+#!/bin/bash
+h2="/sys/kernel/mm/hugepages/hugepages-2048kB"
+echo "2M free $(cat ${h2}/free_hugepages) nr $(cat ${h2}/nr_hugepages)"
+h1="/sys/kernel/mm/hugepages/hugepages-1048576kB"
+echo "1G free $(cat ${h1}/free_hugepages) nr $(cat ${h1}/nr_hugepages)"
