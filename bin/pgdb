@@ -1,11 +1,11 @@
 #!/bin/bash
 hash sudo &>/dev/null
-if [[ 0 -ne $? ]] then
+if [[ 0 -ne $? ]]; then
   echo "sudo not found"
   exit 0
 fi
 hash gdb &>/dev/null
-if [[ 0 -ne $? ]] then
+if [[ 0 -ne $? ]]; then
   echo "gdb not found"
   exit 0
 fi
