@@ -1,6 +1,6 @@
 #!/bin/bash
 hash cppcheck &>/dev/null
-if [[ 0 -ne $? ]] then
+if [[ 0 -ne $? ]]; then
   echo "cppcheck not found"
   exit 0
 fi

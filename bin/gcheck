@@ -1,6 +1,6 @@
 #!/bin/bash
 tcm=/usr/lib/libtcmalloc.so
-if [[ ! -f ${tcm} ]] then
+if [[ ! -f ${tcm} ]]; then
   echo "${tcm} not found"
   exit 0
 fi

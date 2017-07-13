@@ -1,6 +1,6 @@
 #!/bin/bash
 hash htags &>/dev/null
-if [[ 0 -ne $? ]] then
+if [[ 0 -ne $? ]]; then
   echo "htags not found"
   exit 0
 fi

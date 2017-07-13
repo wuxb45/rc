@@ -1,6 +1,6 @@
 #!/bin/bash
 hash date &>/dev/null
-if [[ 0 -ne $? ]] then
+if [[ 0 -ne $? ]]; then
   echo "date not found"
   exit 0
 fi
