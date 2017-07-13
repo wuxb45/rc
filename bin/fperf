@@ -3,21 +3,25 @@ if [[ $# -eq 0 ]]; then
   echo "  Usage: fperf <commands> ..."
   exit 0
 fi
-rid=$(timestamp)
+# get scripts
 ghroot="https://raw.githubusercontent.com/brendangregg/FlameGraph/master"
 bindir="${HOME}/program/usr/bin"
 st1="${bindir}/stackcollapse-perf.pl"
 st2="${bindir}/flamegraph.pl"
-if [[ ! -f "${bindir}/stackcollapse-perf.pl" ]]; then
+if [[ ! -f "${st1}" ]]; then
   mkdir -p ~/program/usr/bin
   wget "${ghroot}/stackcollapse-perf.pl" -O "${st1}"
 fi
-if [[ ! -f "${bindir}/flamegraph.pl" ]]; then
+if [[ ! -f "${st2}" ]]; then
   mkdir -p ~/program/usr/bin
   wget "${ghroot}/flamegraph.pl" -O "${st2}"
 fi
-perf record --call-graph lbr -- "$@"
-perf script > /tmp/fperf-${rid}.perf
-perl -w "${st1}" /tmp/fperf-${rid}.perf > /tmp/fperf-${rid}.folded
-perl -w "${st2}" /tmp/fperf-${rid}.folded > fperf-${rid}.svg
-rm -f /tmp/fperf-${rid}.perf /tmp/fperf-${rid}.folded
+
+rid=$(timestamp)
+pref="/tmp/.fperf-${rid}"
+perf record -q --call-graph lbr -- "$@"
+perf script > ${pref}.perf
+perl -w "${st1}" ${pref}.perf > ${pref}.folded
+perl -w "${st2}" ${pref}.folded > fperf-${rid}.svg
+rm -f ${pref}.perf ${pref}.folded
+echo "fperf-${rid}.svg"
