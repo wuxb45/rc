@@ -1,0 +1,34 @@
+#!/bin/bash
+if [[ $# -lt 1 ]]; then
+  exit 0
+fi
+timefile="/tmp/.PS1.${USER}.${1}.time"
+textfile="/tmp/.PS1.${USER}.${1}.text"
+oldtime=""
+if [[ -f "${timefile}" ]]; then
+  oldtime=$(cat "${timefile}")
+fi
+cap=$(($(tput cols) - 15))
+newtime="$(pwd):${cap}:$(date -Ins -r .)"
+
+if [[ ${oldtime} == ${newtime} ]]; then
+  cat "${textfile}"
+  exit 0
+fi
+
+echo -n "$newtime" > "${timefile}"
+len='0'
+text=""
+set -f
+for x in $(ls -tF | head -n 40); do
+  wc=$(wc -L <<< "$x")
+  len=$(($len + $wc + 1))
+  if [[ $len -gt $cap ]]; then
+    break
+  else
+    text+="$x "
+  fi
+done
+text+="... $(ls -U | wc -w) total"
+echo -n "${text}" > "${textfile}"
+echo -n "${text}"

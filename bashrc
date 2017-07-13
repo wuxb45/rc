@@ -26,65 +26,19 @@ alias dfh='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
 alias freeh='free -h'
-# term color
-alias tfg='tput setaf'
-alias tbg='tput setab'
-# clear
-alias txx='tput sgr0'
 # }}}
 
 # PS1 {{{
-# show some files in current dir
-ps1_hints ()
-{
-  local hintinfo="/tmp/.PS1.${USER}.$$.ps1hint"
-  local hinttext="/tmp/.PS1.${USER}.$$.ps1text"
-  local last=""
-  if [[ -f "${hintinfo}" ]]; then
-    last=$(cat "${hintinfo}")
-  fi
-  local cap=$(($(tput cols) - 15))
-  local newhint="$(pwd):${cap}:$(date -Ins -r .)"
-
-  if [[ ${last} == ${newhint} ]]; then
-    cat "${hinttext}"
-    return
-  fi
-  echo -n "$newhint" > "${hintinfo}"
-  local len='0'
-  local text=""
-  set -f
-  for x in $(ls -tF | head -n 40); do
-    local wc=$(wc -L <<< "$x")
-    len=$(($len + $wc + 1))
-    if [ $len -gt $cap ]; then
-      break
-    else
-      text+="$x "
-    fi
-  done
-  text+="... $(echo $(ls -U) | wc -w) total"
-  echo -n "${text}" > "${hinttext}"
-  echo -n "${text}"
-}
-
-ps1_pwd()
-{
-  echo $(ls -dlhF --time-style=long-iso) | tr -s ' ' | cut -d' ' -f1,3,4,6,7
-}
-
 hash tput &>/dev/null
 if [[ 0 -eq $? ]]; then
   # user host
-  PS_1="$(tput bold)$(tput smul)$(tbg 0)$(tfg 2)\u$(tfg 7)@$(tfg 5)\h"
+  PS_1="$(tput bold)$(tput smul)$(tput setab 0)$(tput setaf 2)\u$(tput setaf 7)@$(tput setaf 5)\h"
   # time pwd
-  PS_2="$(tfg 7)@$(tfg 6)\t$(tfg 7):$(tfg 3)\w$(txx) "
+  PS_2="$(tput setaf 7)@$(tput setaf 6)\t$(tput setaf 7):$(tput setaf 3)\w$(tput sgr0) "
   # working dir info
-  PS_w="$(tbg 7)("'$(ps1_pwd)'" #$(tfg 9)"'$(ls -U | wc -w)'"$(tfg 0))"
-  # hints at new line
-  PS_h='\n($(ps1_hints))'
+  PS_w="$(tput setab 252)$(tput setaf 16)"'$(ps1hlpr1)\n($(ps1hlpr2 $$))'"$(tput sgr0)"
   # the prompt $
-  PS_p="$(txx)\n\$ "
+  PS_p="\n\$ "
   PS1="${PS_1}${PS_2}${PS_w}${PS_h}${PS_p}"
 else
   PS1="\u@\h@\t:\w\n\$ "
