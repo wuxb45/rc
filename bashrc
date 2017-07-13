@@ -35,7 +35,7 @@ alias txx='tput sgr0'
 
 # PS1 {{{
 # show some files in current dir
-ps1_file_hints ()
+ps1_hints ()
 {
   local hintinfo="/tmp/.PS1.${USER}.$$.ps1hint"
   local hinttext="/tmp/.PS1.${USER}.$$.ps1text"
@@ -68,7 +68,7 @@ ps1_file_hints ()
   echo -n "${text}"
 }
 
-ps1_pwd_info ()
+ps1_pwd()
 {
   echo $(ls -dlhF --time-style=long-iso) | tr -s ' ' | cut -d' ' -f1,3,4,6,7
 }
@@ -76,18 +76,18 @@ ps1_pwd_info ()
 hash tput &>/dev/null
 if [[ 0 -eq $? ]]; then
   # user host
-  PS_1='$(tput bold)$(tput smul)$(tbg 0)$(tfg 2)\u$(tfg 7)@$(tfg 5)\h'
+  PS_1="$(tput bold)$(tput smul)$(tbg 0)$(tfg 2)\u$(tfg 7)@$(tfg 5)\h"
   # time pwd
-  PS_2='$(tfg 7)@$(tfg 6)\t$(tfg 7):$(tfg 3)\w$(txx) '
+  PS_2="$(tfg 7)@$(tfg 6)\t$(tfg 7):$(tfg 3)\w$(txx) "
   # working dir info
-  PS_w='$(tbg 7)($(ps1_pwd_info) #$(tfg 9)$(ls -U | wc -w)$(tfg 0))'
+  PS_w="$(tbg 7)("'$(ps1_pwd)'" #$(tfg 9)"'$(ls -U | wc -w)'"$(tfg 0))"
   # hints at new line
-  PS_h='\n($(ps1_file_hints))'
+  PS_h='\n($(ps1_hints))'
   # the prompt $
-  PS_p='$(txx)\n\$ '
+  PS_p="$(txx)\n\$ "
   PS1="${PS_1}${PS_2}${PS_w}${PS_h}${PS_p}"
 else
-  PS1='\u@\h@\t:\w\n\$ '
+  PS1="\u@\h@\t:\w\n\$ "
 fi
 # }}} PS1
 

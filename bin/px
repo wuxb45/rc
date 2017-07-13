@@ -5,10 +5,13 @@ if [[ -n ${1} ]]; then
 fi
 leftsize=0;
 ps ${OPT} -o 'tty:5,start:8,time:8,rss:8,euser:6,pid:6,ppid:6,cmd' --forest  >/tmp/.px.$$
+v1="$(tput bold)$(tput setaf 88)"
+v2="$(tput sgr0)$(tput setaf 18)"
+v3="$(tput sgr0)"
 cat /tmp/.px.$$ | grep -v ']$' | \
 while read -r line; do
   if [[ $leftsize -ne 0 ]]; then
-    echo "$(tput bold)$(tput setaf 88)${line:0:$leftsize}$(tput sgr0)$(tput setaf 18)${line:$leftsize}$(tput sgr0)"
+    echo "${v1}${line:0:$leftsize}${v2}${line:$leftsize}${v3}"
   else
     leftsize=$(( ${#line} - 3))
     echo "${line}"
