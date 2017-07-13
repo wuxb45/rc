@@ -39,7 +39,7 @@ if [[ 0 -eq $? ]]; then
   PS_w="$(tput setab 252)$(tput setaf 16)"'$(ps1hlpr1)\n($(ps1hlpr2 $$))'"$(tput sgr0)"
   # the prompt $
   PS_p="\n\$ "
-  PS1="${PS_1}${PS_2}${PS_w}${PS_h}${PS_p}"
+  PS1="${PS_1}${PS_2}${PS_w}${PS_p}"
 else
   PS1="\u@\h@\t:\w\n\$ "
 fi
