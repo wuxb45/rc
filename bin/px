@@ -4,17 +4,14 @@ if [[ -n ${1} ]]; then
   OPT="-u ${1}"
 fi
 leftsize=0;
-ps ${OPT} -o 'tty:5,start:8,time:8,rss:8,euser:6,pid:6,ppid:6,cmd' --forest >/tmp/.px.$$
+ps ${OPT} -o 'tty:5,start:8,time:8,rss:8,euser:6,pid:6,ppid:6,cmd' --forest  >/tmp/.px.$$
 cat /tmp/.px.$$ | grep -v ']$' | \
 while read -r line; do
-  if [[ $leftsize -eq 0 ]]; then
+  if [[ $leftsize -ne 0 ]]; then
+    echo "$(tput bold)$(tput setaf 88)${line:0:$leftsize}$(tput sgr0)$(tput setaf 18)${line:$leftsize}$(tput sgr0)"
+  else
     leftsize=$(( ${#line} - 3))
     echo "${line}"
-  else
-    echo -n "${line:0:$leftsize}"
-    tput setaf 18
-    echo "${line:$leftsize}"
-    tput sgr0
   fi
 done
 
