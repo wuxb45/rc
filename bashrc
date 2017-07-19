@@ -32,16 +32,16 @@ alias freeh='free -h'
 hash tput &>/dev/null
 if [[ 0 -eq $? ]]; then
   # user host
-  PS_1="$(tput bold)$(tput smul)$(tput setab 0)$(tput setaf 2)\u$(tput setaf 7)@$(tput setaf 5)\h"
+  PS_1="$(tput bold)$(tput smul)$(tput setab 0)$(tput setaf 2)\\u$(tput setaf 7)@$(tput setaf 5)\\h"
   # time pwd
-  PS_2="$(tput setaf 7)@$(tput setaf 6)\t$(tput setaf 7):$(tput setaf 3)\w$(tput sgr0) "
+  PS_2="$(tput setaf 7)@$(tput setaf 6)\\t$(tput setaf 7):$(tput setaf 3)\\w$(tput sgr0) "
   # working dir info
   PS_w="$(tput setab 252)$(tput setaf 16)"'$(ps1hlpr1)\n($(ps1hlpr2 $$))'"$(tput sgr0)"
   # the prompt $
-  PS_p="\n\$ "
+  PS_p="\n\\$ "
   PS1="${PS_1}${PS_2}${PS_w}${PS_p}"
 else
-  PS1="\u@\h@\t:\w\n\$ "
+  PS1="\\u@\\h@\\t:\\w\n\\$ "
 fi
 # }}} PS1
 
