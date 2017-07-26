@@ -57,14 +57,30 @@ if [[ -d "${prog}" ]]; then
   fi # white-list
 
   for home in ${wl}; do
-    proghome=${prog}/${home}
-    for bindir in bin sbin; do
-      if [[ -d "${proghome}" && $? -eq 0 && -d "${proghome}/${bindir}" ]]; then
-        PATH=${proghome}/${bindir}:${PATH}
-      fi
-    done
+    ph=${prog}/${home}
+    if [[ -d "${ph}" ]]; then
+      for bd in bin sbin; do
+        if [[ -d "${ph}/${bd}" ]]; then
+          if [[ -z ${PATH} ]]; then
+            PATH=${ph}/${bd}
+          else
+            PATH=${ph}/${bd}:${PATH}
+          fi
+        fi
+      done
+      for ld in lib lib64; do
+        if [[ -d "${ph}/${ld}" ]]; then
+          if [[ -z ${LD_LIBRARY_PATH} ]]; then
+            LD_LIBRARY_PATH=${ph}/${ld}
+          else
+            LD_LIBRARY_PATH=${ph}/${ld}:${LD_LIBRARY_PATH}
+          fi
+        fi
+      done
+    fi
   done
   export PATH
+  export LD_LIBRARY_PATH
 fi # program
 
 [[ -f ~/.bashrc.local1 ]] && . ~/.bashrc.local1
