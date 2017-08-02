@@ -1,5 +1,21 @@
 #!/bin/bash
-h2="/sys/kernel/mm/hugepages/hugepages-2048kB"
-echo "2M free $(cat ${h2}/free_hugepages) nr $(cat ${h2}/nr_hugepages)"
-h1="/sys/kernel/mm/hugepages/hugepages-1048576kB"
-echo "1G free $(cat ${h1}/free_hugepages) nr $(cat ${h1}/nr_hugepages)"
+for dir in $(ls /sys/kernel/mm/hugepages); do
+  h="/sys/kernel/mm/hugepages/${dir}"
+  if [[ ! -f ${h}/nr_hugepages || ! -f ${h}/free_hugepages ]]; then
+    continue
+  fi
+  nr=$(cat ${h}/nr_hugepages)
+  nf=$(cat ${h}/free_hugepages)
+
+  t=${h#*-} # remove head
+  s=${t%kB} # remove tail
+  u="KB"
+  if [[ ${s} -ge 1048576 ]]; then
+    u="GB"
+    s=$(($s / 1048576))
+  elif [[ ${s} -ge 1024 ]]; then
+    u="MB"
+    s=$(($s / 1024))
+  fi
+  echo unit $s $u nr $nr $(($nr * $s)) $u free $nf $(($nf * $s)) $u
+done
