@@ -11,10 +11,14 @@
 [alias]
   st = status
   ci = commit
+  cm = commit -m
   br = branch
   co = checkout
   di = diff
   wd = diff --color-words
+  ph = push
+  pl = pull
+  rb = rebase
 [push]
   default = simple
 [core]
