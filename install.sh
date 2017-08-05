@@ -1,7 +1,7 @@
 #!/bin/bash
 put ()
 {
-  echo "${1} -> ${2}"
+  #echo "${1} -> ${2}"
 
   if [[ -f "${2}" ]]; then
     if [[ -x $(which colordiff 2>/dev/null) ]]; then
