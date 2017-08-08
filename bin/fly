@@ -1,0 +1,4 @@
+#!/bin/bash
+# Let it go
+nohup "$@" &
+disown
