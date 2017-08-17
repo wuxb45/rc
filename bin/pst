@@ -1,0 +1,8 @@
+#!/bin/bash
+PSROOT=/sys/devices/system/cpu/intel_pstate
+if [[ $# -lt 1 ]]; then
+  echo "Usage: $0 <maxcpu%>"
+  echo "Current settings: $(cat ${PSROOT}/min_perf_pct) .. $(cat ${PSROOT}/max_perf_pct)"
+  exit 0
+fi
+sudo bash -c "echo ${1} > ${PSROOT}/max_perf_pct"
