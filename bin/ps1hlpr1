@@ -1,4 +1,4 @@
 #!/bin/bash
 x1=$(ls -dlhF --time-style=long-iso | tr -s ' ' | cut -d' ' -f1,3,4,6,7)
-x2=$(ls -U | wc -w)
+x2=$(ls -U -1 | wc -l)
 echo "($x1 #$x2)"

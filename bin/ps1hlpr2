@@ -29,6 +29,6 @@ for x in $(ls -tF | head -n 40); do
     text+="$x "
   fi
 done
-text+="... $(ls -U | wc -w) total"
+text+="... $(ls -U -1 | wc -l) total"
 echo -n "${text}" > "${textfile}"
 echo -n "${text}"
