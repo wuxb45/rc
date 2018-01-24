@@ -26,6 +26,7 @@ alias dfh='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
 alias freeh='free -h'
+alias remake='make clean; make'
 # }}}
 
 # PS1 {{{
