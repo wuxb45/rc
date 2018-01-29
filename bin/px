@@ -14,15 +14,22 @@ vc="$(tput sgr0)"
 
 
 ps ${OPT} -o 'tty:5,start:8,time:8,rss:8,euser:6,pid:6,ppid:6,cmd' --forest  >/tmp/.px.$$
+me="$(whoami)     "
+me=${me:0:5}
 
 cat /tmp/.px.$$ | grep -v ']$' | \
 while read -r line; do
   if [[ $leftsize -ne 0 ]]; then
+    if [[ ${line:33:5} == ${me} ]]; then
+      myps="$(tput bold)"
+    else
+      myps=
+    fi
     if [[ $flag -eq 0 ]]; then
-      echo "${v1}${line:0:$leftsize}${v2}${line:$leftsize}${vc}"
+      echo "${v1}${line:0:$leftsize}${v2}${myps}${line:$leftsize}${vc}"
       flag=1
     else
-      echo "${v3}${line:0:$leftsize}${v4}${line:$leftsize}${vc}"
+      echo "${v3}${line:0:$leftsize}${v4}${myps}${line:$leftsize}${vc}"
       flag=0
     fi
   else
