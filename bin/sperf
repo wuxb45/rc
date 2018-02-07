@@ -1,0 +1,7 @@
+#!/bin/bash
+if [[ $# -eq 0 ]]; then
+  echo "  Usage: sperf <commands> ..."
+  exit 0
+fi
+
+perf record -q --call-graph lbr --switch-output -s -- "$@"
