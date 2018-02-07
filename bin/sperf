@@ -4,4 +4,4 @@ if [[ $# -eq 0 ]]; then
   exit 0
 fi
 
-perf record -q --call-graph lbr --switch-output -s -- "$@"
+perf record -q --call-graph lbr --switch-output -- "$@"
