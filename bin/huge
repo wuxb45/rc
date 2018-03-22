@@ -22,3 +22,10 @@ done
 
 echo -n "Transparent Hugepage: "
 cat /sys/kernel/mm/transparent_hugepage/enabled
+NODEROOT="/sys/devices/system/node"
+for node in ${NODEROOT}/node*; do
+  for hugesize in 2048kB 1048576kB; do
+    NRPATH="${node}/hugepages/hugepages-${hugesize}/nr_hugepages"
+    echo ${NRPATH} $(cat ${NRPATH})
+  done
+done
