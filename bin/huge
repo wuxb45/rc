@@ -1,21 +1,18 @@
 #!/bin/bash
-for dir in $(ls /sys/kernel/mm/hugepages); do
-  h="/sys/kernel/mm/hugepages/${dir}"
-  if [[ ! -f ${h}/nr_hugepages || ! -f ${h}/free_hugepages ]]; then
-    continue
-  fi
-  nr=$(cat ${h}/nr_hugepages)
-  nf=$(cat ${h}/free_hugepages)
-  echo "${h}  --  nr ${nr} free ${nf}"
-done
 
 thp="/sys/kernel/mm/transparent_hugepage/enabled"
 echo "${thp}  --  $(cat ${thp})"
 
+SYSROOT="/sys/kernel/mm"
 NODEROOT="/sys/devices/system/node"
-for node in ${NODEROOT}/node*; do
+for path in ${SYSROOT} ${NODEROOT}/node*; do
   for hugesize in 2048kB 1048576kB; do
-    NRPATH="${node}/hugepages/hugepages-${hugesize}/nr_hugepages"
-    echo "${NRPATH}  --  $(cat ${NRPATH})"
+    h="${path}/hugepages/hugepages-${hugesize}"
+    if [[ ! -f ${h}/nr_hugepages || ! -f ${h}/free_hugepages ]]; then
+      continue
+    fi
+    nr=$(cat ${h}/nr_hugepages)
+    nf=$(cat ${h}/free_hugepages)
+    echo "${h}  --  nr ${nr} free ${nf}"
   done
 done
