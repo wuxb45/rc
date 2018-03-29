@@ -6,26 +6,16 @@ for dir in $(ls /sys/kernel/mm/hugepages); do
   fi
   nr=$(cat ${h}/nr_hugepages)
   nf=$(cat ${h}/free_hugepages)
-
-  t=${h#*-} # remove head
-  s=${t%kB} # remove tail
-  u="KB"
-  if [[ ${s} -ge 1048576 ]]; then
-    u="GB"
-    s=$(($s / 1048576))
-  elif [[ ${s} -ge 1024 ]]; then
-    u="MB"
-    s=$(($s / 1024))
-  fi
-  echo unit $s $u nr $nr $(($nr * $s)) $u free $nf $(($nf * $s)) $u
+  echo "${h}  --  nr ${nr} free ${nf}"
 done
 
-echo -n "Transparent Hugepage: "
-cat /sys/kernel/mm/transparent_hugepage/enabled
+thp="/sys/kernel/mm/transparent_hugepage/enabled"
+echo "${thp}  --  $(cat ${thp})"
+
 NODEROOT="/sys/devices/system/node"
 for node in ${NODEROOT}/node*; do
   for hugesize in 2048kB 1048576kB; do
     NRPATH="${node}/hugepages/hugepages-${hugesize}/nr_hugepages"
-    echo ${NRPATH} $(cat ${NRPATH})
+    echo "${NRPATH}  --  $(cat ${NRPATH})"
   done
 done
