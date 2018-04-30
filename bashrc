@@ -37,7 +37,7 @@ if [[ 0 -eq $? ]]; then
   # time pwd
   PS_2="$(tput setaf 7)@$(tput setaf 6)\\t$(tput setaf 7):$(tput setaf 3)\\w$(tput sgr0) "
   # working dir info
-  PS_w="$(tput setab 252)$(tput setaf 16)"'$(ps1hlpr1)\n($(ps1hlpr2 $$))'"$(tput sgr0)"
+  #PS_w="$(tput setab 252)$(tput setaf 16)"'$(ps1hlpr1)\n($(ps1hlpr2 $$))'"$(tput sgr0)"
   # the prompt $
   PS_p="\n\\$ "
   PS1="${PS_1}${PS_2}${PS_w}${PS_p}"
