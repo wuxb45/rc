@@ -19,6 +19,7 @@
   ph = push
   pl = pull
   rb = rebase
+  lg = log --graph --abbrev-commit --decorate --all --format=format:'%C(blue)%h %ai %C(green)%an%C(reset) | %C(bold)%s%C(red)%d'
 [push]
   default = simple
 [core]
