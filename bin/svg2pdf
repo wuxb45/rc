@@ -5,7 +5,7 @@ fi
 for svg in "$@"; do
   echo ${svg}
   fn=${svg%.svg}
-  inkscape -f ${svg} -A /tmp/${fn}.pdf
+  inkscape -z -f ${svg} -A /tmp/${fn}.pdf
   pdfcrop /tmp/${fn}.pdf ${fn}.pdf
   rm /tmp/${fn}.pdf
 done

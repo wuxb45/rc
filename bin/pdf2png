@@ -1,0 +1,10 @@
+#!/bin/bash
+if [[ $# -eq 0 ]]; then
+  echo "  Usage: pdf2png <svg-file> ..."
+fi
+for pdf in "$@"; do
+  echo ${pdf}
+  fn=${pdf%.pdf}
+  dpi=${DPI:-96}
+  inkscape -z -f ${pdf} -d ${dpi} -e ${fn}.png
+done
