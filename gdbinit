@@ -15,9 +15,12 @@ alias -a -- dbs = dashboard stack
 alias -a -- dbt = dashboard threads
 
 # watch expression
-alias -a -- dbw = db expressions watch
-# unwatch expression
-alias -a -- dbx = db expressions unwatch
+alias -a -- dbew = db expressions watch
+alias -a -- dbeu = db expressions unwatch
+alias -a -- dbex = db expressions clear
+alias -a -- dbmw = db memory watch
+alias -a -- dbmu = db memory unwatch
+alias -a -- dbmx = db memory clear
 
 # Black     \e[0;30m # Blue      \e[0;34m # Green     \e[0;32m # Cyan      \e[0;36m
 # Red       \e[0;31m # Purple    \e[0;35m # Brown     \e[0;33m # Gray      \e[0;37m
@@ -30,3 +33,5 @@ db -style style_selected_2 '33'   # Brown
 db source -style context 15
 db stack -style locals True
 db stack -style limit 5
+db assembly -style context 15
+db assembly -style opcodes True
