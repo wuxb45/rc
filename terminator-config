@@ -24,7 +24,7 @@
   hide_window = None
   insert_number = None
   insert_padded = None
-  layout_launcher = None
+  layout_launcher = <Alt>y
   move_tab_left = None
   move_tab_right = None
   new_tab = <Alt>t
