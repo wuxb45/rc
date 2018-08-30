@@ -1,1 +1,4 @@
-this help me manage <.config> files in the cloud.
+Usage:
+$ git clone https://github.com/wuxb45/MyConfig.git
+$ cd MyConfig
+$ ./install.sh
