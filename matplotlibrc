@@ -1,3 +1,2 @@
 backend : svg
 text.usetex : True
-text.latex.unicode : True
