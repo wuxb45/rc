@@ -1,0 +1,8 @@
+#!/usr/bin/expect
+set timeout -1
+spawn -ignore HUP openconnect --authgroup=.Default--Students -u ****username**** https://vpn02outside.uta.edu
+expect "Password:" { send "****password****\r" }
+expect "Password:" { send "push\r" }
+expect "Continuing*"
+expect_background
+interact
