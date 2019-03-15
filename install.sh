@@ -33,6 +33,9 @@ rsync -rpc bin/ ${DEST}/program/usr/bin
 mkdir -p ${DEST}/.config/terminator
 put terminator-config ${DEST}/.config/terminator/config
 
+# Tilix uses dconf to load/dump settings
+dconf load /com/gexperts/Tilix/ < tilix.dconf
+
 # matplotlib set default backend to svg
 mkdir -p ${DEST}/.config/matplotlib
 put matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
