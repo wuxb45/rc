@@ -1,8 +1,10 @@
 [/]
+control-scroll-zoom=true
 copy-on-select=true
-enable-wide-handle=false
+enable-wide-handle=true
 new-instance-mode='new-window'
 quake-specific-monitor=0
+session-name='Tab [${terminalCount}]  ${title}'
 sidebar-on-right=true
 terminal-title-style='small'
 theme-variant='dark'
@@ -75,6 +77,7 @@ win-view-sidebar='disabled'
 
 [profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
 background-color='#DDDDF4F4D4D4'
+background-transparency-percent=0
 badge-color='#AC7EA8'
 badge-color-set=false
 bold-color-set=false
@@ -84,9 +87,9 @@ dim-transparency-percent=10
 foreground-color='#1E1E1E1E1E1E'
 highlight-colors-set=false
 login-shell=true
-palette=['#000000', '#CCCC00000000', '#0000AAAA0000', '#FCFCAFAF3E3E', '#00000000AAAA', '#ADAD7F7FA8A8', '#00AAAA', '#AAAAAA', '#545454', '#FF5454', '#54FF54', '#EDEDD4D40000', '#54545454FFFF', '#FF54FF', '#54FFFF', '#FFFFFF']
+palette=['#000000', '#CCCC00000000', '#0000AAAA0000', '#C4C4A0A00000', '#00000000AAAA', '#ADAD7F7FA8A8', '#00AAAA', '#EEEEEEEEECEC', '#545454', '#FF5454', '#54FF54', '#EDEDD4D40000', '#54545454FFFF', '#FF54FF', '#54FFFF', '#F3F3F3F3F3F3']
 scrollback-lines=99999
 terminal-bell='icon'
-terminal-title='[${id}][${rows}x${columns}]  ${title}${directory}'
+terminal-title='[${id}][${rows}x${columns}]  ${title}'
 use-theme-colors=false
 visible-name='Default'
