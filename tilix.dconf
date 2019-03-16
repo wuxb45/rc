@@ -1,10 +1,7 @@
 [/]
-app-title='${appName}: ${sessionName}'
-background-image-mode='scale'
 copy-on-select=true
 enable-wide-handle=false
 new-instance-mode='new-window'
-quake-hide-headerbar=false
 quake-specific-monitor=0
 sidebar-on-right=true
 terminal-title-style='small'
@@ -41,12 +38,12 @@ session-switch-to-terminal-down='<Alt>j'
 session-switch-to-terminal-left='<Alt>h'
 session-switch-to-terminal-right='<Alt>l'
 session-switch-to-terminal-up='<Alt>k'
-session-synchronize-input='F3'
+session-synchronize-input='F12'
 terminal-close='disabled'
 terminal-copy='disabled'
 terminal-find='<Alt>f'
-terminal-find-next='F12'
-terminal-find-previous='F10'
+terminal-find-next='F4'
+terminal-find-previous='F3'
 terminal-maximize='disabled'
 terminal-page-down='<Alt>Down'
 terminal-page-up='<Alt>Up'
