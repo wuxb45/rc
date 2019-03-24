@@ -34,7 +34,9 @@ mkdir -p ${DEST}/.config/terminator
 put terminator-config ${DEST}/.config/terminator/config
 
 # Tilix uses dconf to load/dump settings
-dconf load /com/gexperts/Tilix/ < tilix.dconf
+if [[ -x $(which dconf 2>/dev/null) ]]; then
+  dconf load /com/gexperts/Tilix/ < tilix.dconf
+fi
 
 # matplotlib set default backend to svg
 mkdir -p ${DEST}/.config/matplotlib
