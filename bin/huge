@@ -16,3 +16,4 @@ for path in ${SYSROOT} ${NODEROOT}/node*; do
     echo "${h}  --  nr ${nr} free ${nf}"
   done
 done
+sysctl kernel.numa_balancing
