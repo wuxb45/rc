@@ -1,4 +1,5 @@
 [/]
+auto-hide-mouse=false
 control-scroll-zoom=true
 copy-on-select=true
 enable-wide-handle=true
@@ -89,7 +90,7 @@ highlight-colors-set=false
 login-shell=true
 palette=['#000000', '#CCCC00000000', '#0000AAAA0000', '#C4C4A0A00000', '#00000000AAAA', '#ADAD7F7FA8A8', '#00AAAA', '#EEEEEEEEECEC', '#545454', '#FF5454', '#54FF54', '#EDEDD4D40000', '#54545454FFFF', '#FF54FF', '#54FFFF', '#F3F3F3F3F3F3']
 scrollback-lines=99999
-terminal-bell='icon'
+terminal-bell='none'
 terminal-title='[${id}][${rows}x${columns}]  ${title}'
 use-theme-colors=false
 visible-name='Default'
