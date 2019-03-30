@@ -29,19 +29,24 @@ done
 mkdir -p ${DEST}/program/usr/bin
 rsync -rpc bin/ ${DEST}/program/usr/bin
 
-# terminator
-mkdir -p ${DEST}/.config/terminator
-put terminator-config ${DEST}/.config/terminator/config
+# [Deprecated] terminator
+#mkdir -p ${DEST}/.config/terminator
+#put terminator-config ${DEST}/.config/terminator/config
 
 # Tilix uses dconf to load/dump settings
 if [[ -x $(which dconf 2>/dev/null) ]]; then
   dconf load /com/gexperts/Tilix/ < tilix.dconf
 fi
 
+# hide desktop (Gnome)
+mkdir -p ${DEST}/.local/share/applications
+put hide.desktop ${DEST}/.local/share/applications/hide.desktop
+
 # matplotlib set default backend to svg
 mkdir -p ${DEST}/.config/matplotlib
 put matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 
+# gdb dashboard
 tmpdb=/tmp/.$$.gdbdb
 wget -qnv -T 2 -O $tmpdb "https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
 put $tmpdb ${DEST}/.gdb-dashboard
