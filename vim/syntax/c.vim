@@ -9,3 +9,5 @@ syn keyword cType abool
 " function
 syn match cFuncCall /\w\+\s*(/me=e-1,he=e-1
 hi def link cFuncCall Function
+let c_gnu=1
+let c_no_curly_error=1
