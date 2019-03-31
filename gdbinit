@@ -27,7 +27,7 @@ alias -a -- dbmx = db memory clear
 # Dark Gray \e[1;30m # L. Blue   \e[1;34m # L. Green  \e[1;32m # L. Cyan   \e[1;36m
 # L. Red    \e[1;31m # L. Purple \e[1;35m # Yellow    \e[1;33m # White     \e[1;37m
 db -layout !memory !assembly !history !registers !stack !threads !expressions source
-db -style syntax_highlighting 'trac'
+db -style syntax_highlighting 'default'
 db -style style_selected_1 '1;31' # Light Red
 db -style style_selected_2 '33'   # Brown
 db source -style context 15
