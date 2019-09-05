@@ -30,8 +30,8 @@ db -layout !memory !assembly !history !registers !stack !threads !expressions so
 db -style syntax_highlighting 'default'
 db -style style_selected_1 '1;31' # Light Red
 db -style style_selected_2 '33'   # Brown
-db source -style context 15
+db source -style height 29
 db stack -style locals True
 db stack -style limit 5
-db assembly -style context 15
+db assembly -style height 29
 db assembly -style opcodes True
