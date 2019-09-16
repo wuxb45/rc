@@ -17,16 +17,20 @@ alias la='ls -A'
 alias lt='ls -ltrhF --time-style=long-iso'
 alias l='ls -CF'
 alias tree='tree -C'
+
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias gr='grep -nr'
-alias grc='grep -nr --include=*.{c,cc,cpp,s,S,ld,cxx,C,h,hh,hpp,py,hs,java,sh,pl,tex,go,rs}'
+alias gr='egrep -nr'
+alias grc='egrep -nr --include=*.{c,cc,cpp,s,S,ld,cxx,C,h,hh,hpp,py,hs,java,sh,pl,tex,go,rs}'
 alias dfh='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
 alias freeh='free -h'
 alias remake='make clean; make'
+alias utags='ctags -R . /usr/include'
+alias mtags='ctags -R . /usr/lib/modules/$(uname -r)/build'
+
 # }}}
 
 # PS1 {{{
