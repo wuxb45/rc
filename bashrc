@@ -27,7 +27,7 @@ alias dfh='df -h'
 alias du0='du -h --max-depth=0'
 alias du1='du -h --max-depth=1'
 alias freeh='free -h'
-alias remake='make clean; make'
+alias remake='make -B'
 alias utags='ctags -R . /usr/include'
 alias mtags='ctags -R . /usr/lib/modules/$(uname -r)/build'
 
