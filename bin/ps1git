@@ -16,7 +16,7 @@ curhead=
 on_branch="On branch ([^${IFS}]*)"
 on_commit="HEAD detached at ([^${IFS}]*)"
 if [[ $gitst =~ $on_branch ]]; then
-  curhead=${BASH_REMATCH[1]}
+  curhead="$(git rev-parse --short HEAD) ${BASH_REMATCH[1]}"
 elif [[ $gitst =~ $on_commit ]]; then
   curhead=${BASH_REMATCH[1]}
 fi
