@@ -20,6 +20,8 @@ nnoremap <C-L> <C-W>l
 nnoremap <Space> <C-w>w
 nnoremap <silent> <F10> :set nu!<CR>
 nnoremap \ :GtagsCursor<CR>
+nnoremap <c-]> g<c-]>
+vnoremap <c-]> g<c-]>
 
 " disable netrw
 let g:loaded_netrw       = 1
