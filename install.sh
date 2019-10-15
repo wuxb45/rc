@@ -42,6 +42,8 @@ rsync -rpc bin/ ${DEST}/program/usr/bin
 # Tilix uses dconf to load/dump settings
 if [[ -x $(which dconf 2>/dev/null) ]]; then
   dconf load /com/gexperts/Tilix/ < tilix.dconf
+else
+  echo "dconf not found. Skip Tilix."
 fi
 
 # hide desktop (Gnome)
@@ -62,3 +64,7 @@ for subdir in plugin colors undodir ftdetect syntax indent ftplugin; do
   mkdir -p ${DEST}/.vim/${subdir}
 done
 rsync -rpc vim/ ${DEST}/.vim
+
+#neovim
+mkdir -p ${DEST}/.config/nvim
+put nvimrc ${DEST}/.config/nvim/init.vim
