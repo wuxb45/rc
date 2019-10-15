@@ -1,19 +1,25 @@
 #!/bin/bash
+if [[ -x $(which colordiff 2>/dev/null) ]]; then
+  diff=colordiff
+elif [[ -x $(which diff 2>/dev/null) ]]; then
+  diff=diff
+else
+  echo "No diff or colordiff"
+  exit 0
+fi
+
+if [[ -x $(which rsync 2>/dev/null) ]]; then
+  copy="rsync -pc"
+else
+  copy="cp"
+fi
+
 put ()
 {
-  if [[ -f "${2}" ]]; then
-    if [[ -x $(which colordiff 2>/dev/null) ]]; then
-      colordiff "${2}" "${1}"
-    elif [[ -x $(which diff 2>/dev/null) ]]; then
-      diff "${2}" "${1}"
-    fi
+  if [[ -f "${2}" ]]; then # if exists
+    ${diff} "${2}" "${1}"
   fi
-
-  if [[ -x $(which rsync 2>/dev/null) ]]; then
-    rsync -pc "${1}" "${2}"
-  else
-    cp "${1}" "${2}"
-  fi
+  ${copy} "${1}" "${2}"
 }
 
 # normal .xx files
