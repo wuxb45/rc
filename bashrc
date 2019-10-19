@@ -6,7 +6,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-shopt -q -s cdspell checkwinsize no_empty_cmd_completion cmdhist dirspell
+shopt -q -s cdspell dirspell checkwinsize no_empty_cmd_completion cmdhist histappend checkhash
 
 # simple alias {{{
 alias cd..='cd ..'
