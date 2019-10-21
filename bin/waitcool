@@ -18,11 +18,11 @@ gettemp ()
 
 # test temp
 if [[ test -eq $2 ]]; then
-  echo $(gettemp ${1})
+  echo $(gettemp "${1}")
   exit 0
 fi
 
 # else
-while [[ $(gettemp ${1}) -gt $2 ]]; do
+while [[ $(gettemp "${1}") -gt $2 ]]; do
   sleep 1
 done
