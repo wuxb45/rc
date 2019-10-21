@@ -1,0 +1,28 @@
+#!/bin/bash
+if [ $# -ne 2 ]; then
+  echo "Usage: ${0} <prefix> <temperature>"
+  exit 0
+fi
+
+hash sensors &>/dev/null
+if [[ 0 -ne $? ]]; then
+  echo "'sensors' not found"
+  exit 0
+fi
+
+
+gettemp ()
+{
+  sensors | grep "^${1}" | sed -n 's/^[^:]*:\s*+\([0-9]\{1,\}\)\..*$/\1/p'
+}
+
+# test temp
+if [[ test -eq $2 ]]; then
+  echo $(gettemp ${1})
+  exit 0
+fi
+
+# else
+while [[ $(gettemp ${1}) -gt $2 ]]; do
+  sleep 1
+done
