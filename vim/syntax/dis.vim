@@ -15,3 +15,4 @@ syn match entryline "^\x\+ <\w\+>:$"
 hi def link entryline Label
 
 let b:current_syntax = "cdis"
+set nofoldenable
