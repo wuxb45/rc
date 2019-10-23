@@ -1,16 +1,30 @@
 #!/bin/bash
-PSROOT=/sys/devices/system/cpu/intel_pstate
+PD=/sys/devices/system/cpu/intel_pstate
 if [[ $# -lt 1 ]]; then
-  echo "Usage: $0 <mincpu%> <maxcpu%>"
+  echo -n "${PD}  $(cat ${PD}/min_perf_pct) $(cat ${PD}/max_perf_pct)  "
+  if [[ "$(cat ${PD}/no_turbo)" == "0" ]]; then
+    echo "turbo enabled"
+  else
+    echo "turbo disabled"
+  fi
+  echo "Usage: $0 <min%> <max%>"
   echo "Usage: $0 <cpu%>"
-  echo "Current settings: $(cat ${PSROOT}/min_perf_pct) .. $(cat ${PSROOT}/max_perf_pct)"
+  echo "Usage: $0 t # enable  turbo"
+  echo "Usage: $0 f # disable turbo"
   exit 0
 fi
 
-sudo bash -c "echo ${1} > ${PSROOT}/min_perf_pct"
-
-if [[ $# -eq 2 ]]; then
-  sudo bash -c "echo ${2} > ${PSROOT}/max_perf_pct"
-elif [[ $# -eq 1 ]]; then
-  sudo bash -c "echo ${1} > ${PSROOT}/max_perf_pct"
+if [[ "${1}" == "t" ]]; then
+  sudo bash -c "echo 0 > ${PD}/no_turbo"
+  echo "turbo enabled"
+elif [[ "${1}" == "f" ]]; then
+  sudo bash -c "echo 1 > ${PD}/no_turbo"
+  echo "turbo disabled"
+else # pct
+  sudo bash -c "echo ${1} > ${PD}/min_perf_pct"
+  if [[ $# -eq 2 ]]; then
+    sudo bash -c "echo ${2} > ${PD}/max_perf_pct"
+  elif [[ $# -eq 1 ]]; then
+    sudo bash -c "echo ${1} > ${PD}/max_perf_pct"
+  fi
 fi
