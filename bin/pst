@@ -3,7 +3,7 @@ PD=/sys/devices/system/cpu/intel_pstate
 if [[ $# -lt 1 ]]; then
   echo -n "${PD}  $(cat ${PD}/min_perf_pct) $(cat ${PD}/max_perf_pct)  "
   if [[ "$(cat ${PD}/no_turbo)" == "0" ]]; then
-    echo "turbo enabled"
+    echo "turbo enabled (turbo_pct $(cat ${PD}/turbo_pct))"
   else
     echo "turbo disabled"
   fi
