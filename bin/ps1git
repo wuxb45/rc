@@ -15,22 +15,27 @@ gitst="$(git status 2>/dev/null | grep '^[a-zA-Z]')"
 curhead=
 on_branch="On branch ([^${IFS}]*)"
 on_commit="HEAD detached at ([^${IFS}]*)"
-if [[ $gitst =~ $on_branch ]]; then
-  curhead="$(git rev-parse --short HEAD) ${BASH_REMATCH[1]}"
-elif [[ $gitst =~ $on_commit ]]; then
+if [[ ${gitst} =~ ${on_branch} ]]; then
+  shortv="$(git rev-parse --short HEAD 2>/dev/null)"
+  if [[ -z ${shortv} ]]; then
+    curhead="${BASH_REMATCH[1]}"
+  else
+    curhead="${shortv} ${BASH_REMATCH[1]}"
+  fi
+elif [[ ${gitst} =~ ${on_commit} ]]; then
   curhead=${BASH_REMATCH[1]}
 fi
 
 lst=
-[[ $gitst =~ "Changes not staged for commit" ]] && lst="${lst}?"
-[[ $gitst =~ "Changes to be committed" ]] && lst="${lst}!"
+[[ ${gitst} =~ "Changes not staged for commit" ]] && lst="${lst}?"
+[[ ${gitst} =~ "Changes to be committed" ]] && lst="${lst}!"
 
 rst=
-if [[ $gitst =~ "Your branch is behind" ]]; then
+if [[ ${gitst} =~ "Your branch is behind" ]]; then
   rst=" L<<R"
-elif [[ $gitst =~ "Your branch is ahead of" ]]; then
+elif [[ ${gitst} =~ "Your branch is ahead of" ]]; then
   rst=" L>>R"
-elif [[ $gitst =~ "have diverged" ]]; then
+elif [[ ${gitst} =~ "have diverged" ]]; then
   rst=" L<>R"
 fi
 
