@@ -13,4 +13,4 @@ if [[ $# -lt 1 ]]; then
   echo "Usage $0 <pid>"
   exit 0
 fi
-sudo -Hi gdb -p "${@}"
+sudo -Hi gdb -cd $(readlink -e /proc/${1}/cwd) -p "${@}"
