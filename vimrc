@@ -23,9 +23,17 @@ nnoremap <C-H> <C-W>h
 nnoremap <C-L> <C-W>l
 nnoremap <Space> <C-w>w
 nnoremap <silent> <F10> :set nu!<CR>
+
+" gtags search
 nnoremap \ :GtagsCursor<CR>
+" gtags next
+nnoremap <c-\> :cn<CR>
+nnoremap <c-n> :cn<CR>
+" gtags prev
+nnoremap <c-p> :cp<CR>
+
+" ctags search
 nnoremap <c-]> g<c-]>
-vnoremap <c-]> g<c-]>
 
 " disable netrw
 let g:loaded_netrw       = 1
