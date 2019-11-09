@@ -43,7 +43,7 @@ if has('persistent_undo')
   set undodir=~/.vim/undodir undofile undolevels=1000 undoreload=10000
 endif
 
-function! MyPluginOptions()
+function MyPluginOptions()
   " Tagbar
   if exists(":TagbarToggle")
     set statusline=%t%m\ [%{&fenc},%{&ff}]%y%r\ %{tagbar#currenttag('%s','','')}%=%c,%l/%L\ %P
@@ -60,6 +60,9 @@ function! MyPluginOptions()
   let g:miniBufExplCycleArround = 1
 endfunction
 au VimEnter * call MyPluginOptions()
+
+" autoexit if quickfix is the last window
+au BufEnter * if &buftype=="quickfix" && winnr('$') == 1 | quit | endif
 
 " remember last position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
