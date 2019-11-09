@@ -1,5 +1,5 @@
 [user]
-  name = Wu Xingbo
+  name = wuxb45
   email = wuxb45@gmail.com
 [color]
   diff = auto
@@ -10,19 +10,20 @@
   pager = true
 [alias]
   st = status
-  ci = commit
   cm = commit -m
   br = branch
   co = checkout
-  di = diff
   wd = diff --color-words
-  ph = push
+  puh = push
+  pus = push
   psh = push
-  pl = pull
+  pul = pull
   pll = pull
-  rb = rebase
   lg = log --graph --abbrev-commit --decorate --all --format=format:'%C(blue)%h %ai %C(green)%an%C(reset) | %C(bold)%s%C(red)%d'
 [push]
   default = simple
 [core]
   pager = less -x1,3
+[diff]
+  tool = vimdiff
+  algorithm = patience
