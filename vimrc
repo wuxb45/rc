@@ -46,7 +46,7 @@ endif
 function MyPluginOptions()
   " Tagbar
   if exists(":TagbarToggle")
-    set statusline=%t%m\ [%{&fenc},%{&ff}]%y%r\ %{tagbar#currenttag('%s','','')}%=%c,%l/%L\ %P
+    set statusline=%t%m\ [%{&fenc},%{&ff}]%y%r%q\ %{tagbar#currenttag('%s','','')}%=\|%c\|\ -%l/%L-\ %P
     let g:tagbar_sort = 0
     let g:tagbar_left = 1
     let g:tagbar_indent = 0
