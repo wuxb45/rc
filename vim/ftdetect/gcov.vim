@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.gcov set filetype=gcov
+au BufRead,BufNewFile *.gcov,*.gcov.txt set filetype=gcov
