@@ -1,6 +1,5 @@
 #!/bin/bash
-hash valgrind &>/dev/null
-if [[ 0 -ne $? ]]; then
+if [[ ! -x $(which valgrind 2>/dev/null) ]]; then
   echo "valgrind not found"
   exit 0
 fi

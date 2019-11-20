@@ -1,6 +1,5 @@
 #!/bin/bash
-hash lsblk &>/dev/null
-if [[ 0 -ne $? ]]; then
+if [[ ! -x $(which lsblk 2>/dev/null) ]]; then
   echo "lsblk not found"
   exit 0
 fi

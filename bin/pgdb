@@ -1,11 +1,9 @@
 #!/bin/bash
-hash sudo &>/dev/null
-if [[ 0 -ne $? ]]; then
+if [[ ! -x $(which sudo 2>/dev/null) ]]; then
   echo "sudo not found"
   exit 0
 fi
-hash gdb &>/dev/null
-if [[ 0 -ne $? ]]; then
+if [[ ! -x $(which gdb 2>/dev/null) ]]; then
   echo "gdb not found"
   exit 0
 fi
@@ -13,4 +11,7 @@ if [[ $# -lt 1 ]]; then
   echo "Usage $0 <pid>"
   exit 0
 fi
-sudo -Hi gdb -cd $(readlink -e /proc/${1}/cwd) -p "${@}"
+cmddir="$(readlink -e /proc/${1}/cwd)"
+[[ -n cmddir ]] && cddir=-cd="${cmddir}"
+
+sudo -Hi gdb ${cddir} -p "${@}"

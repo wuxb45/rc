@@ -1,6 +1,5 @@
 #!/bin/bash
-hash date &>/dev/null
-if [[ 0 -ne $? ]]; then
+if [[ ! -x $(which date 2>/dev/null) ]]; then
   echo "date not found"
   exit 0
 fi

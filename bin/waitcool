@@ -1,15 +1,13 @@
 #!/bin/bash
-if [ $# -ne 2 ]; then
-  echo "Usage: ${0} <prefix> <temperature>"
-  exit 0
-fi
-
-hash sensors &>/dev/null
-if [[ 0 -ne $? ]]; then
+if [[ ! -x $(which sensors 2>/dev/null) ]]; then
   echo "'sensors' not found"
   exit 0
 fi
 
+if [ $# -ne 2 ]; then
+  echo "Usage: ${0} <prefix> <temperature>"
+  exit 0
+fi
 
 gettemp ()
 {
