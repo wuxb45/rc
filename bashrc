@@ -10,45 +10,31 @@ shopt -q -s cdspell dirspell checkwinsize no_empty_cmd_completion cmdhist checkh
 
 # simple alias {{{
 alias cd..='cd ..'
-alias vi='vim'
-alias ls='ls --color=auto'
-alias ll='ls -alhF --time-style=long-iso'
-alias lt='ls -lrhFt --time-style=long-iso'
-alias lz='ls -lrhFS --time-style=long-iso'
-alias tree='tree -C'
-
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias gr='egrep -nr'
-alias grc='egrep -nr --include=*.{c,cc,cpp,s,S,ld,cxx,C,h,hh,hpp,py,hs,java,sh,pl,tex,go,rs}'
-alias dfh='df -h'
-alias du0='du -h --max-depth=0'
-alias du1='du -h --max-depth=1'
-alias freeh='free -h'
-alias remake='make -B'
-alias utags='ctags -R . /usr/include'
-alias mtags='ctags -R . /usr/lib/modules/$(uname -r)/build'
-
+case "$(uname -s)" in
+Linux)
+  alias vi='vim'
+  alias ls='ls --color=auto'
+  alias ll='ls -alhF --time-style=long-iso'
+  alias lt='ls -lrhFt --time-style=long-iso'
+  alias lz='ls -lrhFS --time-style=long-iso'
+  alias tree='tree -C'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+  alias gr='egrep -nr'
+  alias grc='egrep -nr --include=*.{c,cc,cpp,s,S,ld,cxx,C,h,hh,hpp,py,hs,java,sh,pl,tex,go,rs}'
+  alias dfh='df -h'
+  alias du0='du -h --max-depth=0'
+  alias du1='du -h --max-depth=1'
+  alias freeh='free -h'
+  alias remake='make -B'
+  alias utags='ctags -R . /usr/include'
+  alias mtags='ctags -R . /usr/lib/modules/$(uname -r)/build'
+  ;;
+*)
+  ;;
+esac
 # }}}
-
-# PS1 {{{
-hash tput &>/dev/null
-if [[ 0 -eq $? ]]; then
-  # user host
-  PS_1="$(tput bold)$(tput smul)$(tput setab 0)$(tput setaf 2)\\u$(tput setaf 7)@$(tput setaf 5)\\h"
-  # time pwd
-  PS_2="$(tput setaf 7)@$(tput setaf 6)\\t$(tput setaf 7):$(tput setaf 3)\\w$(tput sgr0) "
-  # working dir info
-  #PS_w="$(tput setab 252)$(tput setaf 16)"'$(ps1hlpr1)\n($(ps1hlpr2 $$))'"$(tput sgr0)"
-  PS_w='$(ps1git)'
-  # the prompt $
-  PS_p="\n\\$ "
-  PS1="${PS_1}${PS_2}${PS_w}${PS_p}"
-else
-  PS1="\\u@\\h@\\t:\\w\n\\$ "
-fi
-# }}} PS1
 
 # exports {{{
 if [[ -z $BASHRC_LOADED ]]; then
@@ -99,5 +85,21 @@ export EDITOR='vim'
 export BASHRC_LOADED=y
 fi # BASHRC_LOADED
 # }}}
+
+# PS1 {{{
+if [[ -x $(which tput 2>/dev/null) ]]; then
+  # user host
+  PS_1="$(tput bold)$(tput smul)$(tput setab 0)$(tput setaf 2)\\u$(tput setaf 7)@$(tput setaf 5)\\h"
+  # time pwd
+  PS_2="$(tput setaf 7)@$(tput setaf 6)\\t$(tput setaf 7):$(tput setaf 3)\\w$(tput sgr0) "
+  # working dir info
+  [[ -x $(which ps1git 2>/dev/null) ]] && PS_w='$(ps1git)'
+  # the prompt $
+  PS_p="\n\\$ "
+  PS1="${PS_1}${PS_2}${PS_w}${PS_p}"
+else
+  PS1="\\u@\\h@\\t:\\w\n\\$ "
+fi
+# }}} PS1
 
 [[ -f ~/.bashrc.localn ]] && . ~/.bashrc.localn
