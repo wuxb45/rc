@@ -58,6 +58,10 @@ function MyPluginOptions()
   " MBE
   let g:miniBufExplBuffersNeeded = 1
   let g:miniBufExplCycleArround = 1
+  " NERDTree
+  if exists(":NERDTreeToggle")
+    nnoremap <silent> <F5> :NERDTreeToggle<CR>
+  endif
 endfunction
 au VimEnter * call MyPluginOptions()
 
