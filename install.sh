@@ -56,8 +56,15 @@ put matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 
 # gdb dashboard
 tmpdb=/tmp/.$$.gdbdb
-wget -qnv -T 2 -O $tmpdb "https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
-put $tmpdb ${DEST}/.gdb-dashboard
+tmpurl="https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
+if [[ -x $(which wget 2>/dev/null) ]]; then
+  wget -qnv -T 2 -O ${tmpdb} "${tmpurl}"
+elif [[ -x $(which curl 2>/dev/null) ]]; then
+  curl -s -m 2 -o ${tmpdb} "${tmpurl}"
+else
+  echo "Skip gdb dashboard"
+fi
+[[ -f ${tmpdb} ]] && put $tmpdb ${DEST}/.gdb-dashboard
 
 # vim
 for subdir in plugin colors undodir ftdetect syntax indent ftplugin; do
