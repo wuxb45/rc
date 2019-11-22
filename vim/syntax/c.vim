@@ -7,7 +7,11 @@ syn keyword cType as8 as16 as32 as64
 syn keyword cType abool
 
 " function
-syn match cFuncCall /\w\+\s*(/me=e-1,he=e-1
+syn match cFuncCall "\w\+\ze\s*("
 hi def link cFuncCall Function
+
+" fix the macro defs (the lastest has the highest priority)
+syn match cMacro "^\s*#\s*define\s\+\zs\w\+\ze\s*("
+hi def link cMacro Macro
 let c_gnu=1
 let c_no_curly_error=1
