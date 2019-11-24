@@ -3,4 +3,9 @@ if [[ ! -x $(which htags 2>/dev/null) ]]; then
   echo "htags not found"
   exit 0
 fi
-htags -agInosT --show-position --fixed-guide "${@}"
+# -a alphabetical index
+# -g execute gtags before
+# -I use icons
+# -n line numbers
+# -s symbols
+htags -agIns --show-position --fixed-guide "${@}"
