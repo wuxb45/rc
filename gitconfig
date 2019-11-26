@@ -23,7 +23,7 @@
 [push]
   default = simple
 [core]
-  pager = less -x1,3
+  pager = /usr/share/git/diff-highlight/diff-highlight | less -x1,3
 [diff]
   tool = vimdiff
-  algorithm = patience
+  algorithm = minimal
