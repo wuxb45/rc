@@ -6,6 +6,9 @@ syn keyword cType au8 au16 au32 au64
 syn keyword cType as8 as16 as32 as64
 syn keyword cType abool
 
+syn keyword cType __m128i __m256i __m512i
+syn keyword cType m128 m256 m512
+
 " function
 syn match cFuncCall "\w\+\ze\s*("
 hi def link cFuncCall Function
