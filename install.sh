@@ -33,7 +33,7 @@ for cf in $(cat ./config.list); do
 done
 
 mkdir -p ${DEST}/program/usr/bin
-rsync -rpc bin/ ${DEST}/program/usr/bin
+${copy} -r bin/ ${DEST}/program/usr/bin
 
 # [Deprecated] terminator
 #mkdir -p ${DEST}/.config/terminator
@@ -70,7 +70,7 @@ fi
 for subdir in plugin colors undodir ftdetect syntax indent ftplugin; do
   mkdir -p ${DEST}/.vim/${subdir}
 done
-rsync -rpc vim/ ${DEST}/.vim
+${copy} -r vim/ ${DEST}/.vim
 
 #neovim
 mkdir -p ${DEST}/.config/nvim
