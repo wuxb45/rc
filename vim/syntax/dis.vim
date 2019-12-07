@@ -20,23 +20,23 @@ syn match insnBIN ":\t[^\t]\+"hs=s+2 contained nextgroup=insnASM
 hi def link insnBIN String
 
 " asm
-syn region insnASM start="\t" end="$" contained keepend contains=insnOpc,insnOpr,insnNop
+syn region insnASM start="\t" end="$" contained keepend contains=insnOpc
 
 " opcode
 syn match insnOpc "\t\S\+" contained nextgroup=insnOpr
-hi def link insnOpc Function
+hi def link insnOpc Statement
 
 " operands
-syn region insnOpr start=" " end="$" contained keepend contains=insnReg,insnConst
+syn region insnOpr start="\s" end="$" contained keepend contains=insnReg,insnConst
 hi def link insnOpr Function
 
 " register
-syn match insnReg "%\S\+" contained
+syn match insnReg "%[0-9a-zA-Z.]\+" contained
 hi def link insnReg Number
 
 " imm
-syn region insnConst start="\W[\$\#]\=-\=0x\x\+"ms=s+1 end="\W"me=e-1 contained
-syn region insnConst start="\W[\$\#]\=-\=\d\+"ms=s+1 end="\W"me=e-1 contained
+syn region insnConst start="\W[\$\#]-\=0x\x\+"ms=s+1 end="\W"me=e-1 contained
+syn region insnConst start="\W[\$\#]-\=\d\+"ms=s+1 end="\W"me=e-1 contained
 hi def link insnConst Constant
 
 " nop
