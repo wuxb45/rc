@@ -3,7 +3,7 @@ filetype on
 syntax enable
 set t_Co=256 tabstop=2 shiftwidth=2 softtabstop=2 backspace=2
 set autochdir autoread cursorline expandtab hlsearch incsearch
-set magic number showcmd showmatch wildmenu mouse=
+set noai magic number showcmd showmatch wildmenu mouse=
 set tags=tags; fdm=marker scrolloff=3 laststatus=2
 set encoding=utf-8 fileformat=unix
 set fileencodings=ucs-bom,utf-8,latin1 fileencoding=utf-8
