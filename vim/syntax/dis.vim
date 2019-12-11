@@ -20,7 +20,7 @@ syn match insnBIN ":\t[^\t]\+"hs=s+2 contained nextgroup=insnASM
 hi def link insnBIN String
 
 " asm
-syn region insnASM start="\t" end="$" contained keepend contains=insnOpc
+syn region insnASM start="\t" end="$" contained keepend contains=insnOpc,insnNop
 
 " opcode
 syn match insnOpc "\t\S\+" contained nextgroup=insnOpr
