@@ -22,6 +22,23 @@ put ()
   ${copy} "${1}" "${2}"
 }
 
+webput ()
+{
+  local url="${1}"
+  local dst="${2}"
+  tmpfile=/tmp/.$$.webput
+  if [[ -x $(which wget 2>/dev/null) ]]; then
+    wget -qnv -T 2 -O ${tmpfile} "${url}"
+  elif [[ -x $(which curl 2>/dev/null) ]]; then
+    curl -s -m 2 -o ${tmpfile} "${url}"
+  fi
+  if [[ -f ${tmpfile} ]]; then
+    put ${tmpfile} "${DEST}/${dst}"
+  else
+    echo "skip ${dst}"
+  fi
+}
+
 # normal .xx files
 #echo "install all config files into your HOME."
 DEST=${1:-${HOME}}
@@ -55,16 +72,14 @@ mkdir -p ${DEST}/.config/matplotlib
 put matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 
 # gdb dashboard
-tmpdb=/tmp/.$$.gdbdb
-tmpurl="https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
-if [[ -x $(which wget 2>/dev/null) ]]; then
-  wget -qnv -T 2 -O ${tmpdb} "${tmpurl}"
-elif [[ -x $(which curl 2>/dev/null) ]]; then
-  curl -s -m 2 -o ${tmpdb} "${tmpurl}"
-else
-  echo "Skip gdb dashboard"
-fi
-[[ -f ${tmpdb} ]] && put $tmpdb ${DEST}/.gdb-dashboard
+url="https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
+dst=".gdb-dashboard"
+webput ${url} ${dst}
+# diff-highlight
+url="https://raw.githubusercontent.com/git/git/master/contrib/diff-highlight/diff-highlight"
+dst="program/usr/bin/diff-highlight"
+webput ${url} ${dst}
+chmod +x ${DEST}/${dst}
 
 # vim
 for subdir in plugin colors undodir ftdetect syntax indent ftplugin; do
