@@ -4,7 +4,7 @@ if [[ ! -x $(which valgrind 2>/dev/null) ]]; then
   exit 0
 fi
 if [[ $# -lt 1 ]]; then
-  echo "Usage $0 <pid>"
+  echo "Usage $0 <cmd> ..."
   exit 0
 fi
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes "${@}"
