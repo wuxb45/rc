@@ -1,4 +1,4 @@
 set tab-size = 2
-set main-options = -n 1024
+set main-options = -n 2048
 set commit-order = default
 set show-untracked = no
