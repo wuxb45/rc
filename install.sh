@@ -75,11 +75,12 @@ put matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 url="https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
 dst=".gdb-dashboard"
 webput ${url} ${dst}
-# diff-highlight
-url="https://raw.githubusercontent.com/git/git/master/contrib/diff-highlight/diff-highlight"
-dst="program/usr/bin/diff-highlight"
-webput ${url} ${dst}
-chmod +x ${DEST}/${dst}
+
+## diff-highlight
+#url="https://raw.githubusercontent.com/git/git/master/contrib/diff-highlight/diff-highlight"
+#dst="program/usr/bin/diff-highlight"
+#webput ${url} ${dst}
+#chmod +x ${DEST}/${dst}
 
 # vim
 for subdir in plugin colors undodir ftdetect syntax indent ftplugin; do
