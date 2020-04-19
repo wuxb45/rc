@@ -1,0 +1,12 @@
+#!/usr/bin/expect
+set timeout -1
+set vpnurl [lindex $argv 0];
+set authg [lindex $argv 1];
+set usern [lindex $argv 2];
+set passw [lindex $argv 3];
+spawn -ignore HUP openconnect --authgroup=$authg -u $usern $vpnurl
+expect "Password:" { send "$passw\r" }
+expect "Password:" { send "push\r" }
+expect "Continuing*"
+expect_background
+interact

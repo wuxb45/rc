@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+if [[ ! -x $(which openconnect 2>/dev/null) ]]; then
+  echo "openconnect not found"
+  exit 0
+fi
+if [[ ! -x $(which expect 2>/dev/null) ]]; then
+  echo "expect not found"
+  exit 0
+fi
+if [[ $# -lt 4 ]]; then
+  echo "Usage: <url> <authgroup> <username> <password>"
+  exit 0
+fi
+
+sudo killall -q -s SIGINT openconnect
+nohup sudo ocexpect "$@" &>/dev/null &
+disown
