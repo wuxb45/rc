@@ -128,6 +128,7 @@ if has("gui_running") || &t_Co == 256
   endfun
   " }}}
 
+  " Usage: X(group, fg, bg, attr)
   " Global
   " call <SID>X("Normal", "000000", "ffffff", "")
   call <SID>X("NonText", "438ec3", "b7dce8", "")
@@ -147,6 +148,12 @@ if has("gui_running") || &t_Co == 256
   call <SID>X("CursorLine", "", "ffff99", "None")
   call <SID>X("LineNr", "eeeeee", "438ec3", "bold")
   call <SID>X("MatchParen", "", "", "")
+
+  " vimdiff
+  call <SID>X("DiffAdd", "", "cceeff", "")
+  call <SID>X("DiffChange", "", "cce6ff", "")
+  call <SID>X("DiffDelete", "", "ffa366", "")
+  call <SID>X("DiffText", "", "ffe6ff", "")
 
   " Specials
   call <SID>X("Todo", "e50808", "dbf3cd", "bold")
