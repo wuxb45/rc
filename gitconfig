@@ -19,6 +19,7 @@
   psh = push
   pul = pull
   pll = pull
+  su = submodule update
   lg = log --graph --abbrev-commit --decorate --all --format=format:'%C(blue)%h %ai %C(green)%an%C(reset) | %C(bold)%s%C(red)%d'
 [push]
   default = simple
