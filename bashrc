@@ -30,6 +30,9 @@ Linux)
   alias remake='make -B'
   alias utags='ctags -R . /usr/include'
   alias mtags='ctags -R . /usr/lib/modules/$(uname -r)/build'
+  alias pull='git pull'
+  alias push='git push'
+  alias tiga='tig --all'
   ;;
 *)
   ;;
