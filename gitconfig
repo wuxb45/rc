@@ -13,12 +13,10 @@
   cm = commit -m
   br = branch
   co = checkout
+  cb = checkout -b
   wd = diff --color-words
-  puh = push
-  pus = push
-  psh = push
-  pul = pull
-  pll = pull
+  ps = push
+  pl = pull
   su = submodule update
   lg = log --graph --abbrev-commit --decorate --all --format=format:'%C(blue)%h %ai %C(green)%an%C(reset) | %C(bold)%s%C(red)%d'
 [push]
