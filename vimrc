@@ -24,7 +24,7 @@ let g:BASH_Ctrl_j = 'off'
 nnoremap <Space> <C-W>w
 
 " gtags search (search symbol and open folding)
-nnoremap <C-K> :GtagsCursor<CR>zO
+nnoremap \ :GtagsCursor<CR>zO
 " gtags next (next item in quickfix list and open folding)
 nnoremap <C-N> :cn<CR>zO
 " gtags prev (previous item in quickfix list and open folding)
@@ -32,6 +32,12 @@ nnoremap <C-P> :cp<CR>zO
 
 " ctags: show list if more than one is found
 nnoremap <C-]> g<C-]>
+
+" jump between windows
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
 
 " disable netrw
 let g:loaded_netrw       = 1
