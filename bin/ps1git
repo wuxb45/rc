@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 gitst="$(git status 2>/dev/null | grep '^[a-zA-Z]')"
 [[ $gitst =~ "not a git repository" ]] && return

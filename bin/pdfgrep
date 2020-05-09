@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [[ $# -ne 1 ]]; then
   echo "Grep all occurances of <keyword> in pdf files"
   echo "  Usage : pdfgrep <keyword>"

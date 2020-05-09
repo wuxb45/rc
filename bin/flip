@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # flip line bg colors
 
 v1="$(tput setab 158)"

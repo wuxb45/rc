@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [[ $# -ne 1 ]]; then
   echo "Find pdf files that contain <keyword>"
   echo "  Usage : pdfgrep1 <keyword>"

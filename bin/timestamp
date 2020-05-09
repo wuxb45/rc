@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [[ ! -x $(which date 2>/dev/null) ]]; then
   echo "date not found"
   exit 0

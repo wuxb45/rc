@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [ $# -ne 2 ]; then
   echo "Building SOCKS Proxy on <l-host:l-port> through <[username@]remote-host>"
   echo "  Usage: sshpr <[username@]remote-host> <[l-host:]l-port>"

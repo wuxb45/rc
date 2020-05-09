@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 if [[ ! -x $(which openconnect 2>/dev/null) ]]; then
   echo "openconnect not found"
   exit 0

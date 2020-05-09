@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 PD=/sys/devices/system/cpu/intel_pstate
 if [[ $# -lt 1 ]]; then
   echo -n "${PD}  $(cat ${PD}/min_perf_pct) $(cat ${PD}/max_perf_pct)  "

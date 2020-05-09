@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 OPT='-e'
 if [[ -n ${1} ]]; then
   OPT="-u ${1}"

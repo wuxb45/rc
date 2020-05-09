@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # .ki_path .ki_ids .ki_wl_{arch,drivers}
 tignore="/tmp/.${USER}.kip"
 cp ${HOME}/.ki_path ${tignore}

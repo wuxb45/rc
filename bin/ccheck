@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [[ ! -x $(which cppcheck 2>/dev/null) ]]; then
   echo "cppcheck not found"
   exit 0

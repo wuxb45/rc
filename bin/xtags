@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [[ ! -x $(which htags 2>/dev/null) ]]; then
   echo "htags not found"
   exit 0

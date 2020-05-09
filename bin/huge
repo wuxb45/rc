@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 thp="/sys/kernel/mm/transparent_hugepage/enabled"
 [[ -f ${thp} ]] && echo "${thp}  --  $(cat ${thp})"

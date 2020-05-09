@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [[ -x $(which colordiff 2>/dev/null) ]]; then
   diff=colordiff
 elif [[ -x $(which diff 2>/dev/null) ]]; then
