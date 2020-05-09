@@ -61,3 +61,7 @@ au BufEnter * if &buftype=="quickfix" && winnr('$') == 1 | quit | endif
 
 " remember last position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" open quickfix window when changed
+au QuickFixCmdPost [^l]* nested cwindow
+au QuickFixCmdPost    l* nested lwindow
