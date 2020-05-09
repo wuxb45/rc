@@ -13,27 +13,25 @@ match Search '\s\+$'  "Search: Orange; ErrorMsg: Red; SpellBad: Pink
 " changed: :0 (switch-case); ls (case-block)
 set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,ls,b0,gs,hs,ps,ts,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j0,J0,)20,*70,#0
 
+" Fn keys
+nnoremap <silent> <F5> :NERDTreeToggle<CR>
+nnoremap <silent> <F9> :TagbarToggle<CR>
+nnoremap <silent> <F10> :set nu!<CR>
 
 " disable default C-j mapping
 let g:BASH_Ctrl_j = 'off'
-" normal mode map
-nnoremap <C-J> <C-W>j
-nnoremap <C-K> <C-W>k
-nnoremap <C-H> <C-W>h
-nnoremap <C-L> <C-W>l
-nnoremap <Space> <C-w>w
-nnoremap <silent> <F10> :set nu!<CR>
+" space: switch window
+nnoremap <Space> <C-W>w
 
-" gtags search
-nnoremap \ :GtagsCursor<CR>
-" gtags next
-nnoremap <c-\> :cn<CR>
-nnoremap <c-n> :cn<CR>
-" gtags prev
-nnoremap <c-p> :cp<CR>
+" gtags search (search symbol and open folding)
+nnoremap <C-K> :GtagsCursor<CR>zO
+" gtags next (next item in quickfix list and open folding)
+nnoremap <C-N> :cn<CR>zO
+" gtags prev (previous item in quickfix list and open folding)
+nnoremap <C-P> :cp<CR>zO
 
-" ctags search
-nnoremap <c-]> g<c-]>
+" ctags: show list if more than one is found
+nnoremap <C-]> g<C-]>
 
 " disable netrw
 let g:loaded_netrw       = 1
@@ -51,17 +49,10 @@ function MyPluginOptions()
     let g:tagbar_left = 1
     let g:tagbar_indent = 0
     autocmd FileType tagbar setlocal nocursorline nocursorcolumn
-    nnoremap <silent> <F9> :TagbarToggle<CR>
-  elseif exists(":TlistToggle")
-    nnoremap <silent> <F9> :TlistToggle<CR>
   endif
   " MBE
   let g:miniBufExplBuffersNeeded = 1
   let g:miniBufExplCycleArround = 1
-  " NERDTree
-  if exists(":NERDTreeToggle")
-    nnoremap <silent> <F5> :NERDTreeToggle<CR>
-  endif
 endfunction
 au VimEnter * call MyPluginOptions()
 
