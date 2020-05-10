@@ -10,29 +10,37 @@ shopt -q -s cdspell dirspell checkwinsize no_empty_cmd_completion cmdhist checkh
 
 # simple alias {{{
 alias cd..='cd ..'
+alias vi='vim'
+alias ls='ls --color=auto'
+alias tree='tree -C'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+# add '.' at the end on freebsd
+alias gr='egrep -nr'
+alias grc='egrep -nr --include=*.{c,cc,cpp,s,S,ld,cxx,C,h,hh,hpp,py,hs,java,sh,pl,tex,go,rs}'
+alias du0='du -h -d 0'
+alias du1='du -h -d 1'
+alias dfh='df -h'
+alias remake='make -B'
+alias pull='git pull'
+alias push='git push'
+alias tiga='tig --all'
+
 case "$(uname -s)" in
 Linux)
-  alias vi='vim'
-  alias ls='ls --color=auto'
   alias ll='ls -alhF --time-style=long-iso'
   alias lt='ls -lrhFt --time-style=long-iso'
   alias lz='ls -lrhFS --time-style=long-iso'
-  alias tree='tree -C'
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-  alias gr='egrep -nr'
-  alias grc='egrep -nr --include=*.{c,cc,cpp,s,S,ld,cxx,C,h,hh,hpp,py,hs,java,sh,pl,tex,go,rs}'
-  alias dfh='df -h'
-  alias du0='du -h --max-depth=0'
-  alias du1='du -h --max-depth=1'
   alias freeh='free -h'
-  alias remake='make -B'
   alias utags='ctags -R . /usr/include'
   alias mtags='ctags -R . /usr/lib/modules/$(uname -r)/build'
-  alias pull='git pull'
-  alias push='git push'
-  alias tiga='tig --all'
+  ;;
+FreeBSD)
+  alias ll='ls -alhF -D "%F %H:%M"'
+  alias lt='ls -lrhFt -D "%F %H:%M"'
+  alias lz='ls -lrhFS -D "%F %H:%M"'
+  alias ctags='exctags'
   ;;
 *)
   ;;
