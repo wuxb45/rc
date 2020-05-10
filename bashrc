@@ -11,7 +11,6 @@ shopt -q -s cdspell dirspell checkwinsize no_empty_cmd_completion cmdhist checkh
 # simple alias {{{
 alias cd..='cd ..'
 alias vi='vim'
-alias ls='ls --color=auto'
 alias tree='tree -C'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -29,6 +28,7 @@ alias tiga='tig --all'
 
 case "$(uname -s)" in
 Linux)
+  alias ls='ls --color=auto'
   alias ll='ls -alhF --time-style=long-iso'
   alias lt='ls -lrhFt --time-style=long-iso'
   alias lz='ls -lrhFS --time-style=long-iso'
@@ -38,11 +38,14 @@ Linux)
   alias 2tags='ctags -R . ; gtags'
   ;;
 FreeBSD)
-  alias ll='ls -alhF -D "%F %H:%M"'
-  alias lt='ls -lrhFt -D "%F %H:%M"'
-  alias lz='ls -lrhFS -D "%F %H:%M"'
+  alias ls='ls -G'
+  alias ll='ls -alhF -G -D "%F %H:%M"'
+  alias lt='ls -lrhFt -G -D "%F %H:%M"'
+  alias lz='ls -lrhFS -G -D "%F %H:%M"'
   alias ctags='exctags'
   alias 2tags='exctags -R . ; gtags'
+  alias make='gmake'
+  alias tput='/usr/local/bin/tput'
   ;;
 *)
   ;;
