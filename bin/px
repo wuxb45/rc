@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-OPT='-e'
 if [[ -n ${1} ]]; then
-  OPT="-u ${1}"
+  OPT="-U ${1}"
 fi
 
 leftsize=0;
@@ -13,7 +12,11 @@ v4="$(tput sgr0)$(tput setaf 52)"
 vc="$(tput sgr0)"
 
 
-ps ${OPT} -o 'tty:5,start:8,time:8,rss:8,euser:6,pid:6,ppid:6,cmd' --forest  >/tmp/.px.$$
+if [[ $(uname -s) == "Linux" ]]; then
+  ps ${OPT} -e -o 'tty:5,start:8,time:8,rss:8,euser:6,pid:6,ppid:6,cmd' --forest  >/tmp/.px.$$
+elif [[ $(uname -s) == "FreeBSD" ]]; then
+  ps ${OPT} -a -o 'tty,start,time,rss,user,pid,ppid,command'  >/tmp/.px.$$
+fi
 me="$(whoami)     "
 me=${me:0:5}
 
