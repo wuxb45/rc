@@ -35,12 +35,14 @@ Linux)
   alias freeh='free -h'
   alias utags='ctags -R . /usr/include'
   alias mtags='ctags -R . /usr/lib/modules/$(uname -r)/build'
+  alias 2tags='ctags -R . ; gtags'
   ;;
 FreeBSD)
   alias ll='ls -alhF -D "%F %H:%M"'
   alias lt='ls -lrhFt -D "%F %H:%M"'
   alias lz='ls -lrhFS -D "%F %H:%M"'
   alias ctags='exctags'
+  alias 2tags='exctags -R . ; gtags'
   ;;
 *)
   ;;
