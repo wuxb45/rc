@@ -42,8 +42,8 @@ FreeBSD)
   alias ll='ls -alhF -G -D "%F %H:%M"'
   alias lt='ls -lrhFt -G -D "%F %H:%M"'
   alias lz='ls -lrhFS -G -D "%F %H:%M"'
-  alias ctags='exctags'
-  alias 2tags='exctags -R . ; gtags'
+  alias ctags='uctags'
+  alias 2tags='uctags -R; gtags'
   alias make='gmake'
   alias tput='/usr/local/bin/tput'
   ;;
