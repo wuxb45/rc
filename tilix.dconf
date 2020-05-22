@@ -13,7 +13,7 @@ terminal-title-show-when-single=false
 terminal-title-style='small'
 theme-variant='dark'
 use-tabs=true
-window-style='disable-csd-hide-toolbar'
+window-style='borderless'
 
 [keybindings]
 app-new-session='<Alt>t'
