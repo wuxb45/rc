@@ -25,6 +25,7 @@ alias remake='make -B'
 alias pull='git pull'
 alias push='git push'
 alias tiga='tig --all'
+alias pri='perf report -i'
 
 case "$(uname -s)" in
 Linux)
