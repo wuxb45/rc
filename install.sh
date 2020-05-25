@@ -34,6 +34,7 @@ webput ()
   fi
   if [[ -f ${tmpfile} ]]; then
     put ${tmpfile} "${DEST}/${dst}"
+    rm -f ${tmpfile}
   else
     echo "skip ${dst}"
   fi
