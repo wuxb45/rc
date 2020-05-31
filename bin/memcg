@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+msg_exit()
+{
+  echo "usage: create <cgname> <memsize>"
+  echo "       ls"
+  echo "       edit <cgname>"
+  echo "       <cgname> [cmd ...]  (start login-shell without cmd)"
+}
+
+case ${1} in
+create)
+  [[ $# -lt 3 ]] && msg_exit
+  mkdir -p ${HOME}/.config/systemd/user
+  printf "[Slice]\nMemoryMax=${3}\n" > ${HOME}/.config/systemd/user/${2}.slice
+  systemctl --user daemon-reload
+  # show file content
+  head ${HOME}/.config/systemd/user/${2}.slice
+  ;;
+
+ls)
+  head -v ${HOME}/.config/systemd/user/*.slice
+  ;;
+
+edit)
+  [[ $# -lt 2 ]] && msg_exit
+  if [[ ! -f ${HOME}/.config/systemd/user/${2}.slice ]]; then
+    echo "${HOME}/.config/systemd/user/${2}.slice not found"
+  else
+    ${EDITOR} ${HOME}/.config/systemd/user/${2}.slice
+  fi
+  ;;
+
+*)
+  [[ $# -lt 1 ]] && msg_exit
+  if [[ ! -f ${HOME}/.config/systemd/user/${1}.slice ]]; then
+    echo "${HOME}/.config/systemd/user/${1}.slice does not exist"
+    exit 0
+  fi
+  if [[ $# -lt 2 ]]; then
+    systemd-run --user --slice=${1}.slice --shell
+  else
+    systemd-run --user --slice=${1}.slice "${@:2}"
+  fi
+  ;;
+
+esac
