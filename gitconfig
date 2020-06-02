@@ -26,3 +26,5 @@
 [diff]
   tool = vimdiff
   algorithm = minimal
+[pull]
+	ff = only
