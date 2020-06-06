@@ -22,6 +22,11 @@ ls)
   head -v ${HOME}/.config/systemd/user/*.slice
   ;;
 
+"")
+  head -v ${HOME}/.config/systemd/user/*.slice
+  msg_exit
+  ;;
+
 edit)
   [[ $# -lt 2 ]] && msg_exit
   if [[ ! -f ${HOME}/.config/systemd/user/${2}.slice ]]; then
