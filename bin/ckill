@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+if [[ $# -eq 0 ]]; then
+  echo "  Usage: ckill <pid>"
+  exit 0
+fi
+
+kill -TERM $1
+kill -CONT $1
