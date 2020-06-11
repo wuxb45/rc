@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 # Let it go
-nohup "$@" 1>/tmp/.fly-$$.1 2>/tmp/.fly-$$.2 &
+nohup "$@" 1>/tmp/fly-$$.1 2>/tmp/fly-$$.2 &
 disown
+echo "stdout: /tmp/fly-$$.1"
+echo "stderr: /tmp/fly-$$.2"
