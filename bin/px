@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-if [[ -n ${1} ]]; then
-  OPT="-U ${1}"
-fi
 
+# bsd
 if [[ $(uname -s) == "FreeBSD" ]]; then
+  [[ -n ${1} ]] && OPT="-U ${1}"
   ps ${OPT} -a -o 'tty,start,time,rss,user,pid,ppid,command'
   exit 0
 fi
@@ -17,8 +16,16 @@ v3="$(tput bold)$(tput setaf 17)"
 v4="$(tput sgr0)$(tput setaf 52)"
 vc="$(tput sgr0)"
 
+fmt='tty:5,start:8,time:8,rss:8,euser:6,pid:7,ppid:7,cmd'
 
-ps ${OPT} -o 'tty:5,start:8,time:8,rss:8,euser:6,pid:7,ppid:7,cmd' --ppid 2 -p 2 -N --forest >/tmp/.px.$$
+if [[ -n ${1} ]]; then
+  # filter by user
+  ps -U ${1} -o ${fmt} --forest >/tmp/.px.$$
+else
+  # filter out kernel threads
+  ps -o ${fmt} --ppid 2 -p 2 -N --forest >/tmp/.px.$$
+fi
+
 me="$(whoami)     "
 me=${me:0:5}
 
