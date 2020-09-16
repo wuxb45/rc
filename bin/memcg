@@ -2,10 +2,14 @@
 
 msg_exit()
 {
-  echo "usage: create <cgname> <memsize>"
-  echo "       ls"
-  echo "       edit <cgname>"
-  echo "       <cgname> [cmd ...]  (start login-shell without cmd)"
+  echo "usage:"
+  echo "    create <cgname> <memsize>     # memsize: 3K, 5M, or 7G"
+  echo "    ls"
+  echo "    rm <cgname>"
+  echo "    edit <cgname>"
+  echo "    <cgname>            # start login-shell"
+  echo "    <cgname> [cmd ...]  # run command"
+  exit 0
 }
 
 case ${1} in
@@ -16,6 +20,18 @@ create)
   systemctl --user daemon-reload
   # show file content
   head ${HOME}/.config/systemd/user/${2}.slice
+  ;;
+
+rm)
+  [[ $# -lt 2 ]] && msg_exit
+  slicefn="${HOME}/.config/systemd/user/${2}.slice"
+  if [[ ! -f ${slicefn} ]]; then
+    echo "${slicefn} not found"
+  else
+    systemctl --user stop ${2}.slice
+    rm -f ${slicefn}
+    systemctl --user daemon-reload
+  fi
   ;;
 
 ls)
@@ -29,8 +45,9 @@ ls)
 
 edit)
   [[ $# -lt 2 ]] && msg_exit
-  if [[ ! -f ${HOME}/.config/systemd/user/${2}.slice ]]; then
-    echo "${HOME}/.config/systemd/user/${2}.slice not found"
+  slicefn="${HOME}/.config/systemd/user/${2}.slice"
+  if [[ ! -f ${slicefn} ]]; then
+    echo "${slicefn} not found"
   else
     ${EDITOR} ${HOME}/.config/systemd/user/${2}.slice
     systemctl --user daemon-reload
@@ -39,8 +56,9 @@ edit)
 
 *)
   [[ $# -lt 1 ]] && msg_exit
-  if [[ ! -f ${HOME}/.config/systemd/user/${1}.slice ]]; then
-    echo "${HOME}/.config/systemd/user/${1}.slice does not exist"
+  slicefn="${HOME}/.config/systemd/user/${2}.slice"
+  if [[ ! -f ${slicefn} ]]; then
+    echo "${slicefn} does not exist"
     exit 0
   fi
   if [[ $# -lt 2 ]]; then
