@@ -42,10 +42,12 @@ Linux)
   alias 2tags='ctags -R . ; gtags'
   ;;
 Darwin)
+  alias gr='gegrep --color=auto -nr'
+  alias grc='gegrep --color=auto -nr --include=*.{c,cc,cpp,s,S,ld,cxx,C,h,hh,hpp,py,hs,java,sh,pl,tex,go,rs}'
   alias ls='gls --color=auto'
-  alias ll='gls -alhF --time-style=long-iso'
-  alias lt='gls -lrhFt --time-style=long-iso'
-  alias lz='gls -lrhFS --time-style=long-iso'
+  alias ll='gls --color=auto -alhF --time-style=long-iso'
+  alias lt='gls --color=auto -lrhFt --time-style=long-iso'
+  alias lz='gls --color=auto -lrhFS --time-style=long-iso'
   alias make='gmake'
   ;;
 FreeBSD)
