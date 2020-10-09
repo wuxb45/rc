@@ -41,6 +41,13 @@ Linux)
   alias mtags='ctags -R . /usr/lib/modules/$(uname -r)/build'
   alias 2tags='ctags -R . ; gtags'
   ;;
+Darwin)
+  alias ls='gls --color=auto'
+  alias ll='gls -alhF --time-style=long-iso'
+  alias lt='gls -lrhFt --time-style=long-iso'
+  alias lz='gls -lrhFS --time-style=long-iso'
+  alias make='gmake'
+  ;;
 FreeBSD)
   alias ls='ls -G'
   alias ll='ls -alhF -G -D "%F %H:%M"'

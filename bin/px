@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
 # bsd
-if [[ $(uname -s) == "FreeBSD" ]]; then
+case $(uname -s) in
+FreeBSD | Darwin)
   [[ -n ${1} ]] && OPT="-U ${1}"
   ps ${OPT} -a -o 'tty,start,time,rss,user,pid,ppid,command'
   exit 0
-fi
+  ;;
+esac
 
 # Linux
 leftsize=0;
