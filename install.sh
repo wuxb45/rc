@@ -72,6 +72,10 @@ put hide.desktop ${DEST}/.local/share/applications/hide.desktop
 mkdir -p ${DEST}/.config/matplotlib
 put matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 
+# gtk copy-paste
+mkdir -p ${DEST}/.config/gtk-3.0
+put gtk.css ${DEST}/.config/gtk-3.0/gtk.css
+
 # gdb dashboard
 url="https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
 dst=".gdb-dashboard"
