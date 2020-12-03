@@ -10,3 +10,4 @@ ki_ids
 ki_path
 gdbinit
 inputrc
+tmux.conf
