@@ -1,0 +1,12 @@
+#!/bin/bash
+if [[ $# -lt 2 ]]; then
+  echo "  Usage: bindiff <file1> <file2> [<xxd-options>]"
+  echo "  Example: bindiff x y '-g 4 -e'"
+  exit 0
+elif [[ $# -eq 2 ]]; then
+  xxdopt="-g 1"
+else
+  xxdopt="${3}"
+fi
+
+vimdiff <(xxd ${xxdopt} ${1}) <(xxd ${xxdopt} ${2})
