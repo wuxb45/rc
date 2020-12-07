@@ -76,10 +76,10 @@ put matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 mkdir -p ${DEST}/.config/gtk-3.0
 put gtk.css ${DEST}/.config/gtk-3.0/gtk.css
 
-# gdb dashboard
-url="https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
-dst=".gdb-dashboard"
-webput ${url} ${dst}
+## gdb dashboard
+#url="https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
+#dst=".gdb-dashboard"
+#webput ${url} ${dst}
 
 ## diff-highlight
 #url="https://raw.githubusercontent.com/git/git/master/contrib/diff-highlight/diff-highlight"
