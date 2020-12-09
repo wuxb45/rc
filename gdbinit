@@ -2,4 +2,5 @@
 add-auto-load-safe-path ./
 set max-value-size unlimited
 tui enable
-winheight src 13
+winheight src 15
+focus cmd
