@@ -131,15 +131,21 @@ fi # BASHRC_LOADED
 
 # PS1 {{{
 if [[ -x $(which tput 2>/dev/null) ]]; then
-  # user host
-  PS_1="$(tput bold)$(tput smul)$(tput setab 0)$(tput setaf 2)\\u$(tput setaf 7)@$(tput setaf 5)\\h"
-  # time pwd
-  PS_2="$(tput setaf 7)@$(tput setaf 6)\\t$(tput setaf 7):$(tput setaf 3)\\w$(tput sgr0) "
+  # username
+  PS_u="$(tput bold)$(tput smul)$(tput setab 0)$(tput setaf 2)\\u"
+  # tmux
+  [[ -n ${TMUX} ]] && PS_m="$(tput setaf 7)@$(tput setaf 6)$(tmux display-message -p '#{window_index}:#{pane_index}')"
+  # hostname
+  PS_h="$(tput setaf 7)@$(tput setaf 5)\\h"
+  # time
+  PS_t="$(tput setaf 7)@$(tput setaf 6)\\t"
+  # wd
+  PS_d="$(tput setaf 7):$(tput setaf 3)\\w$(tput sgr0) "
   # working dir info
   [[ -x $(which ps1git 2>/dev/null) ]] && PS_w='$(ps1git)'
   # the prompt $
   PS_p="\n\\$ "
-  PS1="${PS_1}${PS_2}${PS_w}${PS_p}"
+  PS1="${PS_u}${PS_m}${PS_h}${PS_t}${PS_d}${PS_w}${PS_p}"
 else
   PS1="\\u@\\h@\\t:\\w\n\\$ "
 fi
