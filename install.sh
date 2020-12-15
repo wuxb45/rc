@@ -76,6 +76,10 @@ put matplotlibrc ${DEST}/.config/matplotlib/matplotlibrc
 mkdir -p ${DEST}/.config/gtk-3.0
 put gtk.css ${DEST}/.config/gtk-3.0/gtk.css
 
+# yay
+mkdir -p ${DEST}/.config/yay
+put yay-config.json ${DEST}/.config/yay/config.json
+
 ## gdb dashboard
 #url="https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit"
 #dst=".gdb-dashboard"
