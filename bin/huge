@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+if [[ $# -eq 3 ]]; then
+  if [[ $2 == 1 ]]; then
+    sudo bash -c "echo ${3} >/sys/devices/system/node/node${1}/hugepages/hugepages-1048576kB/nr_hugepages"
+  elif [[ $2 == 2 ]]; then
+    sudo bash -c "echo ${3} >/sys/devices/system/node/node${1}/hugepages/hugepages-2048kB/nr_hugepages"
+  else
+    echo "  Usage: huge <node> <2(MB)|1(GB)> <nr>"
+  fi
+else
+  echo "  Usage: huge <node> <2(MB)|1(GB)> <nr>"
+fi
+
 thp="/sys/kernel/mm/transparent_hugepage/enabled"
 [[ -f ${thp} ]] && echo "${thp}  --  $(cat ${thp})"
 
