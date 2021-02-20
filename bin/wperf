@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+if [[ $# -eq 0 ]]; then
+  echo "  Usage: wperf <commands> ..."
+  exit 0
+fi
+
+perf record -q -s --call-graph dwarf --switch-output -- "$@"
