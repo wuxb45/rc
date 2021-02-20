@@ -1,0 +1,6 @@
+# ~/.bashrc.localn for MacOS+Homebrew bash-completion@2
+if [[ -x $(which brew 2>/dev/null) ]]; then
+  if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
+    . `brew --prefix`/etc/bash_completion.d/git-completion.bash
+  fi
+fi
