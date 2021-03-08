@@ -7,11 +7,19 @@ if [[ ! -x $(which gdb 2>/dev/null) ]]; then
   echo "gdb not found"
   exit 0
 fi
+
 if [[ $# -lt 1 ]]; then
-  echo "Usage $0 <pid>"
-  exit 0
+  if [[ -r /run/user/$UID/.debug_wait_gdb_pid ]]; then
+  tgtpid=$(cat /run/user/$UID/.debug_wait_gdb_pid)
+  else
+    echo "Usage $0 [<pid>]"
+    exit 0
+  fi
+else
+  tgtpid=${1}
 fi
+
 cmddir="$(readlink -e /proc/${1}/cwd)"
 [[ -n cmddir ]] && cddir=-cd="${cmddir}"
 
-sudo -Hi gdb ${cddir} -p "${@}"
+sudo -Hi gdb ${cddir} -p "${tgtpid}"
