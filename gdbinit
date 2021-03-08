@@ -9,6 +9,7 @@ tui new-layout four {-horizontal src 1 {regs 1 asm 1} 1} 1 status 0 cmd 1
 layout two
 focus cmd
 set pagination off
+set logging on
 
 define hook-stop
 ref
