@@ -60,6 +60,7 @@ ${copy} -r bin/ ${DEST}/program/usr/bin
 # Tilix uses dconf to load/dump settings
 if [[ -x $(which dconf 2>/dev/null) ]]; then
   dconf load /com/gexperts/Tilix/ < tilix.dconf
+  dconf load /org/gnome/desktop/wm/keybindings/ < gnome-keybindings.dconf
 else
   echo "dconf not found. Skip Tilix."
 fi
