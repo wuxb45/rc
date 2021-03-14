@@ -61,6 +61,7 @@ ${copy} -r bin/ ${DEST}/program/usr/bin
 if [[ -x $(which dconf 2>/dev/null) ]]; then
   dconf load /com/gexperts/Tilix/ < tilix.dconf
   dconf load /org/gnome/desktop/wm/keybindings/ < gnome-keybindings.dconf
+  dconf load /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ < custom-keybindings.dconf
 else
   echo "dconf not found. Skip Tilix."
 fi
