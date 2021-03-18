@@ -68,8 +68,8 @@ esac
 # color-man {{{
 man()
 {
-  LESS_TERMCAP_mb=$'\e[1;32m' \
-  LESS_TERMCAP_md=$'\e[1;32m' \
+  LESS_TERMCAP_mb=$'\e[1;35m' \
+  LESS_TERMCAP_md=$'\e[1;34m' \
   LESS_TERMCAP_so=$'\e[01;103m\e[1;30m' \
   LESS_TERMCAP_se=$'\e[0m' \
   LESS_TERMCAP_us=$'\e[1;4;31m' \
