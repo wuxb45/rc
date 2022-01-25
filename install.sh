@@ -94,10 +94,18 @@ put yay-config.json ${DEST}/.config/yay/config.json
 #chmod +x ${DEST}/${dst}
 
 # vim
-for subdir in plugin colors undodir ftdetect syntax indent ftplugin; do
+for subdir in plugin colors undodir ftdetect syntax indent ftplugin pack/p/opt pack/p/start; do
   mkdir -p ${DEST}/.vim/${subdir}
 done
 ${copy} -r vim/ ${DEST}/.vim
+
+# tagbar
+[[ -d ${DEST}/.vim/pack/p/opt/tagbar ]] || git clone https://github.com/preservim/tagbar.git ${DEST}/.vim/pack/p/opt/tagbar
+git -C ${DEST}/.vim/pack/p/opt/tagbar pull
+
+# supertab
+[[ -d ${DEST}/.vim/pack/p/start/supertab ]] || git clone https://github.com/ervandew/supertab.git ${DEST}/.vim/pack/p/start/supertab
+git -C ${DEST}/.vim/pack/p/start/supertab pull
 
 #neovim
 mkdir -p ${DEST}/.config/nvim
