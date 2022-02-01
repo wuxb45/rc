@@ -103,6 +103,10 @@ ${copy} -r vim/ ${DEST}/.vim
 [[ -d ${DEST}/.vim/pack/p/opt/tagbar ]] || git clone https://github.com/preservim/tagbar.git ${DEST}/.vim/pack/p/opt/tagbar
 git -C ${DEST}/.vim/pack/p/opt/tagbar pull
 
+# nerdtree
+[[ -d ${DEST}/.vim/pack/p/start/nerdtree ]] || git clone https://github.com/preservim/nerdtree.git ${DEST}/.vim/pack/p/start/nerdtree
+git -C ${DEST}/.vim/pack/p/start/nerdtree pull
+
 # supertab
 [[ -d ${DEST}/.vim/pack/p/start/supertab ]] || git clone https://github.com/ervandew/supertab.git ${DEST}/.vim/pack/p/start/supertab
 git -C ${DEST}/.vim/pack/p/start/supertab pull
