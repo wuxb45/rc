@@ -100,8 +100,8 @@ done
 ${copy} -r vim/ ${DEST}/.vim
 
 # tagbar
-[[ -d ${DEST}/.vim/pack/p/opt/tagbar ]] || git clone https://github.com/preservim/tagbar.git ${DEST}/.vim/pack/p/opt/tagbar
-git -C ${DEST}/.vim/pack/p/opt/tagbar pull
+[[ -d ${DEST}/.vim/pack/p/start/tagbar ]] || git clone https://github.com/preservim/tagbar.git ${DEST}/.vim/pack/p/start/tagbar
+git -C ${DEST}/.vim/pack/p/start/tagbar pull
 
 # nerdtree
 [[ -d ${DEST}/.vim/pack/p/start/nerdtree ]] || git clone https://github.com/preservim/nerdtree.git ${DEST}/.vim/pack/p/start/nerdtree
