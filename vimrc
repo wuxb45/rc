@@ -11,7 +11,7 @@ colorscheme my256
 match Search '\s\+$'  "Search: Orange; ErrorMsg: Red; SpellBad: Pink
 " indentation: (default at http://vimdoc.sourceforge.net/htmldoc/indent.html)
 " changed: :0 (switch-case); ls (case-block)
-set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,ls,b0,gs,hs,ps,ts,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j0,J0,)20,*70,#0
+set cinoptions=>s,e0,n0,f0,{0,}0,^0,L-1,:0,=s,ls,b0,g0,hs,ps,ts,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j0,J0,)20,*70,#0
 
 " Fn keys
 nnoremap <silent> <F5> :NERDTreeToggle<CR>
