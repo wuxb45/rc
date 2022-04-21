@@ -114,3 +114,6 @@ git -C ${DEST}/.vim/pack/p/start/supertab pull
 #neovim
 mkdir -p ${DEST}/.config/nvim
 put nvimrc ${DEST}/.config/nvim/init.vim
+
+#alacritty
+put alacritty.yml ${DEST}/.config/alacritty.yml

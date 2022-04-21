@@ -1,0 +1,102 @@
+env:
+  TERM: xterm-256color
+
+window:
+  padding:
+    x: 0
+    y: 0
+
+  # full or none
+  decorations: full
+  startup_mode: Windowed
+  title: Alacritty
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 5000
+
+  # Number of lines the viewport will move for every line scrolled when
+  # scrollback is enabled (history > 0).
+  multiplier: 3
+
+  #auto_scroll: false
+font:
+  normal:
+    family: Roboto Mono
+    style: Medium
+  bold:
+    family: Roboto Mono
+    style: Bold
+  italic:
+    family: Roboto Mono
+    style: Italic
+  bold_italic:
+    family: Roboto Mono
+    style: Bold Italic
+  size: 10.0
+
+  # Offset is the extra space around each character. `offset.y` can be thought of
+  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
+  offset:
+    x: 0
+    y: 0
+
+  # Glyph offset determines the locations of the glyphs within their cells with
+  # the default being at the bottom. Increasing `x` moves the glyph to the right,
+  # increasing `y` moves the glyph upwards.
+  glyph_offset:
+    x: 0
+    y: 0
+
+# If `true`, bold text is drawn using the bright color variants.
+#draw_bold_text_with_bright_colors: true
+colors:
+  primary:
+    background: '0xddf4d4'
+    foreground: '0x1e1e1e'
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0xffffff'
+    cursor: '0x000000'
+  # Normal colors
+  normal:
+    black:   '0x000000'
+    red:     '0xcc0000'
+    green:   '0x00aa00'
+    yellow:  '0xc4a000'
+    blue:    '0x0000aa'
+    magenta: '0xad7fa8'
+    cyan:    '0x00aaaa'
+    white:   '0xeeeeec'
+  # Bright colors
+  bright:
+    black:   '0x545454'
+    red:     '0xff5454'
+    green:   '0x54ff54'
+    yellow:  '0xedd400'
+    blue:    '0x5454ff'
+    magenta: '0xff54ff'
+    cyan:    '0x54ffff'
+    white:   '0xf3f3f3'
+
+visual_bell:
+  animation: EaseOutExpo
+  duration: 0
+
+key_bindings:
+  - { key: V,        mods: Control|Shift, action: Paste            }
+  - { key: C,        mods: Control|Shift, action: Copy             }
+  - { key: Key0,     mods: Control,       action: ResetFontSize    }
+  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  - { key: Paste,                         action: Paste            }
+  - { key: Copy,                          action: Copy             }
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+debug:
+  log_level: OFF
+  print_events: false
+  ref_test: false
