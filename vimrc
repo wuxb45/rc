@@ -7,6 +7,7 @@ set noai magic number showcmd showmatch wildmenu mouse=a
 set tags=tags; fdm=marker scrolloff=3 laststatus=2
 set encoding=utf-8 fileformat=unix
 set fileencodings=ucs-bom,utf-8,latin1 fileencoding=utf-8
+set background=light
 colorscheme my256
 match Search '\s\+$'  "Search: Orange; ErrorMsg: Red; SpellBad: Pink
 " indentation: (default at http://vimdoc.sourceforge.net/htmldoc/indent.html)
