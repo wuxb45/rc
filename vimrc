@@ -41,8 +41,8 @@ nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 
 " disable netrw
-let g:loaded_netrw       = 1
-let g:loaded_netrwPlugin = 1
+"let g:loaded_netrw       = 1
+"let g:loaded_netrwPlugin = 1
 
 if has('persistent_undo')
   set undodir=~/.vim/undodir undofile undolevels=1000 undoreload=10000
