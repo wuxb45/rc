@@ -175,7 +175,7 @@ if has("gui_running") || &t_Co == 256
   call <SID>X("StorageClass", "cc6600", "", "")
   call <SID>X("Operator", "663300", "", "")
 
-  call <SID>X("Error", "ff0000", "101010", "bold")
+  call <SID>X("Error", "ff0000", "9040c0", "bold")
   call <SID>X("Identifier", "f39c12", "", "")
   call <SID>X("Label", "ff0080", "", "")
 
