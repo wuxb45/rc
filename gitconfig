@@ -11,6 +11,7 @@
 [alias]
   st = status
   cm = commit -m
+  ca = commit --amend --no-edit
   br = branch
   co = checkout
   cb = checkout -b
