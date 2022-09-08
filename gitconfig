@@ -22,6 +22,7 @@
   lg = log --graph --abbrev-commit --decorate --all --format=format:'%C(blue)%h %ai %C(green)%an%C(reset) | %C(bold)%s%C(red)%d'
 [push]
   default = simple
+  autoSetupRemote = true
 [core]
   pager = less -x1,3
 [diff]
