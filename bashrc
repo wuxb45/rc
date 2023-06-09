@@ -82,6 +82,15 @@ man()
 # exports {{{
 if [[ -z $BASHRC_LOADED ]]; then
 
+if [[ -d "${HOME}/.local/bin" ]]; then
+  if [[ -z ${PATH} ]]; then
+    PATH=${HOME}/.local/bin
+  else
+    PATH=${HOME}/.local/bin:${PATH}
+  fi
+  export PATH
+fi
+
 prog=${HOME}/program
 if [[ -d "${prog}" ]]; then
   if [[ -f "${prog}/.wl" ]]; then
