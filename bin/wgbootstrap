@@ -1,0 +1,97 @@
+#!/bin/bash
+
+if [[ ! -f default_if.txt ]]; then
+  ip route show default 0.0.0.0/0 | awk '{print $5}' > default_if.txt
+fi
+
+if [[ ! -f listen_port.txt ]]; then
+  echo "10086" > listen_port.txt
+fi
+
+if [[ ! -f server_ip.txt ]]; then
+  echo "REPLACE_ME" > server_ip.txt
+fi
+
+default_if=$(cat default_if.txt)
+listen_port=$(cat listen_port.txt)
+server_ip=$(cat server_ip.txt)
+if [[ ${server_ip} =~ "REPLACE_ME" ]]; then
+  echo "Server IP unavailable: using a placeholder in generated confs; update server_ip.txt and rerun if needed"
+fi
+
+# key pairs
+for cid in $(seq 0 20); do
+  if [[ $cid -eq 0 ]]; then
+    cname=server
+  else
+    cname=client-${cid}
+  fi
+
+  if [[ ! -f ${cname}.key ]]; then
+    (umask 0077; wg genkey > ${cname}.key)
+  fi
+
+  if [[ ! -f ${cname}.pub ]]; then
+    wg pubkey < ${cname}.key > ${cname}.pub
+  fi
+done
+
+if [[ ! -f preshared.pub ]]; then
+  (umask 0077; wg genpsk > preshared.pub)
+fi
+
+# conf
+
+cat <<EOF >server.conf
+[Interface]
+PrivateKey = $(cat server.key)
+Address = 10.0.0.1/24
+ListenPort = ${listen_port}
+PostUp = sysctl -w net.ipv4.ip_forward=1; iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o ${default_if} -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o ${default_if} -j MASQUERADE
+
+EOF
+
+for cid in $(seq 1 20); do
+  cname=client-${cid}
+  client_addr="10.0.0.$((${cid}+100))"
+
+  cat <<EOF >>server.conf
+[Peer]
+# Unassigned
+PublicKey = $(cat ${cname}.pub)
+PreSharedKey = $(cat preshared.pub)
+AllowedIPs = ${client_addr}/32
+
+EOF
+
+  cat <<EOF >${cname}-linux.conf
+[Interface]
+PrivateKey = $(cat ${cname}.key)
+Address = ${client_addr}/24
+DNS = 1.1.1.1
+PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o ${default_if} -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o ${default_if} -j MASQUERADE
+
+[Peer]
+PublicKey = $(cat server.pub)
+PreSharedKey = $(cat preshared.pub)
+AllowedIPs = 0.0.0.0/0
+Endpoint = ${server_ip}:${listen_port}
+PersistentKeepalive = 25
+EOF
+
+  cat <<EOF >${cname}-other.conf
+[Interface]
+PrivateKey = $(cat ${cname}.key)
+Address = ${client_addr}/24
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = $(cat server.pub)
+PreSharedKey = $(cat preshared.pub)
+AllowedIPs = 0.0.0.0/0
+Endpoint = ${server_ip}:${listen_port}
+EOF
+
+done
