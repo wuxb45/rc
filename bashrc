@@ -10,7 +10,13 @@ shopt -q -s cdspell dirspell checkwinsize no_empty_cmd_completion cmdhist checkh
 
 # simple alias {{{
 alias cd..='cd ..'
-alias vi='vim'
+if [[ -x $(which vi 2>/dev/null) ]]; then
+  echo >> /dev/null
+elif [[ -x $(which nvim 2>/dev/null) ]]; then
+  alias vi='nvim'
+elif [[ -x $(which vim 2>/dev/null) ]]; then
+  alias vi='vim'
+fi
 alias tree='tree -C'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
