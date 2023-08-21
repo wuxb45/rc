@@ -1,0 +1,9 @@
+#!/bin/bash
+if [[ -f /etc/os-release ]]; then
+    source /etc/os-release
+fi
+if [[ $ID_LIKE == "debian" ]]; then
+    column -t -s, -n "$@" | less -F -S -X -K
+else
+    perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' "$@" | column -t -s, | less  -F -S -X -K
+fi
