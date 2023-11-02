@@ -111,6 +111,10 @@ git -C ${DEST}/.vim/pack/p/start/nerdtree pull
 [[ -d ${DEST}/.vim/pack/p/start/supertab ]] || git clone https://github.com/ervandew/supertab.git ${DEST}/.vim/pack/p/start/supertab
 git -C ${DEST}/.vim/pack/p/start/supertab pull
 
+# Copilot
+[[ -d ${DEST}/.vim/pack/p/start/copilot ]] || git clone https://github.com/github/copilot.vim.git ${DEST}/.vim/pack/p/start/copilot
+git -C ${DEST}/.vim/pack/p/start/copilot pull
+
 #neovim
 mkdir -p ${DEST}/.config/nvim
 put nvimrc ${DEST}/.config/nvim/init.vim
