@@ -8,7 +8,11 @@ if [[ -f /etc/os-release ]]; then
     source /etc/os-release
 fi
 if [[ $ID_LIKE == "debian" ]]; then
-    column -t -s, -n "$@" | less -F -S -X -K
+    if [[ $(column --version 2>&1 | grep "util-linux") ]]; then
+      column -t -s ',' "$@" | less -F -S -X -K
+    else
+      column -t -s ',' -n "$@" | less -F -S -X -K
+    fi
 else
     perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' "$@" | column -t -s, | less  -F -S -X -K
 fi
