@@ -50,8 +50,8 @@ for cf in $(cat ./config.list); do
   put "$cf" "${DEST}/.$cf"
 done
 
-mkdir -p ${DEST}/program/usr/bin
-${copy} -r bin/ ${DEST}/program/usr/bin
+mkdir -p ${DEST}/.local/bin
+${copy} -r bin/ ${DEST}/.local/bin
 
 # [Deprecated] terminator
 #mkdir -p ${DEST}/.config/terminator
