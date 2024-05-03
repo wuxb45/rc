@@ -157,7 +157,7 @@ if [[ -x $(which tput 2>/dev/null) ]]; then
   # wd
   PS_d="$(tput setaf 7):$(tput setaf 3)\\w$(tput sgr0) "
   # working dir info
-  [[ -x $(which ps1git 2>/dev/null) ]] && PS_w='$(ps1git)'
+  [[ -z $PS_w ]] && [[ -x $(which ps1git 2>/dev/null) ]] && PS_w='$(ps1git)'
   # the prompt $
   PS_p="\n\\$ "
   PS1="${PS_u}${PS_m}${PS_h}${PS_t}${PS_d}${PS_w}${PS_p}"
