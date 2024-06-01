@@ -4,15 +4,10 @@ if [[ $# -eq 0 ]]; then
     exit 1
 fi
 
-if [[ -f /etc/os-release ]]; then
-    source /etc/os-release
-fi
-if [[ $ID_LIKE == "debian" ]]; then
-    if [[ $(column --version 2>&1 | grep "util-linux") ]]; then
-      column -t -s ',' "$@" | less -F -S -X -K
-    else
-      column -t -s ',' -n "$@" | less -F -S -X -K
-    fi
+# check if csvkit is installed
+if [[ -x $(which csvlook 2>/dev/null) ]]; then
+    csvlook $1 | less -FSXK
 else
-    perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' "$@" | column -t -s, | less  -F -S -X -K
+    echo "csvlook is not installed. Please install csvkit."
+    echo "You can install it using 'pip install csvkit'"
 fi
