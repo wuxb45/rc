@@ -6,7 +6,7 @@ fi
 
 # check if csvkit is installed
 if [[ -x $(which csvlook 2>/dev/null) ]]; then
-    csvlook --max-precision 3 -d ',' $1 | less -FSXK
+    csvlook -I -d ',' $1 | less -FSXK
 else
     echo "csvlook is not installed. Please install csvkit."
     echo "You can install it using 'pip install csvkit'"
