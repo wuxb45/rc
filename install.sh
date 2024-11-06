@@ -115,6 +115,10 @@ git -C ${DEST}/.vim/pack/p/start/supertab pull
 [[ -d ${DEST}/.vim/pack/p/start/copilot ]] || git clone https://github.com/github/copilot.vim.git ${DEST}/.vim/pack/p/start/copilot
 git -C ${DEST}/.vim/pack/p/start/copilot pull
 
+# rainbow csv
+[[ -d ${DEST}/.vim/pack/p/start/rainbow_csv ]] || git clone https://github.com/mechatroner/rainbow_csv.git ${DEST}/.vim/pack/p/start/rainbow_csv
+git -C ${DEST}/.vim/pack/p/start/rainbow_csv pull
+
 #neovim
 mkdir -p ${DEST}/.config/nvim
 put nvimrc ${DEST}/.config/nvim/init.vim
