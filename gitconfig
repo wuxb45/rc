@@ -31,3 +31,7 @@
   algorithm = minimal
 [pull]
 	ff = only
+
+
+[include]
+    path = ~/.gitconfig.wsl

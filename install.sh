@@ -125,3 +125,9 @@ put nvimrc ${DEST}/.config/nvim/init.vim
 
 #alacritty
 put alacritty.yml ${DEST}/.config/alacritty.yml
+
+#if under wsl, enable git credential manager
+if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
+  echo "WSL detected. add gitconfig.wsl"
+  put gitconfig.wsl ${DEST}/.gitconfig.wsl
+fi
