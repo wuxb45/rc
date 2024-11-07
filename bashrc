@@ -148,8 +148,8 @@ fi # BASHRC_LOADED
 if [[ -x $(which tput 2>/dev/null) ]]; then
   # username
   PS_u="$(tput bold)$(tput smul)$(tput setab 0)$(tput setaf 2)\\u"
-  # tmux
-  [[ -n ${TMUX} ]] && PS_m="$(tput setaf 7)@$(tput setaf 6)$(tmux display-message -p '#{window_index}:#{pane_index}')"
+  # tmux (see man page FORMATS for variable names)
+  [[ -n ${TMUX} ]] && PS_m="$(tput setaf 7)@$(tput setaf 6)$(tmux display-message -p '#{window_index}/#{session_windows}:#{pane_index}/#{window_panes}')"
   # hostname
   PS_h="$(tput setaf 7)@$(tput setaf 5)\\h"
   # time
