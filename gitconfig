@@ -30,8 +30,8 @@
   tool = vimdiff
   algorithm = minimal
 [pull]
-	ff = only
-
-
+  ff = only
+[credential]
+  helper = cache --timeout=604800
 [include]
     path = ~/.gitconfig.wsl
