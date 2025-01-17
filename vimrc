@@ -24,12 +24,12 @@ let g:BASH_Ctrl_j = 'off'
 " space: switch window
 nnoremap <Space> <C-W>w
 
-" gtags search (search symbol and open folding)
-nnoremap \ :GtagsCursor<CR>zO
-" gtags next (next item in quickfix list and open folding)
-nnoremap <C-N> :cn<CR>zO
-" gtags prev (previous item in quickfix list and open folding)
-nnoremap <C-P> :cp<CR>zO
+" " gtags search (search symbol and open folding)
+" nnoremap \ :GtagsCursor<CR>zO
+" " gtags next (next item in quickfix list and open folding)
+" nnoremap <C-N> :cn<CR>zO
+" " gtags prev (previous item in quickfix list and open folding)
+" nnoremap <C-P> :cp<CR>zO
 
 " ctags: show list if more than one is found
 nnoremap <C-]> g<C-]>
