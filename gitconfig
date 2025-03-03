@@ -23,6 +23,8 @@
 [push]
   default = simple
   autoSetupRemote = true
+[fetch]
+  prune = true
 [core]
   pager = less -x1,3
   trustctime = false
