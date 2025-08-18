@@ -139,6 +139,7 @@ export HISTSIZE=10000
 export HISTFILESIZE=20000
 export HISTIGNORE='&'
 export EDITOR='vim'
+export PROMPT_COMMAND='history -a'
 
 export BASHRC_LOADED=y
 fi # BASHRC_LOADED
