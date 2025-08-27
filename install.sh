@@ -58,13 +58,13 @@ ${copy} -r bin/ ${DEST}/.local/bin
 #put terminator-config ${DEST}/.config/terminator/config
 
 # Tilix uses dconf to load/dump settings
-if [[ -x $(which dconf 2>/dev/null) ]]; then
-  dconf load /com/gexperts/Tilix/ < tilix.dconf
-  dconf load /org/gnome/desktop/wm/keybindings/ < gnome-keybindings.dconf
-  dconf load /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ < custom-keybindings.dconf
-else
-  echo "dconf not found. Skip Tilix."
-fi
+#if [[ -x $(which dconf 2>/dev/null) ]]; then
+#  dconf load /com/gexperts/Tilix/ < tilix.dconf
+#  dconf load /org/gnome/desktop/wm/keybindings/ < gnome-keybindings.dconf
+#  dconf load /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ < custom-keybindings.dconf
+#else
+#  echo "dconf not found. Skip Tilix."
+#fi
 
 # hide desktop (Gnome)
 mkdir -p ${DEST}/.local/share/applications
@@ -124,7 +124,7 @@ mkdir -p ${DEST}/.config/nvim
 put nvimrc ${DEST}/.config/nvim/init.vim
 
 #alacritty
-put alacritty.yml ${DEST}/.config/alacritty.yml
+#put alacritty.yml ${DEST}/.config/alacritty.yml
 
 #if under wsl, enable git credential manager
 if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
