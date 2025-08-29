@@ -20,8 +20,10 @@
   pl = pull
   su = submodule update
   lg = log --graph --abbrev-commit --decorate --all --format=format:'%C(blue)%h %ai %C(green)%an%C(reset) | %C(bold)%s%C(red)%d'
+[branch]
+  sort = -committerdate
 [push]
-  default = simple
+  default = current
   autoSetupRemote = true
 [fetch]
   prune = true
@@ -30,9 +32,13 @@
   trustctime = false
 [diff]
   tool = vimdiff
-  algorithm = minimal
+  algorithm = histogram
+[log]
+  date = iso
 [pull]
   ff = only
+[init]
+  defaultBranch = main
 [credential]
   helper = store
 [include]
