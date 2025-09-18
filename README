@@ -1,4 +1,11 @@
 Usage:
-$ git clone https://github.com/wuxb45/MyConfig.git
-$ cd MyConfig
+$ git clone https://github.com/wuxb45/rc.git
+$ cd rc
 $ ./install.sh
+
+Node.js for vim/neovim Copilot in Ubuntu:
+
+$ curl -sL https://deb.nodesource.com/setup_22.x -o /tmp/nodesource_setup.sh
+$ sudo bash /tmp/nodesource_setup.sh
+$ sudo apt install nodejs
+
