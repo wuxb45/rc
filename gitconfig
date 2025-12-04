@@ -42,4 +42,4 @@
 [credential]
   helper = store
 [include]
-    path = ~/.gitconfig.wsl
+  path = ~/.gitconfig.wsl
