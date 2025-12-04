@@ -124,12 +124,18 @@ if [[ -d "${prog}" ]]; then
           else
             LD_LIBRARY_PATH=${ph}/${ld}:${LD_LIBRARY_PATH}
           fi
+          if [[ -z ${LIBRARY_PATH} ]]; then
+            LIBRARY_PATH=${ph}/${ld}
+          else
+            LIBRARY_PATH=${ph}/${ld}:${LIBRARY_PATH}
+          fi
         fi
       done
     fi
   done
   export PATH
   export LD_LIBRARY_PATH
+  export LIBRARY_PATH
 fi # program
 
 [[ -f ~/.bashrc.local1 ]] && . ~/.bashrc.local1
