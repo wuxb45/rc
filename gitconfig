@@ -10,7 +10,9 @@
   pager = true
 [alias]
   st = status
+  au = add -u
   cm = commit -m
+  cx = commit -m wip
   ca = commit --amend --no-edit
   br = branch
   co = checkout
