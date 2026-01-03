@@ -124,7 +124,7 @@ mkdir -p ${DEST}/.config/nvim
 put nvimrc ${DEST}/.config/nvim/init.vim
 
 #alacritty
-#put alacritty.yml ${DEST}/.config/alacritty.yml
+put alacritty.toml ${DEST}/.config/alacritty.toml
 
 #if under wsl, enable git credential manager
 if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
