@@ -31,10 +31,10 @@ alias remake='make -B'
 alias pull='git pull'
 alias push='git push'
 alias fetch='git fetch'
-alias checkout='git checkout'
 alias commit='git commit'
 alias tiga='tig --all'
 alias pri='perf report -i'
+alias uptime='uptime -p'
 
 case "$(uname -s)" in
 Linux)
@@ -45,7 +45,6 @@ Linux)
   alias freeh='free -h'
   alias utags='ctags -R . /usr/include'
   alias mtags='ctags -R . /usr/lib/modules/$(uname -r)/build'
-  alias 2tags='ctags -R . ; gtags'
   ;;
 Darwin)
   alias gr='gegrep --color=auto -nr'
@@ -62,7 +61,6 @@ FreeBSD)
   alias lt='ls -lrhFt -G -D "%F %H:%M"'
   alias lz='ls -lrhFS -G -D "%F %H:%M"'
   alias ctags='uctags'
-  alias 2tags='uctags -R; gtags'
   alias make='gmake'
   alias tput='/usr/local/bin/tput'
   ;;
