@@ -1,0 +1,4 @@
+[credential "https://dev.azure.com/msresearch"]
+  helper =
+  helper = azuredevops
+  useHttpPath = true
