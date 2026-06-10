@@ -10,11 +10,10 @@ shopt -q -s cdspell dirspell checkwinsize no_empty_cmd_completion cmdhist checkh
 
 # simple alias {{{
 alias cd..='cd ..'
-if [[ -x $(which vi 2>/dev/null) ]]; then
-  echo >> /dev/null
-elif [[ -x $(which nvim 2>/dev/null) ]]; then
+# prefer nvim, then vim; otherwise leave vi as whatever is on PATH.
+if command -v nvim >/dev/null 2>&1; then
   alias vi='nvim'
-elif [[ -x $(which vim 2>/dev/null) ]]; then
+elif command -v vim >/dev/null 2>&1; then
   alias vi='vim'
 fi
 alias tree='tree -C'
@@ -132,7 +131,7 @@ if [[ -d "${prog}" ]]; then
     fi
   done
   export PATH
-  export LD_LIBRARY_PATH
+  [[ -n ${LD_LIBRARY_PATH} ]] && export LD_LIBRARY_PATH
   #export LIBRARY_PATH
 fi # program
 
@@ -143,14 +142,21 @@ export HISTSIZE=10000
 export HISTFILESIZE=20000
 export HISTIGNORE='&'
 export EDITOR='vim'
-export PROMPT_COMMAND='history -a'
+# flush this shell's new history and pull in commands from other sessions,
+# so tmux panes/windows share history live. append, don't clobber, in case a
+# local file already set PROMPT_COMMAND.
+case ";${PROMPT_COMMAND};" in
+  *";history -a; history -n;"*) ;;
+  *) PROMPT_COMMAND="history -a; history -n;${PROMPT_COMMAND:+ ${PROMPT_COMMAND}}" ;;
+esac
+export PROMPT_COMMAND
 
 export BASHRC_LOADED=y
 fi # BASHRC_LOADED
 # }}}
 
 # PS1 {{{
-if [[ -x $(which tput 2>/dev/null) ]]; then
+if command -v tput >/dev/null 2>&1; then
   # username
   PS_u="$(tput bold)$(tput smul)$(tput setab 0)$(tput setaf 2)\\u"
   # tmux (see man page FORMATS for variable names)
@@ -162,7 +168,7 @@ if [[ -x $(which tput 2>/dev/null) ]]; then
   # wd
   PS_d="$(tput setaf 7):$(tput setaf 3)\\w$(tput sgr0) "
   # working dir info
-  [[ -z $PS_w ]] && [[ -x $(which ps1git 2>/dev/null) ]] && PS_w='$(ps1git)'
+  [[ -z $PS_w ]] && command -v ps1git >/dev/null 2>&1 && PS_w='$(ps1git)'
   # the prompt $
   PS_p="\n\\$ "
   PS1="${PS_u}${PS_m}${PS_h}${PS_t}${PS_d}${PS_w}${PS_p}"
