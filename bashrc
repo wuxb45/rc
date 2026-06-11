@@ -146,8 +146,8 @@ export EDITOR='vim'
 # so tmux panes/windows share history live. append, don't clobber, in case a
 # local file already set PROMPT_COMMAND.
 case ";${PROMPT_COMMAND};" in
-  *";history -a; history -n;"*) ;;
-  *) PROMPT_COMMAND="history -a; history -n;${PROMPT_COMMAND:+ ${PROMPT_COMMAND}}" ;;
+  *";history -a;"*) ;;
+  *) PROMPT_COMMAND="history -a;${PROMPT_COMMAND:+ ${PROMPT_COMMAND}}" ;;
 esac
 export PROMPT_COMMAND
 
