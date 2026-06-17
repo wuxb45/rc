@@ -20,12 +20,15 @@ vc="$(tput sgr0)"
 
 fmt='tty:5,start:8,time:8,rss:8,euser:6,pid:7,ppid:7,cmd'
 
-if [[ -n ${1} ]]; then
-  # filter by user
-  ps -U ${1} -o ${fmt} --forest >/tmp/.px.$$
-else
-  # filter out kernel threads
+if [[ -z ${1} ]]; then
+  # default: only my own processes
+  ps -U "$(whoami)" -o ${fmt} --forest >/tmp/.px.$$
+elif [[ ${1} == all ]]; then
+  # all processes, no filtering (still drop kernel threads)
   ps -o ${fmt} --ppid 2 -p 2 -N --forest >/tmp/.px.$$
+else
+  # filter by the given user
+  ps -U ${1} -o ${fmt} --forest >/tmp/.px.$$
 fi
 
 me="$(whoami)     "
